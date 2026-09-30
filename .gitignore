@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Python (from Week 3)
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Secrets such as API keys
+.env
