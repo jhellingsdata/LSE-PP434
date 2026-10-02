@@ -1,9 +1,11 @@
 # Week 1: Introduction + building blocks
 
 **Lecture practical:** Your first web page on GitHub Pages
-**Seminar:** Connecting VSCode to GitHub, Live Server, your first commit
+**Seminar:** Editing your site in VSCode, Live Server, embedding charts
 
-Before the lecture, complete the [Getting started guide](../../setup/00-getting-started.md).
+- Before the seminar: [Getting started](../../setup/00-getting-started.md)
+- In the seminar: [Editing your site in VSCode](../../setup/01-editing-in-vscode.md)
+- Before next week's seminar: [Setting up Git](../../setup/02-git-setup.md)
 
 ## Code examples
 
