@@ -1,0 +1,17 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Advanced alternative: chart the raw ONS file without editing it in Excel. Keeps only the monthly rows and parses '1989 JAN' as a date.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/EcoDemoUser/EcoDemoUser.github.io/main/data/cpih_ons_raw.csv",
+    "format": {"type": "csv", "header": ["period", "cpih"]}
+  },
+  "transform": [
+    {"filter": "test(/^[0-9]{4} [A-Z]{3}$/, datum.period)"},
+    {"calculate": "timeParse(datum.period, '%Y %b')", "as": "date"}
+  ],
+  "mark": "line",
+  "encoding": {
+    "x": {"field": "date", "type": "temporal"},
+    "y": {"field": "cpih", "type": "quantitative"}
+  }
+}

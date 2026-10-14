@@ -1,0 +1,27 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {"url": "https://raw.githubusercontent.com/EcoDemoUser/EcoDemoUser.github.io/main/data/cpih_monthly.csv"},
+
+  "title": {
+    "text": "UK inflation peaked at 9.6% in October 2022",
+    "subtitle": "CPIH, annual % change. Source: ONS (L55O)",
+    "anchor": "start"
+  },
+  "width": 400,
+  "height": 250,
+
+  "mark": {"type": "line", "color": "#c8102e", "strokeWidth": 2},
+
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "axis": {"title": null, "grid": false}
+    },
+    "y": {
+      "field": "cpih",
+      "type": "quantitative",
+      "axis": {"title": null, "labelExpr": "datum.value + '%'"}
+    }
+  }
+}

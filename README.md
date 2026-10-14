@@ -20,8 +20,8 @@ To get a copy of the example files, open a week's folder and download the files 
 | Week | Topic | Code examples |
 |---|---|---|
 | 1 | Introduction + building blocks | [week01](weeks/week01/README.md) |
-| 2 | Visualisation theory and principles I | *coming soon* |
-| 3 | Visualisation theory and principles II · APIs | *coming soon* |
+| 2 | Visualisation theory and principles I | [week02](weeks/week02/README.md) |
+| 3 | Visualisation principles · Introducing Python | [week03](weeks/week03/README.md) |
 | 4 | Programming for data science · Scrapers and loops | *coming soon* |
 | 5 | Maps, data and policy | *coming soon* |
 | 6 | *Reading week* | — |

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {"url": "https://raw.githubusercontent.com/EcoDemoUser/EcoDemoUser.github.io/main/data/cpih_monthly.csv"},
+  "mark": "line",
+  "encoding": {
+    "x": {"field": "date", "type": "temporal"},
+    "y": {"field": "cpih", "type": "quantitative"}
+  }
+}
