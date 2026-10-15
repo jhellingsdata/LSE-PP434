@@ -1,0 +1,22 @@
+# PP434 Automated Data Visualisation for Policymaking: Python packages
+# Install with:  uv pip install -r requirements.txt
+
+# Notebooks in VSCode
+ipykernel
+
+# Getting data
+requests
+beautifulsoup4
+
+# Working with data
+pandas
+openpyxl          # read .xlsx Excel files
+xlrd              # read older .xls Excel files
+
+# Charts
+altair
+vl-convert-python # save Altair charts as PNG/SVG
+matplotlib
+
+# Machine learning (Weeks 9-10)
+scikit-learn

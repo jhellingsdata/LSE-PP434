@@ -11,7 +11,7 @@ Setup guides, weekly code examples and useful links for PP434 (2026/27).
 | [Getting started](setup/00-getting-started.md) | Checking your GitHub account and website, VSCode and Live Server, browser tools | **Before the Week 1 seminar** |
 | [Editing your site in VSCode](setup/01-editing-in-vscode.md) | Live Server, renaming pages, embedding charts, publishing changes | Week 1 seminar |
 | [Setting up Git](setup/02-git-setup.md) | Installing Git, your name and email, `.gitignore`, where to keep your code | **Before the Week 2 seminar** |
-| Python setup *(coming soon)* | Installing Python and the course packages | **Before the Week 3 lecture** |
+| [Python on your own computer](setup/03-local-python.md) *(optional)* | Running notebooks in VSCode with `uv`, next to your website files | Any time from Week 3 |
 
 ## Weekly materials
 
