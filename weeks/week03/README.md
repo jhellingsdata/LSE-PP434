@@ -26,7 +26,8 @@ Notebooks are numbered in the order we suggest working through them. **Core** no
 |---|---|
 | [`data/data_shiller.xls`](data/data_shiller.xls) | Robert Shiller's original data, from [shillerdata.com](https://shillerdata.com/) (downloaded October 2026) |
 | [`data/data_shiller.csv`](data/data_shiller.csv) | Cleaned from the Excel file (by `DS3_8`). Used in the lecture practical |
-| [`data/data_shiller_pe.csv`](data/data_shiller_pe.csv) | The output of `DS3_2`: `Date_iso` and `PE_ratio`. Use it in the seminar if you need to catch up |
+| [`data/data_shiller_clean.csv`](data/data_shiller_clean.csv) | The full output of `DS3_2`: every column (including real prices and `CAPE`), plus `PE_ratio` and `Date_iso`. Good for trying other variables |
+| [`data/data_shiller_pe.csv`](data/data_shiller_pe.csv) | The chart-ready output of `DS3_2`: just `Date_iso` and `PE_ratio`. Use it in the seminar if you need to catch up |
 
 ## Portfolio
 
