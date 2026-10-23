@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Live chart from the UK Police API: street-level crimes recorded within a mile of the Bear Pit, Bristol, in the latest available month. No API key needed. Each row in the response is one crime, so we count rows by category. (Replaces last year's donut chart: a sorted bar chart is much easier to read with many categories.)",
+  "data": {
+    "url": "https://data.police.uk/api/crimes-street/all-crime?lat=51.4594888&lng=-2.5907564"
+  },
+  "title": {
+    "text": "Crime near the Bear Pit, Bristol",
+    "subtitle": "Recorded crimes by type, latest month. Source: data.police.uk",
+    "anchor": "start",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey"
+  },
+  "width": 350,
+  "height": {
+    "step": 18
+  },
+  "view": {
+    "stroke": "transparent"
+  },
+  "mark": {
+    "type": "bar",
+    "color": "#4c78a8"
+  },
+  "encoding": {
+    "y": {
+      "field": "Crime type",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null
+    },
+    "x": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of crimes",
+      "axis": {
+        "gridDash": [
+          2,
+          4
+        ]
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "replace(datum.category, /-/g, ' ')",
+      "as": "Crime type"
+    }
+  ]
+}

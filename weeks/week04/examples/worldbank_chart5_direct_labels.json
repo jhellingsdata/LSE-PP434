@@ -1,0 +1,96 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Live chart from World Bank Indicators API (V2) with 'Employment in agriculture, % of total employment (SL.AGR.EMPL.Z)'. Uses layering to add a text layer with our country group names. To only show the text labels on the last (most recent point), we add aggregate max and aggregate argmax to the text encodings, telling it to find the highest date (x) value, then find the y-value at that max date. This method means the labels will only be shown at the most recent points. Note: this method only works if there are no missing/null values, so we had a simple transform filter for only true valid values.",
+  "data": {
+    "url": "https://api.worldbank.org/v2/country/lic;lmc;mic;umc;hic/indicator/SL.AGR.EMPL.ZS?format=json&per_page=1000&date=1999:2025",
+    "format": {
+      "property": "[1]"
+    }
+  },
+  "view": {
+    "stroke": "transparent"
+  },
+  "width": 400,
+  "height": 300,
+  "title": {
+    "text": "Agriculture employment",
+    "subtitle": "By country income classification group. Source: ILO data via World Bank API",
+    "frame": "group",
+    "anchor": "start",
+    "subtitleFontSize": 10
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "",
+      "axis": {
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "% of total employment",
+      "axis": {
+        "titleAngle": 0,
+        "titleAlign": "left",
+        "titleX": 2,
+        "titleY": 15,
+        "titleOpacity": 0.6
+      },
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      }
+    },
+    "color": {
+      "field": "country.value",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "scheme": "set1"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.value != null"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line"
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "aggregate": "max"
+        },
+        "y": {
+          "field": "value",
+          "aggregate": {
+            "argmax": "date"
+          }
+        },
+        "text": {
+          "field": "country.value",
+          "type": "nominal",
+          "aggregate": {
+            "argmax": "date"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -12,6 +12,7 @@ Setup guides, weekly code examples and useful links for PP434 (2026/27).
 | [Editing your site in VSCode](setup/01-editing-in-vscode.md) | Live Server, renaming pages, embedding charts, publishing changes | Week 1 seminar |
 | [Setting up Git](setup/02-git-setup.md) | Installing Git, your name and email, `.gitignore`, where to keep your code | **Before the Week 2 seminar** |
 | [Python on your own computer](setup/03-local-python.md) *(optional)* | Running notebooks in VSCode with `uv`, next to your website files | Any time from Week 3 |
+| Using Git *(coming soon)* | Everyday Git: commit, push and pull; working in a shared repository with a group | From Week 4 |
 
 ## Weekly materials
 
@@ -22,7 +23,7 @@ To get a copy of the example files, open a week's folder and download the files 
 | 1 | Introduction + building blocks | [week01](weeks/week01/README.md) |
 | 2 | Visualisation theory and principles I | [week02](weeks/week02/README.md) |
 | 3 | Visualisation principles · Introducing Python | [week03](weeks/week03/README.md) |
-| 4 | Programming for data science · Scrapers and loops | *coming soon* |
+| 4 | Data: APIs and scrapers | [week04](weeks/week04/README.md) |
 | 5 | Maps, data and policy | *coming soon* |
 | 6 | *Reading week* | — |
 | 7 | Advanced data: storage, reshaping | *coming soon* |

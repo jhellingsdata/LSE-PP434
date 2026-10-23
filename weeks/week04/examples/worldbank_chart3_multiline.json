@@ -1,0 +1,53 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Live chart from World Bank Indicators API (V2). Shows 'Employment in agriculture, % of total employment (SL.AGR.EMPL.Z)'. Selects data for country income groups (instead of a country code, uses the income-group codes lic;lmc;mic;umc;hic, separated by semicolons). Includes property in the data object telling Vega to look at 2nd list item in the API response. Shows how to deal with nested JSON (where a column value is a JSON object), and encodes the nested country name using dot notation in the colour field: 'country.value'.",
+  "data": {
+    "url": "https://api.worldbank.org/v2/country/lic;lmc;mic;umc;hic/indicator/SL.AGR.EMPL.ZS?format=json&per_page=1000&date=1999:2025",
+    "format": {
+      "property": "[1]"
+    }
+  },
+  "width": 400,
+  "height": 300,
+  "mark": {
+    "type": "line"
+  },
+  "title": {
+    "text": "Agriculture employment",
+    "subtitle": "By country income classification group. Source: ILO data via World Bank API"
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "",
+      "axis": {
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "% of total employment",
+      "axis": {},
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      }
+    },
+    "color": {
+      "field": "country.value",
+      "type": "nominal",
+      "legend": {
+        "title": null
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.value != null"
+    }
+  ]
+}

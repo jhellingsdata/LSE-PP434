@@ -1,0 +1,53 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Live daily exchange rates from the Frankfurter API (central bank data, no API key). The URL asks for every day since 1 January 2026, so the chart gains a new point each working day. The response is already a flat list of records (date, base, quote, rate), so no 'property' is needed.",
+  "data": {
+    "url": "https://api.frankfurter.dev/v2/rates?from=2026-01-01&base=GBP&quotes=USD,EUR"
+  },
+  "width": 450,
+  "height": 250,
+  "view": {
+    "stroke": "transparent"
+  },
+  "title": {
+    "text": "How much is \u00a31 worth?",
+    "subtitle": "Daily exchange rates, 2026. Source: Frankfurter API (European Central Bank and other central banks)",
+    "anchor": "start",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey"
+  },
+  "mark": {
+    "type": "line",
+    "strokeWidth": 1.5
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "grid": false,
+        "format": "%b"
+      }
+    },
+    "y": {
+      "field": "rate",
+      "type": "quantitative",
+      "title": null,
+      "scale": {
+        "zero": false
+      },
+      "axis": {
+        "gridDash": [
+          2,
+          4
+        ]
+      }
+    },
+    "color": {
+      "field": "quote",
+      "type": "nominal",
+      "title": null
+    }
+  }
+}

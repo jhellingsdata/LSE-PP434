@@ -1,0 +1,37 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Step 1. A live chart: the data comes straight from the World Bank API every time the page loads. 'property': '[1]' picks the data out of the API's [metadata, data] response. per_page=100 is needed because the API sends only 50 rows by default (the chart would start in 1976, not 1960).",
+  "data": {
+    "url": "https://api.worldbank.org/v2/country/kor/indicator/SP.DYN.TFRT.IN?format=json&per_page=100",
+    "format": {
+      "property": "[1]"
+    }
+  },
+  "width": 500,
+  "height": 350,
+  "mark": "line",
+  "title": {
+    "text": "South Korea: declining fertility",
+    "subtitle": "Total fertility rate (births per woman). Source: World Bank"
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "",
+      "axis": {
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": ""
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.value != null"
+    }
+  ]
+}

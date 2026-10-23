@@ -1,0 +1,84 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Live chart from World Bank API. Pulls in data for one country. Uses a transform filter to remove missing values (the latest year is often still empty). Adds a layer with a rule mark, using inline data to set the 'replacement rate' for total fertility. Shows properties for removing chart border, setting custom stroke dash, stroke/line thickness.",
+  "data": {
+    "url": "https://api.worldbank.org/v2/country/kor/indicator/SP.DYN.TFRT.IN?format=json&per_page=100",
+    "format": {
+      "property": "[1]"
+    }
+  },
+  "width": 400,
+  "height": 300,
+  "view": {
+    "stroke": "transparent"
+  },
+  "title": {
+    "text": "South Korea: declining fertility",
+    "subtitle": "Total fertility rate. Replacement level (2.1) shown. Source: World Bank API",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey",
+    "frame": "group",
+    "anchor": "start"
+  },
+  "transform": [
+    {
+      "filter": "datum.value != null"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "#df6d99"
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": "",
+          "axis": {
+            "grid": false,
+            "labelFontSize": 12
+          }
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "",
+          "axis": {
+            "gridDash": [
+              2,
+              4
+            ],
+            "labelFontSize": 12
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "y_custom": 2.1,
+            "label": "Replacement rate"
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2.5,
+        "opacity": 0.5,
+        "strokeDash": [
+          4,
+          1
+        ]
+      },
+      "encoding": {
+        "y": {
+          "field": "y_custom",
+          "type": "quantitative"
+        }
+      }
+    }
+  ]
+}
