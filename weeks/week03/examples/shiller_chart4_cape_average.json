@@ -1,0 +1,87 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Example 4. Final example introduces concept of layered charts, where we define two charts: a mark like and a mark 'rule' chart. The rule chart uses an aggregate to find the mean CAPE value over the whole period. Layering allows us to show them both at the same time.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week03/data/data_shiller_clean.csv"
+  },
+  "height": 280,
+  "width": 400,
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "font": "Trebuchet MS, Helvetica, Arial, sans-serif"
+  },
+  "title": {
+    "text": "US stock prices are high relative to earnings",
+    "subtitle": "Cyclically adjusted price-to-earnings ratio (CAPE), S&P composite. Dashed line: average since 1950. Source: Robert Shiller",
+    "anchor": "start",
+    "frame": "group",
+    "fontSize": 14,
+    "color": "#444444",
+    "subtitleFontSize": 9,
+    "subtitleFontStyle": "italic",
+    "subtitleColor": "#5d5c5c"
+  },
+  "transform": [
+    {
+      "filter": "year(datum['Date_iso']) >= 1950"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          1
+        ],
+        "color": "#fdc541",
+        "strokeWidth": 1.3
+      },
+      "encoding": {
+        "y": {
+          "field": "CAPE",
+          "type": "quantitative",
+          "aggregate": "mean"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#c8102e",
+        "strokeWidth": 1.5,
+        "interpolate": "basis"
+      },
+      "encoding": {
+        "x": {
+          "field": "Date_iso",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "grid": false,
+            "domainColor": "#444444",
+            "labelColor": "#444444"
+          }
+        },
+        "y": {
+          "field": "CAPE",
+          "title": null,
+          "type": "quantitative",
+          "axis": {
+            "domain": false,
+            "ticks": false,
+            "gridDash": [
+              1,
+              4
+            ],
+            "labelFontSize": 12,
+            "labelPadding": 5,
+            "labelColor": "#444444"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -20,6 +20,19 @@ Notebooks are numbered in the order we suggest working through them. **Core** no
 | 7 | [`DS3_7_PandasRequests`](notebooks/DS3_7_PandasRequests.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week03/notebooks/DS3_7_PandasRequests.ipynb) | Practice | Fetching data from an API, merging and reshaping |
 | 8 | [`DS3_8_ShillerExcelToCSV`](notebooks/DS3_8_ShillerExcelToCSV.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week03/notebooks/DS3_8_ShillerExcelToCSV.ipynb) | Stretch | Turning Shiller's original Excel file into the clean CSV used in the lecture |
 
+## Example charts
+
+Four Vega-Lite charts that build on the seminar chart, step by step. Open one on GitHub, copy the JSON into the [Vega-Lite editor](https://vega.github.io/editor/), and compare it with the one before.
+
+| Chart | What's new |
+|---|---|
+| [`shiller_chart1_basic.json`](examples/shiller_chart1_basic.json) | The chart saved from `DS3_3_Altair_Shiller`: line colour, title and subtitle, no vertical grid lines |
+| [`shiller_chart2_styled.json`](examples/shiller_chart2_styled.json) | More styling: font, softer title colours, dashed grid lines, no chart border or y-axis line |
+| [`shiller_chart3_cape_since1950.json`](examples/shiller_chart3_cape_since1950.json) | A `filter` **transform** to show 1950 onwards, and the y-axis switched to `CAPE` |
+| [`shiller_chart4_cape_average.json`](examples/shiller_chart4_cape_average.json) | A **layered** chart: a dashed `rule` at the average CAPE (an `aggregate`) on top of the line |
+
+Charts 2–4 were written directly in Vega-Lite, so there's no Altair code for them. Translating one into Altair is a good stretch exercise.
+
 ## Data
 
 | File | What it is |

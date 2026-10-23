@@ -78,6 +78,23 @@ You should see your `user.name` and `user.email`.
 
 > Use the **noreply** address, not your personal email. Changes saved to a public repository can be seen by anyone.
 
+<details>
+<summary><b>Already set up Git with your personal email?</b></summary>
+
+That's fine, and easy to change. Running the `user.email` line again replaces the old address.
+
+1. On GitHub, go to **Settings → Emails** and tick **"Keep my email addresses private"**.
+2. Copy the `...@users.noreply.github.com` address shown there.
+3. In the VSCode terminal, run (with your address):
+   ```
+   git config --global user.email "12345678+USERNAME@users.noreply.github.com"
+   ```
+4. Check with `git config --global user.email`.
+
+From now on, your commits use the private address. Commits you've **already** pushed keep the old one. Rewriting them isn't worth the risk for a course repository, so leave them as they are.
+
+</details>
+
 ---
 
 ## 4. Add a `.gitignore` to your repository

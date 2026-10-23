@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Example 3. Adding a transform to filter the date. This allows us to show a subset of the full date range from the source data. Works by selecting our column with the special 'datum' argument, and extracting just the 'year', then filtering for values above a given value, e.g. 1990.  // Have also switched the 'y' field to 'CAPE' - this adjusted PE measure divides the price by the average inflation-adjusted earnings of the previous 10 years. ",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week03/data/data_shiller_clean.csv"
+  },
+  "height": 280,
+  "width": 400,
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "font": "Trebuchet MS, Helvetica, Arial, sans-serif"
+  },
+  "title": {
+    "text": "US stock prices are high relative to earnings",
+    "subtitle": "Cyclically adjusted price-to-earnings ratio (CAPE), S&P composite, 1950 onwards. Source: Robert Shiller",
+    "anchor": "start",
+    "frame": "group",
+    "fontSize": 14,
+    "color": "#444444",
+    "subtitleFontSize": 9,
+    "subtitleFontStyle": "italic",
+    "subtitleColor": "#5d5c5c"
+  },
+  "mark": {
+    "type": "line",
+    "color": "#c8102e",
+    "strokeWidth": 1.5,
+    "interpolate": "basis"
+  },
+  "transform": [
+    {
+      "filter": "year(datum['Date_iso']) >= 1950"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Date_iso",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "grid": false,
+        "domainColor": "#444444",
+        "labelColor": "#444444"
+      }
+    },
+    "y": {
+      "field": "CAPE",
+      "title": null,
+      "type": "quantitative",
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "gridDash": [
+          2,
+          2
+        ],
+        "labelFontSize": 12,
+        "labelPadding": 5,
+        "labelColor": "#444444"
+      }
+    }
+  }
+}

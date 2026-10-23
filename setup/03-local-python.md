@@ -60,11 +60,11 @@ An **environment** is a private copy of Python, with the packages for one projec
 3. In the VSCode terminal, run these two lines:
 
 ```
-uv venv --python 3.12
+uv venv --python 3.13 --seed
 uv pip install -r requirements.txt
 ```
 
-The first line creates the environment (and downloads Python 3.12 if you don't have it). The second installs every package we use in the course, so you only do this once.
+The first line creates the environment (and downloads Python 3.13 if you don't have it). `--seed` also adds `pip`, so notebook cells that start with `%pip install` work on your computer too. The second line installs every package we use in the course, so you only do this once.
 
 > **Check your `.gitignore`.** The `.venv` folder is large and should never be uploaded to GitHub. Your `.gitignore` already includes `.venv/` if you followed [Setting up Git](02-git-setup.md#4-add-a-gitignore-to-your-repository) (the Python template). After step 3, the Source Control tab should **not** list hundreds of new files. If it does, add a line `.venv/` to `.gitignore`.
 
@@ -94,7 +94,7 @@ print("ready")
 |---|---|---|
 | Where files are saved | Temporary Colab storage, so you must download them | Your folder, next to the notebook |
 | `from google.colab import files` | Works | **Doesn't exist.** Skip these cells: your files are already in your folder |
-| `%pip install ...` cells | Needed for some packages | Skip them: everything is already installed |
+| `%pip install ...` cells | Needed for some packages | Safe to run: they just check the package is installed and up to date |
 | Saving your work | Save a copy in Drive | `Cmd + S` / `Ctrl + S`, then commit as usual |
 
 **File paths:** a notebook saves files in **its own folder**. To save a CSV into a `data` folder next to `notebooks`, use `'../data/my_data.csv'` (`..` means "go up one folder").
@@ -120,6 +120,7 @@ Then add it to `requirements.txt`, so the list stays complete.
 | `uv: command not found` (Mac) or `uv is not recognized` (Windows) | Close and reopen VSCode. If it still fails, restart your computer |
 | `.venv` doesn't appear in **Select Kernel** | **View → Command Palette** → `Developer: Reload Window`, then try again |
 | `ModuleNotFoundError: No module named ...` | Wrong kernel (choose `.venv`), or the package isn't installed (`uv pip install ...`) |
+| `No module named pip` when running a `%pip` cell | Your environment was made without `--seed`. Run `uv pip install pip` in the terminal, then try again |
 | VSCode asks to install `ipykernel` | Click **Install**. It's in `requirements.txt`, so this usually means the wrong kernel is selected |
 | Source Control shows hundreds of new files | `.venv` isn't ignored: add `.venv/` to `.gitignore` |
 | Strange errors about files being in use or missing | Is your folder inside OneDrive, iCloud or Dropbox? Move it to your `code` folder (see [Setting up Git](02-git-setup.md#5-choose-where-your-code-will-live)) |

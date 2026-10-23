@@ -1,0 +1,59 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Example 2. Advanced styling - improving our basic PE ratio chart from the Python seminar notebook (DS3_3_Altair_Shiller.ipynb)",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week03/data/data_shiller_clean.csv"
+  },
+  "height": 280,
+  "width": 400,
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "font": "Trebuchet MS, Helvetica, Arial, sans-serif"
+  },
+  "title": {
+    "text": "US stock prices are high relative to earnings",
+    "subtitle": "Price-to-earnings ratio, S&P composite. Source: Robert Shiller",
+    "anchor": "start",
+    "frame": "group",
+    "fontSize": 14,
+    "color": "#444444",
+    "subtitleFontSize": 9,
+    "subtitleFontStyle": "italic",
+    "subtitleColor": "#5d5c5c"
+  },
+  "mark": {
+    "type": "line",
+    "color": "#c8102e",
+    "strokeWidth": 1.5
+  },
+  "encoding": {
+    "x": {
+      "field": "Date_iso",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "grid": false,
+        "domainColor": "#444444",
+        "labelColor": "#444444"
+      }
+    },
+    "y": {
+      "field": "PE_ratio",
+      "title": null,
+      "type": "quantitative",
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "gridDash": [
+          2,
+          2
+        ],
+        "labelFontSize": 12,
+        "labelPadding": 5,
+        "labelColor": "#444444"
+      }
+    }
+  }
+}

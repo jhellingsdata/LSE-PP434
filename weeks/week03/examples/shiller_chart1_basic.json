@@ -1,0 +1,35 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Week 3 seminar, PE-ratio chart from DS3_3_Altair_Shiller.ipynb notebook. Basic styling to change axis grid, add a title etc.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week03/data/data_shiller_clean.csv"
+  },
+  "height": 280,
+  "width": 500,
+  "title": {
+    "text": "US stock prices are high relative to earnings",
+    "anchor": "start",
+    "subtitle": "Price-to-earnings ratio, S&P composite. Source: Robert Shiller"
+  },
+  "mark": {
+    "type": "line",
+    "color": "#c8102e",
+    "strokeWidth": 1.5
+  },
+  "encoding": {
+    "x": {
+      "axis": {
+        "grid": false
+      },
+      "field": "Date_iso",
+      "title": null,
+      "type": "temporal"
+    },
+    "y": {
+      "field": "PE_ratio",
+      "title": null,
+      "type": "quantitative"
+    }
+  },
+  "config": {}
+}
