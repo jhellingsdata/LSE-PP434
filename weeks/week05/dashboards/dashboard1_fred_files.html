@@ -1,0 +1,95 @@
+<!--
+    DASHBOARD 1: A LOOP THAT EMBEDS ONE CHART PER DATA FILE
+
+    Before you start:
+      1. Run DS5_2_Loop_API_Download.ipynb to download six FRED data files (JSON) of your choice.
+      2. Put this HTML file and dashboard_styles.css in your website folder, and the six JSON files
+         in a folder called "data" inside it.
+      3. In the JavaScript below, put your six series codes in the list `seriesCodes`.
+      4. Open the HTML with Live Server. Once it works, commit and sync to GitHub.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard 1: FRED data</title>
+
+    <!-- Load Vega-Lite (all three must be the same major version) -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+
+    <link rel="stylesheet" type="text/css" href="dashboard_styles.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>Data Science <span style="color: #86d0bb">Loops</span></h1>
+        <p class="rubric">A dashboard of six charts, made with one loop. Data: FRED (downloaded with DS5_2).</p>
+        <p id="message"></p>
+    </div>
+
+    <!-- Six empty places for charts, with ids c1 to c6 -->
+    <div id="charts">
+        <figure id="c1" class="chart"></figure>
+        <figure id="c2" class="chart"></figure>
+        <figure id="c3" class="chart"></figure>
+        <figure id="c4" class="chart"></figure>
+        <figure id="c5" class="chart"></figure>
+        <figure id="c6" class="chart"></figure>
+    </div>
+
+    <script>
+        // 1. A TEMPLATE CHART: everything is the same for every chart, except the data link and title (left empty)
+        let templateSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+            "title": {"text": "", "anchor": "start"},
+            "view": {"stroke": "transparent"},
+            "data": {
+                "url": "",                                   // filled in by the loop
+                "format": {"type": "json", "property": "observations"}   // FRED puts the data inside "observations"
+            },
+            "transform": [
+                {"filter": "year(datum.date) >= 2000"}       // a conditional: keep only 2000 onwards
+            ],
+            "width": 200,
+            "height": 150,
+            "mark": {"type": "line", "color": "#58b3c7"},
+            "encoding": {
+                "x": {"field": "date", "type": "temporal", "title": null, "axis": {"grid": false}},
+                "y": {"field": "value", "type": "quantitative", "title": null}
+            }
+        };
+
+        // 2. THE LIST TO LOOP OVER: one series code per chart
+        //    Use the same codes as your list in DS5_2, e.g. ["UNRATE", "CPIAUCSL", ...]
+        let seriesCodes = [];
+
+        // 3. WHERE THE DATA FILES ARE: the "data" folder next to this HTML file (ending in /).
+        //    You could also use a full link, e.g. the raw GitHub link to a data folder.
+        let baseUrl = "data/";
+
+        // A conditional: if the list is still empty, show a reminder on the page
+        if (seriesCodes.length === 0) {
+            document.getElementById("message").textContent = "No charts yet: add your series codes to seriesCodes in the JavaScript.";
+        }
+
+        // 4. THE LOOP: runs once for each series (i = 0, 1, 2, ... up to the length of the list)
+        for (let i = 0; i < seriesCodes.length; i++) {
+
+            // Make a fresh copy of the template, so each chart has its own settings
+            let spec = structuredClone(templateSpec);
+
+            // Fill in the data link and the title. `${ }` puts a value into text, like an f-string in Python.
+            spec.data.url = `${baseUrl}data_US_FRED-${seriesCodes[i]}.json`;
+            spec.title.text = seriesCodes[i];
+
+            console.log(spec.data.url);   // print the link (open the browser console to check it)
+
+            // Put the chart into figure c1, c2, ... (i starts at 0, so we add 1)
+            vegaEmbed(`#c${i + 1}`, spec);
+        }
+    </script>
+</body>
+</html>

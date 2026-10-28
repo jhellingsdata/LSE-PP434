@@ -1,0 +1,97 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A ternary conditional (condition ? if_true : if_false) in a 'calculate' transform makes a new column, 'Level', which we then use for colour. The same as: if value > 2, 'Above 2%', else '2% or below'. To use your own FRED file instead, replace 'data' with {\"url\": \"data/data_US_FRED-FEDFUNDS.json\", \"format\": {\"type\": \"json\", \"property\": \"observations\"}}, and the x field 'year' with 'date' (type temporal).",
+  "data": {
+    "values": [
+      {
+        "year": 2015,
+        "value": 0.13
+      },
+      {
+        "year": 2016,
+        "value": 0.4
+      },
+      {
+        "year": 2017,
+        "value": 1.0
+      },
+      {
+        "year": 2018,
+        "value": 1.83
+      },
+      {
+        "year": 2019,
+        "value": 2.16
+      },
+      {
+        "year": 2020,
+        "value": 0.38
+      },
+      {
+        "year": 2021,
+        "value": 0.08
+      },
+      {
+        "year": 2022,
+        "value": 1.68
+      },
+      {
+        "year": 2023,
+        "value": 5.02
+      },
+      {
+        "year": 2024,
+        "value": 5.14
+      }
+    ]
+  },
+  "transform": [
+    {
+      "calculate": "datum.value > 2 ? 'Above 2%' : '2% or below'",
+      "as": "Level"
+    }
+  ],
+  "title": {
+    "text": "When were US interest rates above 2%?",
+    "subtitle": "Federal funds rate, %, annual average. Source: FRED (FEDFUNDS)",
+    "anchor": "start",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey"
+  },
+  "width": 400,
+  "height": 220,
+  "view": {
+    "stroke": "transparent"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null,
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": null
+    },
+    "color": {
+      "field": "Level",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "Above 2%",
+          "2% or below"
+        ],
+        "range": [
+          "#c8102e",
+          "#bbbbbb"
+        ]
+      }
+    }
+  }
+}

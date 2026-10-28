@@ -24,7 +24,7 @@ To get a copy of the example files, open a week's folder and download the files 
 | 2 | Visualisation theory and principles I | [week02](weeks/week02/README.md) |
 | 3 | Visualisation principles · Introducing Python | [week03](weeks/week03/README.md) |
 | 4 | Data: APIs and scrapers | [week04](weeks/week04/README.md) |
-| 5 | Maps, data and policy | *coming soon* |
+| 5 | Programming: loops and conditionals | [week05](weeks/week05/README.md) |
 | 6 | *Reading week* | — |
 | 7 | Advanced data: storage, reshaping | *coming soon* |
 | 8 | Advanced analysis | *coming soon* |

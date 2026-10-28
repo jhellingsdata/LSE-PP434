@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A conditional in a chart: each bar is red IF unemployment is above 5%, otherwise grey. 'test' is the condition; the first 'value' is used when it's true, the second when it's false. To use your own FRED file instead, replace 'data' with {\"url\": \"data/data_US_FRED-UNRATE.json\", \"format\": {\"type\": \"json\", \"property\": \"observations\"}}, and the x field 'year' with 'date' (type temporal).",
+  "data": {
+    "values": [
+      {
+        "year": 2015,
+        "value": 5.3
+      },
+      {
+        "year": 2016,
+        "value": 4.9
+      },
+      {
+        "year": 2017,
+        "value": 4.4
+      },
+      {
+        "year": 2018,
+        "value": 3.9
+      },
+      {
+        "year": 2019,
+        "value": 3.7
+      },
+      {
+        "year": 2020,
+        "value": 8.1
+      },
+      {
+        "year": 2021,
+        "value": 5.4
+      },
+      {
+        "year": 2022,
+        "value": 3.6
+      },
+      {
+        "year": 2023,
+        "value": 3.6
+      },
+      {
+        "year": 2024,
+        "value": 4.0
+      }
+    ]
+  },
+  "title": {
+    "text": "When was US unemployment above 5%?",
+    "subtitle": "Unemployment rate, %, annual average. Red: above 5%. Source: FRED (UNRATE)",
+    "anchor": "start",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey"
+  },
+  "width": 400,
+  "height": 220,
+  "view": {
+    "stroke": "transparent"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null,
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": null
+    },
+    "color": {
+      "condition": {
+        "test": "datum.value > 5",
+        "value": "#c8102e"
+      },
+      "value": "#bbbbbb"
+    }
+  }
+}
