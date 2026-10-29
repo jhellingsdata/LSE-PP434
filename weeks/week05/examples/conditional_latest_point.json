@@ -1,0 +1,98 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Mark and label only the latest value. 'joinaggregate' adds the latest date to every row; then a 'filter' keeps only the row where the date equals it. The line layer uses all the data; the point and label layers use just that one row. This updates by itself when new data arrives.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week05/data/data_US_FRED-UNRATE.json",
+    "format": {
+      "type": "json",
+      "property": "observations"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.value)",
+      "as": "rate"
+    },
+    {
+      "filter": "year(datum.date) >= 2015 && isValid(datum.rate) && isFinite(datum.rate)"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "date",
+          "as": "latest_date"
+        }
+      ]
+    }
+  ],
+  "title": {
+    "text": "US unemployment rate",
+    "subtitle": "%, monthly. Source: FRED (UNRATE)",
+    "anchor": "start",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey"
+  },
+  "width": 450,
+  "height": 220,
+  "view": {
+    "stroke": "transparent"
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "rate",
+      "type": "quantitative",
+      "title": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "#bbbbbb"
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.date == datum.latest_date"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 60,
+        "color": "#c8102e"
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.date == datum.latest_date"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontWeight": "bold",
+        "color": "#c8102e"
+      },
+      "encoding": {
+        "text": {
+          "field": "rate",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ]
+}

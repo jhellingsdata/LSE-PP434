@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "PREVIEW of Week 8 (interactive charts): you don't need this yet. An interactive conditional. A 'param' records which bar the mouse is over. The opacity condition says: IF this bar is the one selected, opacity 1, otherwise 0.3. With nothing selected, all bars are solid.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week05/data/data_US_FRED-FEDFUNDS.json",
+    "format": {
+      "type": "json",
+      "property": "observations"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.value)",
+      "as": "rate"
+    },
+    {
+      "timeUnit": "year",
+      "field": "date",
+      "as": "year"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "rate",
+          "as": "rate"
+        }
+      ],
+      "groupby": [
+        "year"
+      ]
+    },
+    {
+      "filter": "year(datum.year) >= 2000 && year(datum.year) <= 2024"
+    }
+  ],
+  "params": [
+    {
+      "name": "hover",
+      "select": {
+        "type": "point",
+        "on": "pointerover",
+        "clear": "pointerout"
+      }
+    }
+  ],
+  "title": {
+    "text": "US interest rates since 2000",
+    "subtitle": "Federal funds rate, %, annual average. Hover over a bar. Source: FRED (FEDFUNDS)",
+    "anchor": "start",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey"
+  },
+  "width": 450,
+  "height": 220,
+  "view": {
+    "stroke": "transparent"
+  },
+  "mark": {
+    "type": "bar",
+    "color": "#58b3c7"
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "timeUnit": "year",
+      "type": "ordinal",
+      "title": null,
+      "axis": {
+        "labelAngle": 0,
+        "labelExpr": "year(datum.value) % 5 == 0 ? datum.label : ''"
+      }
+    },
+    "y": {
+      "field": "rate",
+      "type": "quantitative",
+      "title": null
+    },
+    "opacity": {
+      "condition": {
+        "param": "hover",
+        "empty": true,
+        "value": 1
+      },
+      "value": 0.3
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "timeUnit": "year",
+        "title": "Year"
+      },
+      {
+        "field": "rate",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Rate, %"
+      }
+    ]
+  }
+}

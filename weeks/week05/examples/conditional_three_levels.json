@@ -1,0 +1,102 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A nested ternary gives three groups instead of two: condition1 ? A : condition2 ? B : C. Read it as: if inflation is above 4, 'Over 4%'; otherwise, if it is above 2, '2% to 4%'; otherwise 'At or below 2%'. Inflation is the % change in prices on 12 months earlier ('lag' 12 rows back).",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week05/data/data_US_FRED-CPIAUCSL.json",
+    "format": {
+      "type": "json",
+      "property": "observations"
+    }
+  },
+  "transform": [
+    {
+      "window": [
+        {
+          "op": "lag",
+          "param": 12,
+          "field": "value",
+          "as": "year_ago"
+        }
+      ],
+      "sort": [
+        {
+          "field": "date"
+        }
+      ]
+    },
+    {
+      "calculate": "(toNumber(datum.value) / toNumber(datum.year_ago) - 1) * 100",
+      "as": "inflation"
+    },
+    {
+      "filter": "year(datum.date) >= 2015"
+    },
+    {
+      "calculate": "datum.inflation > 4 ? 'Over 4%' : datum.inflation > 2 ? '2% to 4%' : 'At or below 2%'",
+      "as": "Level"
+    }
+  ],
+  "title": {
+    "text": "How far was US inflation from the 2% target?",
+    "subtitle": "Consumer prices, % change on a year earlier. Source: FRED (CPIAUCSL)",
+    "anchor": "start",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey"
+  },
+  "width": 450,
+  "height": 220,
+  "view": {
+    "stroke": "transparent"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "inflation",
+      "type": "quantitative",
+      "title": null
+    },
+    "color": {
+      "field": "Level",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "Over 4%",
+          "2% to 4%",
+          "At or below 2%"
+        ],
+        "range": [
+          "#c8102e",
+          "#f4a582",
+          "#bbbbbb"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "date",
+        "type": "temporal",
+        "format": "%b %Y",
+        "title": "Month"
+      },
+      {
+        "field": "inflation",
+        "type": "quantitative",
+        "format": ".1f",
+        "title": "Inflation, %"
+      },
+      {
+        "field": "Level",
+        "type": "nominal"
+      }
+    ]
+  }
+}

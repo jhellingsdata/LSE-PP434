@@ -1,0 +1,97 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Label only the bars that matter. A ternary in 'calculate' makes the label text IF the rate is above 5%, and an empty label ('') otherwise. The bars and labels are two layers sharing the same data.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week05/data/data_US_FRED-UNRATE.json",
+    "format": {
+      "type": "json",
+      "property": "observations"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.value)",
+      "as": "rate"
+    },
+    {
+      "timeUnit": "year",
+      "field": "date",
+      "as": "year"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "rate",
+          "as": "rate"
+        }
+      ],
+      "groupby": [
+        "year"
+      ]
+    },
+    {
+      "filter": "year(datum.year) >= 2005 && year(datum.year) <= 2024"
+    },
+    {
+      "calculate": "datum.rate > 5 ? format(datum.rate, '.1f') : ''",
+      "as": "label"
+    }
+  ],
+  "title": {
+    "text": "Which years had unemployment above 5%?",
+    "subtitle": "Unemployment rate, %, annual average. Labels: years above 5%. Source: FRED (UNRATE)",
+    "anchor": "start",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey"
+  },
+  "width": 450,
+  "height": 220,
+  "view": {
+    "stroke": "transparent"
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "timeUnit": "year",
+      "type": "ordinal",
+      "title": null,
+      "axis": {
+        "labelAngle": 0,
+        "labelExpr": "year(datum.value) % 5 == 0 ? datum.label : ''"
+      }
+    },
+    "y": {
+      "field": "rate",
+      "type": "quantitative",
+      "title": null
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "datum.rate > 5",
+            "value": "#c8102e"
+          },
+          "value": "#bbbbbb"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -6,
+        "fontSize": 10,
+        "color": "#c8102e"
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Positive and negative values in different colours. 'window' with 'lag' gets the previous quarter's value, 'calculate' works out the % change, and a colour condition makes the bar red IF growth is below 0.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week05/data/data_US_FRED-GDPC1.json",
+    "format": {
+      "type": "json",
+      "property": "observations"
+    }
+  },
+  "transform": [
+    {
+      "window": [
+        {
+          "op": "lag",
+          "field": "value",
+          "as": "previous"
+        }
+      ],
+      "sort": [
+        {
+          "field": "date"
+        }
+      ]
+    },
+    {
+      "calculate": "(toNumber(datum.value) / toNumber(datum.previous) - 1) * 100",
+      "as": "growth"
+    },
+    {
+      "filter": "year(datum.date) >= 2005"
+    }
+  ],
+  "title": {
+    "text": "When did the US economy shrink?",
+    "subtitle": "Real GDP, % change on previous quarter. Red: the economy shrank. Source: FRED (GDPC1)",
+    "anchor": "start",
+    "subtitleFontSize": 10,
+    "subtitleColor": "grey"
+  },
+  "width": 450,
+  "height": 220,
+  "view": {
+    "stroke": "transparent"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "growth",
+      "type": "quantitative",
+      "title": null
+    },
+    "color": {
+      "condition": {
+        "test": "datum.growth < 0",
+        "value": "#c8102e"
+      },
+      "value": "#58b3c7"
+    },
+    "tooltip": [
+      {
+        "field": "date",
+        "type": "temporal",
+        "format": "%b %Y",
+        "title": "Quarter"
+      },
+      {
+        "field": "growth",
+        "type": "quantitative",
+        "format": ".1f",
+        "title": "Growth, %"
+      }
+    ]
+  }
+}
