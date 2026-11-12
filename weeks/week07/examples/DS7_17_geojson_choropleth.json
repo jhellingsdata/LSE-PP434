@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "The same GeoJSON, simplified with mapshaper (85 KB), as a choropleth. The lookup works exactly as with TopoJSON: only the name of the code field changes (properties.LAD13CD).",
+  "title": {
+    "text": "Wages in Wales, 2024 (GeoJSON)",
+    "anchor": "start",
+    "subtitle": "Annual wages (£). Grey: no data. Source: ONS",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 320,
+  "height": 380,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/wales_councils_simplified.geojson",
+    "format": {
+      "property": "features"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.LAD13CD",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/wales_wages_2024.csv"
+        },
+        "key": "geo_id",
+        "fields": [
+          "value"
+        ]
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 0.8
+  },
+  "encoding": {
+    "color": {
+      "condition": {
+        "test": "!isValid(datum.value)",
+        "value": "#e3e3e3"
+      },
+      "field": "value",
+      "type": "quantitative",
+      "title": "£ a year",
+      "scale": {
+        "scheme": "blues"
+      },
+      "legend": {
+        "format": ",.0f"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.LAD13NM",
+        "title": "Local authority"
+      },
+      {
+        "field": "value",
+        "type": "quantitative",
+        "format": ",.0f",
+        "title": "Wages (£)"
+      }
+    ]
+  }
+}

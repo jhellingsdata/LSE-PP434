@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "England's devolution map as set out at Budget 2026 (October 2026): strategic authorities in force, plus areas agreed, proposed or named for a future deal. Colour by the 'status' property. Source: jhellingsdata/map-data, gbr/proposed/SA_ENG_2026_10.json.",
+  "title": {
+    "text": "England's devolution map, October 2026",
+    "anchor": "start",
+    "subtitle": "Strategic authorities by status, as set out at Budget 2026",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 380,
+  "height": 450,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_ENG_2026_05.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eeeeee",
+        "stroke": "white",
+        "strokeWidth": 0.3
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/proposed/SA_ENG_2026_10.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "color": {
+          "field": "properties.status",
+          "type": "nominal",
+          "title": "Status",
+          "scale": {
+            "domain": [
+              "current",
+              "agreed",
+              "proposed",
+              "named"
+            ],
+            "range": [
+              "#0f5499",
+              "#58b3c7",
+              "#a6dbe6",
+              "#f4a582"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Area"
+          },
+          {
+            "field": "properties.status",
+            "title": "Status"
+          },
+          {
+            "field": "properties.tier",
+            "title": "Tier (if in force)"
+          },
+          {
+            "field": "properties.planned_tier",
+            "title": "Planned tier"
+          }
+        ]
+      }
+    }
+  ]
+}

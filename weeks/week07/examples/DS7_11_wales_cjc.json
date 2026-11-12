@@ -1,0 +1,78 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A lookup with categories instead of numbers: each council looks up its Corporate Joint Committee (CJC) region in a small CSV, and we colour by it. A second layer draws the four CJC borders on top. We made that file by merging the councils in mapshaper (see the mapshaper guide).",
+  "title": {
+    "text": "Wales: Corporate Joint Committees",
+    "anchor": "start",
+    "subtitle": "Each council belongs to one of four regional CJCs",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 320,
+  "height": 380,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/wales_cjc_lookup.csv"
+            },
+            "key": "lad_id",
+            "fields": [
+              "cjc"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "cjc",
+          "type": "nominal",
+          "title": null
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Council"
+          },
+          {
+            "field": "cjc",
+            "title": "CJC"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/wales_cjc.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#333333",
+        "strokeWidth": 1.2
+      }
+    }
+  ]
+}

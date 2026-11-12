@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A world choropleth. The country codes in the map (properties.iso_a3_eh) are matched to the ISO3 codes in the CSV. The Equal Earth projection keeps countries' areas in proportion. A log scale suits values that range from hundreds to over 100,000.",
+  "title": {
+    "text": "GDP per person, 2022",
+    "anchor": "start",
+    "subtitle": "PPP, international $. Grey: no data. Source: World Bank",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 600,
+  "height": 320,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/world/world.json",
+    "format": {
+      "type": "topojson",
+      "feature": "geog"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.iso_a3_eh",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/world_gdp_per_capita_2022.csv"
+        },
+        "key": "iso3",
+        "fields": [
+          "country",
+          "value"
+        ]
+      }
+    }
+  ],
+  "projection": {
+    "type": "equalEarth"
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 0.3
+  },
+  "encoding": {
+    "color": {
+      "condition": {
+        "test": "!isValid(datum.value)",
+        "value": "#e3e3e3"
+      },
+      "field": "value",
+      "type": "quantitative",
+      "title": "$",
+      "scale": {
+        "type": "log",
+        "scheme": "viridis"
+      },
+      "legend": {
+        "format": "$,.0f"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.name",
+        "title": "Country"
+      },
+      {
+        "field": "value",
+        "type": "quantitative",
+        "format": "$,.0f",
+        "title": "GDP per person"
+      }
+    ]
+  }
+}

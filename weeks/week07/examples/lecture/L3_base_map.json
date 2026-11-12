@@ -1,0 +1,28 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Step 3. A base map on its own. A map file is just more coordinates: each shape is a long list of [longitude, latitude] points, joined up. The geoshape mark draws them, using the same projection.",
+  "title": {
+    "text": "Step 3: a base map",
+    "anchor": "start",
+    "subtitle": "UK nations, from a TopoJSON file",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 300,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/CTRY_UK.json",
+    "format": {
+      "type": "topojson",
+      "feature": "geog"
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "geoshape",
+    "fill": "#e3e3e3",
+    "stroke": "white"
+  }
+}

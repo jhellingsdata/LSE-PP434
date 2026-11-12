@@ -1,0 +1,80 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "England's strategic authorities in July 2026, coloured by tier (a property in the map file). A grey layer of all councils underneath fills in the areas with no strategic authority. Boundaries and tiers: jhellingsdata/map-data (gbr/sa/README.md).",
+  "title": {
+    "text": "Devolution in England, July 2026",
+    "anchor": "start",
+    "subtitle": "Strategic authorities by tier",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 380,
+  "height": 450,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_ENG_2026_05.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eeeeee",
+        "stroke": "white",
+        "strokeWidth": 0.3
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "color": {
+          "field": "properties.tier",
+          "type": "nominal",
+          "title": "Tier",
+          "scale": {
+            "domain": [
+              "established",
+              "mayoral",
+              "foundation"
+            ],
+            "range": [
+              "#0f5499",
+              "#58b3c7",
+              "#f4a582"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Strategic authority"
+          },
+          {
+            "field": "properties.tier",
+            "title": "Tier"
+          },
+          {
+            "field": "properties.mayor_from",
+            "title": "First mayoral election"
+          }
+        ]
+      }
+    }
+  ]
+}

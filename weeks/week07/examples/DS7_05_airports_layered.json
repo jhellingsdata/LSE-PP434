@@ -1,0 +1,75 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Layers: the base map first (drawn underneath), then the points on top. The projection is set once, at the top, so both layers share it and line up.",
+  "title": {
+    "text": "UK airports",
+    "anchor": "start",
+    "subtitle": "Circle size: passengers",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 300,
+  "height": 400,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/CTRY_UK.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e3e3e3",
+        "stroke": "white"
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/uk_airports.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#d35400",
+        "opacity": 0.8
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "passengers",
+          "type": "quantitative",
+          "title": "Passengers"
+        },
+        "tooltip": [
+          {
+            "field": "airport",
+            "title": "Airport"
+          },
+          {
+            "field": "passengers",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Passengers"
+          },
+          {
+            "field": "aircraft_movements",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Flights"
+          }
+        ]
+      }
+    }
+  ]
+}

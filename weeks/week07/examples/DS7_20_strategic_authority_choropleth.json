@@ -1,0 +1,87 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A choropleth of England's strategic authorities. Start with the SA map, then look up each SA's value from msa_latest.csv (one row per SA, a column for each indicator). To map something else, change \"employment_rate\" to another column name (in \"fields\", the colour, the condition and the tooltip), and update the titles. Strategic authorities with no value are drawn in a darker grey. A grey layer of all councils underneath shows the areas with no strategic authority.",
+  "title": {
+    "text": "Employment rate in England's strategic authorities, 2025",
+    "anchor": "start",
+    "subtitle": "% of residents aged 16 to 64 in work. Grey: no strategic authority. Source: ONS Annual Population Survey",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 380,
+  "height": 450,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_ENG_2026_05.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eeeeee",
+        "stroke": "white",
+        "strokeWidth": 0.3
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/msa/msa_latest.csv"
+            },
+            "key": "geo_id",
+            "fields": [
+              "employment_rate"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "!isValid(datum.employment_rate)",
+            "value": "#cccccc"
+          },
+          "field": "employment_rate",
+          "type": "quantitative",
+          "title": "% in work",
+          "scale": {
+            "scheme": "blues"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Strategic authority"
+          },
+          {
+            "field": "employment_rate",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Employment rate (%)"
+          }
+        ]
+      }
+    }
+  ]
+}

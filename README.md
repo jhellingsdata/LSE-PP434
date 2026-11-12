@@ -13,6 +13,7 @@ Setup guides, weekly code examples and useful links for PP434 (2026/27).
 | [Setting up Git](setup/02-git-setup.md) | Installing Git, your name and email, `.gitignore`, where to keep your code | **Before the Week 2 seminar** |
 | [Python on your own computer](setup/03-local-python.md) *(optional)* | Running notebooks in VSCode with `uv`, next to your website files | Any time from Week 3 |
 | Using Git *(coming soon)* | Everyday Git: commit, push and pull; working in a shared repository with a group | From Week 4 |
+| [Map files and mapshaper](setup/05-map-files-mapshaper.md) | Finding boundary files, simplifying and fixing them in mapshaper.org, filtering and merging areas | Week 7 |
 
 ## Weekly materials
 
@@ -26,10 +27,11 @@ To get a copy of the example files, open a week's folder and download the files 
 | 4 | Data: APIs and scrapers | [week04](weeks/week04/README.md) |
 | 5 | Programming: loops and conditionals | [week05](weeks/week05/README.md) |
 | 6 | *Reading week* | — |
-| 7 | Advanced data: storage, reshaping | *coming soon* |
-| 8 | Advanced analysis | *coming soon* |
-| 9 | Machine learning I | *coming soon* |
-| 10 | Machine learning II · Interactivity | *coming soon* |
+| 7 | Maps | [week07](weeks/week07/README.md) · [maps page](https://jhellingsdata.github.io/LSE-PP434/weeks/week07/maps/) |
+| 8 | Advanced data: storage, reshaping | *coming soon* |
+| 9 | Advanced analysis | *coming soon* |
+| 10 | Machine learning I | *coming soon* |
+| 11 | Machine learning II · Interactivity | *coming soon* |
 
 ## Useful links
 

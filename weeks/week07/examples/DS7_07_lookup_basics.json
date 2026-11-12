@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A lookup without a map. Our data has country codes; a second table has names and values for each code. 'lookup' matches the two on country_code and copies across the 'fields' we ask for. A choropleth does exactly this, with a map as the first table.",
+  "title": {
+    "text": "A lookup joins two tables",
+    "anchor": "start"
+  },
+  "data": {
+    "values": [
+      {
+        "country_code": "USA"
+      },
+      {
+        "country_code": "CHN"
+      },
+      {
+        "country_code": "IND"
+      }
+    ]
+  },
+  "transform": [
+    {
+      "lookup": "country_code",
+      "from": {
+        "data": {
+          "values": [
+            {
+              "country_code": "USA",
+              "country_name": "United States",
+              "population_growth": 0.5
+            },
+            {
+              "country_code": "CHN",
+              "country_name": "China",
+              "population_growth": 0.4
+            },
+            {
+              "country_code": "IND",
+              "country_name": "India",
+              "population_growth": 0.8
+            }
+          ]
+        },
+        "key": "country_code",
+        "fields": [
+          "country_name",
+          "population_growth"
+        ]
+      }
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "population_growth",
+      "type": "quantitative",
+      "title": "Population growth (%)"
+    },
+    "y": {
+      "field": "country_name",
+      "type": "nominal",
+      "title": null
+    }
+  }
+}

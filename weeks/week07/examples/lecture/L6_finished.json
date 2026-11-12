@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Step 6. Finishing touches: a title that says what the map shows, a source, council borders for more detail, and a white edge on each circle so overlapping airports stay visible.",
+  "title": {
+    "text": "Where do UK air passengers fly from?",
+    "anchor": "start",
+    "subtitle": "Passengers by airport. The area of each circle shows passengers",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 320,
+  "height": 420,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_UK_2026_05.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e3e3e3",
+        "stroke": "white",
+        "strokeWidth": 0.3
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/uk_airports.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#d35400",
+        "opacity": 0.85,
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "passengers",
+          "type": "quantitative",
+          "title": "Passengers",
+          "scale": {
+            "range": [
+              10,
+              600
+            ]
+          },
+          "legend": {
+            "values": [
+              1000000,
+              5000000,
+              10000000,
+              15000000
+            ],
+            "format": "~s"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "airport",
+            "title": "Airport"
+          },
+          {
+            "field": "passengers",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Passengers"
+          },
+          {
+            "field": "aircraft_movements",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Flights"
+          }
+        ]
+      }
+    }
+  ]
+}

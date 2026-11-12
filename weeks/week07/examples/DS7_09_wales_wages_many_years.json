@@ -1,0 +1,91 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "When the CSV has many years, a lookup from the map would keep only ONE row per area (whichever comes last). So we flip it round: start with the CSV, filter to one year, then look up each area's shape (stored as 'geo') and draw it with the 'shape' encoding. A grey base map layer underneath shows areas with no data.",
+  "title": {
+    "text": "Wages in Wales, 2022",
+    "anchor": "start",
+    "subtitle": "Annual wages (£). Grey: no data. Source: ONS",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 320,
+  "height": 380,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e3e3e3",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/wages_LAD_WLS.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.date == 2022"
+        },
+        {
+          "lookup": "geo_id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+              "format": {
+                "type": "topojson",
+                "feature": "geog"
+              }
+            },
+            "key": "properties.id"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "£ a year",
+          "scale": {
+            "scheme": "blues"
+          },
+          "legend": {
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "geo.properties.name",
+            "title": "Local authority"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Wages (£)"
+          }
+        ]
+      }
+    }
+  ]
+}

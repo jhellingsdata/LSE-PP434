@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7: Maps · PP434</title>
+<script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+<style>
+  :root { --ink: #222; --muted: #666; --line: #e5e5e5; --accent: #0f5499; --bg: #fafafa; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; color: var(--ink); background: #fff;
+         max-width: 980px; margin: 0 auto; padding: 24px 16px 80px; line-height: 1.55; }
+  h1 { margin-bottom: 4px; }
+  .lede { color: var(--muted); margin-top: 0; }
+  h2 { margin-top: 56px; padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  nav { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+  nav ol { margin: 4px 0; padding-left: 20px; }
+  a { color: var(--accent); }
+  code { background: #f2f2f2; padding: 1px 4px; border-radius: 3px; font-size: 0.92em; }
+  .example { border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin: 20px 0; }
+  .example h3 { margin: 0 0 4px; font-size: 1.05em; }
+  .example .desc { color: var(--muted); margin: 0 0 12px; font-size: 0.95em; }
+  .chart { overflow-x: auto; }
+  details { margin-top: 10px; }
+  summary { cursor: pointer; color: var(--accent); font-size: 0.95em; }
+  pre { background: #f6f8fa; border: 1px solid var(--line); border-radius: 6px; padding: 12px; overflow-x: auto;
+        font-size: 12.5px; line-height: 1.45; max-height: 480px; }
+  .files { font-size: 0.9em; color: var(--muted); }
+  .note { background: #fff8e5; border-left: 4px solid #f0b400; padding: 10px 14px; border-radius: 4px; margin: 16px 0; }
+  table { border-collapse: collapse; font-size: 0.95em; }
+  td, th { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+</style>
+</head>
+<body>
+
+<h1>Week 7: Maps</h1>
+<p class="lede">PP434 Automated Data Visualisation for Policymaking · Vega-Lite 6 examples, building up one idea at a time.</p>
+
+<nav>
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#lecture">Lecture practical</a>: from an x/y chart to a map, step by step</li>
+    <li><a href="#base">Base maps</a>: drawing shapes from a map file (TopoJSON and GeoJSON)</li>
+    <li><a href="#points">Point maps</a>: putting points on a map with <strong>layers</strong></li>
+    <li><a href="#choropleth">Choropleth maps</a>: colouring areas by a value with a <strong>lookup</strong></li>
+    <li><a href="#devolution">Devolution</a>: strategic authorities in England, and Wales</li>
+    <li><a href="#further">Going further</a>: small areas, Scotland, the world, devolution plans, constituencies</li>
+    <li><a href="#recipe">A recipe for any map</a>, and <a href="#smaller">making map files smaller</a></li>
+  </ol>
+  <p class="files">Each chart's code is a JSON file in <a href="https://github.com/jhellingsdata/LSE-PP434/tree/main/weeks/week07/examples">weeks/week07/examples</a>.
+  Open any chart in the Vega Editor from its <strong>…</strong> menu. Map files come from
+  <a href="https://github.com/jhellingsdata/map-data">jhellingsdata/map-data</a>; data files are in
+  <a href="https://github.com/jhellingsdata/LSE-PP434/tree/main/weeks/week07/data">weeks/week07/data</a>.
+  The same maps in Python: <a href="https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week07/notebooks/DS7_1_Maps_Altair.ipynb">DS7_1_Maps_Altair</a> (Colab).</p>
+</nav>
+
+<h2 id="lecture">Lecture practical: from an x/y chart to a map</h2>
+<p>A point map is a scatter plot. Longitude and latitude are just x and y, in degrees instead of pixels. A <strong>projection</strong>
+is a scale for the whole Earth: it turns degrees into pixels. A base map is more of the same: shapes made of
+[longitude, latitude] points, drawn with the same projection. These six steps build up one idea at a time.</p>
+<div data-example="lecture/L1_airports_as_a_scatter_plot"></div>
+<div data-example="lecture/L2_airports_with_a_projection"></div>
+<div data-example="lecture/L3_base_map"></div>
+<div data-example="lecture/L4_layers"></div>
+<div data-example="lecture/L5_size_and_tooltip"></div>
+<div data-example="lecture/L6_finished"></div>
+
+<h2 id="base">1. Base maps</h2>
+<p>A map file (GeoJSON or TopoJSON) holds <strong>shapes</strong>. The <code>geoshape</code> mark draws them, and a
+<strong>projection</strong> flattens the round Earth onto the page. Our map-data files are TopoJSON, with the shapes in a group called
+<code>geog</code>, so the data needs <code>"format": {"type": "topojson", "feature": "geog"}</code>.</p>
+<div data-example="DS7_01_wales_outline"></div>
+<div data-example="DS7_02_wales_local_authorities"></div>
+<div data-example="DS7_03_uk_nations"></div>
+<h3>GeoJSON</h3>
+<p>Many map files online are <strong>GeoJSON</strong>: a list of <code>features</code>, so the data needs
+<code>"format": {"property": "features"}</code>. Otherwise, everything works the same.</p>
+<div data-example="DS7_16_geojson_wales"></div>
+<div data-example="DS7_17_geojson_choropleth"></div>
+
+<h2 id="points">2. Point maps: layers</h2>
+<p>Point data is a table with a <strong>latitude</strong> and <strong>longitude</strong> for each row. To give the points context,
+we draw two charts in one: the base map first, then the points on top. This is a <code>layer</code>.</p>
+<div data-example="DS7_04_airports_points"></div>
+<div data-example="DS7_05_airports_layered"></div>
+<div data-example="DS7_06_power_plants"></div>
+
+<h2 id="choropleth">3. Choropleth maps: lookups</h2>
+<p>A choropleth colours each area by a value. The map has a code for each area (<code>properties.id</code>), and our CSV has the same
+codes (<code>geo_id</code>) with a value for each. A <code>lookup</code> transform matches the codes and copies the value onto each shape.
+Start with a lookup on its own, without a map:</p>
+<div data-example="DS7_07_lookup_basics"></div>
+<div data-example="DS7_08_wales_wages_choropleth"></div>
+<div class="note"><strong>Why did my map go blank (or show the wrong year)?</strong> A lookup keeps only <em>one</em> matching row for each
+area. If your CSV has a row for every year, use the pattern below: start with the CSV, filter to one year, then look up the shapes.</div>
+<div data-example="DS7_09_wales_wages_many_years"></div>
+
+<h2 id="devolution">4. Devolution</h2>
+<p>England's <strong>strategic authorities</strong> (formerly combined authorities) are groups of councils that take on powers from central
+government. Wales has four regional <strong>Corporate Joint Committees</strong>. Boundaries and tiers come from
+<a href="https://github.com/jhellingsdata/map-data/blob/main/gbr/sa/README.md">map-data's strategic authorities guide</a>, which also has a
+folder for each authority, with its councils and small areas.</p>
+<div data-example="DS7_10_england_strategic_authorities"></div>
+<div data-example="DS7_11_wales_cjc"></div>
+<div data-example="DS7_20_strategic_authority_choropleth"></div>
+<div data-example="DS7_12_strategic_authority_density"></div>
+<p>Data for every strategic authority and council in England (and some for Wales) is in
+<a href="https://github.com/jhellingsdata/LSE-PP434/tree/main/weeks/week07/data/msa">weeks/week07/data/msa</a>: its README explains
+what each file measures and which map file to use with it.</p>
+
+<h2 id="further">5. Going further</h2>
+<div data-example="DS7_13_wales_msoa_density"></div>
+<div data-example="DS7_14_scotland_wages"></div>
+<div data-example="DS7_15_world_gdp"></div>
+<div data-example="DS7_18_devolution_budget_2026"></div>
+<div data-example="DS7_19_constituencies_2024"></div>
+
+<h2 id="recipe">A recipe for any map</h2>
+<ol>
+  <li><strong>Find a base map</strong> for your areas (see map-data, or the ONS Open Geography Portal). Copy its <em>raw</em> GitHub link.</li>
+  <li><strong>Draw it</strong> with a <code>geoshape</code> mark. If nothing appears, check the <code>format</code>: TopoJSON needs the right
+      <code>feature</code> name; GeoJSON needs <code>"property": "features"</code>.</li>
+  <li><strong>Find the area codes</strong> in the map: add a tooltip with <code>properties.id</code> (or open the file and look).</li>
+  <li><strong>Get your data</strong> with one row per area, and a column with the <em>same</em> codes. Check they match: same type of area,
+      same year of boundaries, no missing leading zeros.</li>
+  <li><strong>Add the lookup</strong>: <code>"lookup"</code> is the code in the map, <code>"key"</code> the column in your CSV,
+      <code>"fields"</code> the columns to copy.</li>
+  <li><strong>Finish it</strong>: colour scheme, legend title, tooltip, title and source. Show missing data in grey.</li>
+  <li><strong>Export and embed</strong> the JSON on your website, as in Week 3.</li>
+</ol>
+
+<h2 id="smaller">Making map files smaller</h2>
+<p>Official boundary files are very detailed, and can be tens of megabytes: too slow for a web page. Aim for under about 500&nbsp;KB.
+<a href="https://mapshaper.org">mapshaper.org</a> simplifies them in your browser: drag in the file, click <strong>Simplify</strong>
+(tick <em>prevent shape removal</em>), drag the slider to about 5%, then <strong>Export</strong> as TopoJSON.
+In our example, a 1.5&nbsp;MB file of Welsh councils became 17&nbsp;KB.</p>
+<p><strong><a href="https://github.com/jhellingsdata/LSE-PP434/blob/main/setup/05-map-files-mapshaper.md">Read the full mapshaper guide</a></strong>: formats, where to find boundaries, filtering and merging
+areas, and fixes for blank or "inside out" maps.</p>
+
+<script>
+async function showExample(el) {
+  const name = el.dataset.example;
+  const url = `../examples/${name}.json`;
+  const text = await (await fetch(url)).text();
+  const spec = JSON.parse(text);
+  const title = typeof spec.title === "object" ? spec.title.text : (spec.title || name);
+  el.className = "example";
+  el.innerHTML = `
+    <h3>${name.startsWith("lecture/") ? "" : parseInt(name.slice(4, 6)) + ". "}${title}</h3>
+    <p class="desc"></p>
+    <div class="chart"></div>
+    <details><summary>Show the code</summary><pre></pre></details>
+    <p class="files"><a href="${url}">${name.split("/").pop()}.json</a></p>`;
+  el.querySelector(".desc").textContent = spec.description || "";
+  el.querySelector("pre").textContent = text;
+  vegaEmbed(el.querySelector(".chart"), spec, {actions: {export: true, source: false, compiled: false, editor: true}})
+    .catch(err => { el.querySelector(".chart").textContent = "Chart failed to load: " + err; });
+}
+document.querySelectorAll("[data-example]").forEach(showExample);
+</script>
+</body>
+</html>

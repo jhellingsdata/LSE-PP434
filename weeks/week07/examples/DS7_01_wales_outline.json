@@ -1,0 +1,25 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "The simplest map: one shape (Wales), drawn with the geoshape mark. A projection turns longitude and latitude into positions on the page.",
+  "title": {
+    "text": "Wales",
+    "anchor": "start"
+  },
+  "width": 300,
+  "height": 350,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/CTRY_GB-WLS.json",
+    "format": {
+      "type": "topojson",
+      "feature": "geog"
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "geoshape",
+    "fill": "#9bd3ae",
+    "stroke": "white"
+  }
+}

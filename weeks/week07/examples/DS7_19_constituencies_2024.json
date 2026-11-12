@@ -1,0 +1,51 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "The 650 Westminster constituencies (July 2024 boundaries). The map has no nation field, but each code starts with a letter for its nation (E, W, S, N), so a 'calculate' transform makes one. To map election results, add a lookup on properties.id (the constituency code) from a results CSV, such as the House of Commons Library's.",
+  "title": {
+    "text": "Westminster constituencies, 2024",
+    "anchor": "start",
+    "subtitle": "650 seats. Hover for names",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 320,
+  "height": 450,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/ELE_MP_UK_2024_07.json",
+    "format": {
+      "type": "topojson",
+      "feature": "geog"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "{'E': 'England', 'W': 'Wales', 'S': 'Scotland', 'N': 'Northern Ireland'}[substring(datum.properties.id, 0, 1)]",
+      "as": "nation"
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 0.2
+  },
+  "encoding": {
+    "color": {
+      "field": "nation",
+      "type": "nominal",
+      "title": null
+    },
+    "tooltip": [
+      {
+        "field": "properties.name",
+        "title": "Constituency"
+      },
+      {
+        "field": "nation",
+        "title": "Nation"
+      }
+    ]
+  }
+}

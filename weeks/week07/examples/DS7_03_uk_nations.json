@@ -1,0 +1,38 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A UK base map. Colour by a property in the map file itself (the nation's name): no other data needed.",
+  "title": {
+    "text": "The United Kingdom",
+    "anchor": "start"
+  },
+  "width": 300,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/CTRY_UK.json",
+    "format": {
+      "type": "topojson",
+      "feature": "geog"
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 0.8
+  },
+  "encoding": {
+    "color": {
+      "field": "properties.name",
+      "type": "nominal",
+      "title": null
+    },
+    "tooltip": [
+      {
+        "field": "properties.name",
+        "title": "Nation"
+      }
+    ]
+  }
+}

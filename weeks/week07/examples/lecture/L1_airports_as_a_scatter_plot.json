@@ -1,0 +1,44 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Step 1. No map yet: just a scatter plot. Longitude on x, latitude on y, exactly like any x/y chart. 'zero: false' stops the axes starting at 0. Notice the shape is squashed: at UK latitudes, one degree of longitude is only about 69 km, but one degree of latitude is about 111 km.",
+  "title": {
+    "text": "Step 1: UK airports as a scatter plot",
+    "anchor": "start",
+    "subtitle": "x = longitude, y = latitude (in degrees)",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 300,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/uk_airports.csv"
+  },
+  "mark": {
+    "type": "circle",
+    "color": "#d35400"
+  },
+  "encoding": {
+    "x": {
+      "field": "longitude",
+      "type": "quantitative",
+      "scale": {
+        "zero": false
+      },
+      "title": "Longitude (°)"
+    },
+    "y": {
+      "field": "latitude",
+      "type": "quantitative",
+      "scale": {
+        "zero": false
+      },
+      "title": "Latitude (°)"
+    },
+    "tooltip": [
+      {
+        "field": "airport",
+        "title": "Airport"
+      }
+    ]
+  }
+}

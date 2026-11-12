@@ -1,0 +1,95 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Zooming in on one strategic authority. Layer 1: its small areas (MSOAs), coloured by population density with a lookup. Layer 2: its councils, drawn as outlines only (filled: false). To map another SA, change the folder name (see gbr/sa/ in map-data). A log scale spreads out the colours when a few values are much bigger than the rest.",
+  "title": {
+    "text": "Greater Manchester: population density",
+    "anchor": "start",
+    "subtitle": "People per km², by MSOA, 2021 Census. Lines: council borders",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 400,
+  "height": 380,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/sa/msa001_greater_manchester/MSOA.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/pop_density_census_msoa21.csv"
+            },
+            "key": "geo_id",
+            "fields": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.2
+      },
+      "encoding": {
+        "color": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "People per km²",
+          "scale": {
+            "type": "log",
+            "scheme": "oranges"
+          },
+          "legend": {
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Area"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "People per km²"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/sa/msa001_greater_manchester/LAD.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#333333",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Council"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Step 2. The same points, but now with 'longitude' and 'latitude' channels and a projection. A projection is like an x and y scale for the whole Earth: it turns degrees into pixels, and corrects the squashing. There are no axes, because the projection is now doing their job.",
+  "title": {
+    "text": "Step 2: the same points, projected",
+    "anchor": "start",
+    "subtitle": "Mercator projection",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 300,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/uk_airports.csv"
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "circle",
+    "color": "#d35400"
+  },
+  "encoding": {
+    "longitude": {
+      "field": "longitude",
+      "type": "quantitative"
+    },
+    "latitude": {
+      "field": "latitude",
+      "type": "quantitative"
+    },
+    "tooltip": [
+      {
+        "field": "airport",
+        "title": "Airport"
+      }
+    ]
+  }
+}

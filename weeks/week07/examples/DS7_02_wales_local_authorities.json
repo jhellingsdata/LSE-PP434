@@ -1,0 +1,38 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "The same idea with more detail: the 22 local authorities of Wales. Each shape has properties (here id and name), which we can use in a tooltip.",
+  "title": {
+    "text": "Wales: local authorities",
+    "anchor": "start"
+  },
+  "width": 300,
+  "height": 350,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+    "format": {
+      "type": "topojson",
+      "feature": "geog"
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "geoshape",
+    "fill": "#9bd3ae",
+    "stroke": "white",
+    "strokeWidth": 0.8
+  },
+  "encoding": {
+    "tooltip": [
+      {
+        "field": "properties.name",
+        "title": "Local authority"
+      },
+      {
+        "field": "properties.id",
+        "title": "Code"
+      }
+    ]
+  }
+}

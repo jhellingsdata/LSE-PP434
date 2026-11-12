@@ -1,0 +1,56 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A point map: each row of the CSV has a latitude and longitude. Without a base map, the points float in space.",
+  "title": {
+    "text": "UK airports",
+    "anchor": "start",
+    "subtitle": "Circle size: passengers",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 300,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/uk_airports.csv"
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "circle",
+    "color": "#d35400"
+  },
+  "encoding": {
+    "longitude": {
+      "field": "longitude",
+      "type": "quantitative"
+    },
+    "latitude": {
+      "field": "latitude",
+      "type": "quantitative"
+    },
+    "size": {
+      "field": "passengers",
+      "type": "quantitative",
+      "title": "Passengers"
+    },
+    "tooltip": [
+      {
+        "field": "airport",
+        "title": "Airport"
+      },
+      {
+        "field": "passengers",
+        "type": "quantitative",
+        "format": ",",
+        "title": "Passengers"
+      },
+      {
+        "field": "aircraft_movements",
+        "type": "quantitative",
+        "format": ",",
+        "title": "Flights"
+      }
+    ]
+  }
+}

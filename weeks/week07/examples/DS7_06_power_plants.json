@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A point map with two encodings: colour shows the fuel type, size shows capacity. A square-root scale makes a circle's area (not its width) match the value.",
+  "title": {
+    "text": "UK power plants",
+    "anchor": "start",
+    "subtitle": "By fuel type and capacity (MW)",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 350,
+  "height": 450,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/CTRY_UK.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e3e3e3",
+        "stroke": "white"
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/uk_power_plants.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.7,
+        "stroke": "white",
+        "strokeWidth": 0.4
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "fuel_category",
+          "type": "nominal",
+          "title": "Fuel"
+        },
+        "size": {
+          "field": "capacity_mw",
+          "type": "quantitative",
+          "title": "Capacity (MW)",
+          "scale": {
+            "type": "sqrt",
+            "range": [
+              5,
+              300
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "Power plant"
+          },
+          {
+            "field": "fuel_category",
+            "title": "Fuel"
+          },
+          {
+            "field": "capacity_mw",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Capacity (MW)"
+          }
+        ]
+      }
+    }
+  ]
+}

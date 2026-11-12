@@ -1,0 +1,40 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "GeoJSON, the format you'll often find online first. This file (from github.com/martinjc/UK-GeoJSON) is a list of 'features', so the data needs \"format\": {\"property\": \"features\"} instead of the TopoJSON settings. Its properties have ONS-style names (LAD13CD, LAD13NM). At 1.5 MB, it's slow: see the mapshaper guide to make it 20 times smaller.",
+  "title": {
+    "text": "Wales: local authorities (GeoJSON)",
+    "anchor": "start",
+    "subtitle": "Source: martinjc/UK-GeoJSON, 1.5 MB",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 300,
+  "height": 350,
+  "data": {
+    "url": "https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/administrative/wal/lad.json",
+    "format": {
+      "property": "features"
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "geoshape",
+    "fill": "#9bd3ae",
+    "stroke": "white",
+    "strokeWidth": 0.8
+  },
+  "encoding": {
+    "tooltip": [
+      {
+        "field": "properties.LAD13NM",
+        "title": "Local authority"
+      },
+      {
+        "field": "properties.LAD13CD",
+        "title": "Code"
+      }
+    ]
+  }
+}
