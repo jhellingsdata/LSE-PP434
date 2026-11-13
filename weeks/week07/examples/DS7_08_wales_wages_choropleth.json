@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "A choropleth. Start with the map, then 'lookup' each area's id (properties.id) in the CSV (column geo_id) and copy across its value. The CSV has ONE row per area. Areas with no value are grey (a conditional: !isValid means 'is missing').",
+  "description": "A choropleth. Start with the map, then 'lookup' each area's id (properties.id) in the CSV (column geo_id) and copy across its value. The CSV has ONE row per area. Areas with no value are grey (a conditional: !isValid means 'is missing'). Note \"invalid\": \"show\" in the mark: without it, Vega-Lite drops shapes with a missing value, leaving a hole instead of grey.",
   "title": {
     "text": "Wages in Wales, 2024",
     "anchor": "start",
@@ -37,7 +37,8 @@
   "mark": {
     "type": "geoshape",
     "stroke": "white",
-    "strokeWidth": 0.8
+    "strokeWidth": 0.8,
+    "invalid": "show"
   },
   "encoding": {
     "color": {

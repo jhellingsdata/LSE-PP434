@@ -1,0 +1,171 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A very common reason for grey areas: the codes don't match. In 2025, Barnsley and Sheffield were given new codes (E08000038, E08000039) with no change of boundary, but this CSV still uses the old ones (E08000016, E08000019). Hover to compare the map's codes with the data. Right: a calculate on the map side swaps each new code for its old one before the lookup, a conditional like Week 5's. Better still: use data and maps from the same year.",
+  "hconcat": [
+    {
+      "title": {
+        "text": "Codes don't match",
+        "anchor": "start",
+        "subtitle": "Two councils are grey: their codes changed in 2025",
+        "subtitleColor": "grey",
+        "subtitleFontSize": 11
+      },
+      "width": 260,
+      "height": 220,
+      "projection": {
+        "type": "mercator"
+      },
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/sa/msa004_south_yorkshire/LAD.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/south_yorkshire_pay_old_codes.csv"
+            },
+            "key": "geo_id",
+            "fields": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1,
+        "invalid": "show"
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "!isValid(datum.value)",
+            "value": "#cccccc"
+          },
+          "field": "value",
+          "type": "quantitative",
+          "title": "£ a year",
+          "scale": {
+            "scheme": "purples",
+            "domain": [
+              34000,
+              38500
+            ]
+          },
+          "legend": {
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Council"
+          },
+          {
+            "field": "properties.id",
+            "title": "Code in the map"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Pay (£)"
+          }
+        ]
+      }
+    },
+    {
+      "title": {
+        "text": "Fixed with a calculate",
+        "anchor": "start",
+        "subtitle": "Map codes translated to the CSV's older codes",
+        "subtitleColor": "grey",
+        "subtitleFontSize": 11
+      },
+      "width": 260,
+      "height": 220,
+      "projection": {
+        "type": "mercator"
+      },
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/sa/msa004_south_yorkshire/LAD.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.properties.id == 'E08000038' ? 'E08000016' : datum.properties.id == 'E08000039' ? 'E08000019' : datum.properties.id",
+          "as": "old_id"
+        },
+        {
+          "lookup": "old_id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/south_yorkshire_pay_old_codes.csv"
+            },
+            "key": "geo_id",
+            "fields": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1,
+        "invalid": "show"
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "!isValid(datum.value)",
+            "value": "#cccccc"
+          },
+          "field": "value",
+          "type": "quantitative",
+          "title": "£ a year",
+          "scale": {
+            "scheme": "purples",
+            "domain": [
+              34000,
+              38500
+            ]
+          },
+          "legend": {
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Council"
+          },
+          {
+            "field": "properties.id",
+            "title": "Code in the map"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Pay (£)"
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "shared"
+    }
+  }
+}

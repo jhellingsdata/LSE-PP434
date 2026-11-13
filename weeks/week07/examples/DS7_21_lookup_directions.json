@@ -1,0 +1,146 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "The same data, looked up in two directions, and two different reasons for the same hole. Left: start from the map and look up values (one row per area in the CSV). Blaenau Gwent's shape is there, but its value is missing, and Vega-Lite drops marks with missing values by default. Fix: add \"invalid\": \"show\" to the mark and a grey colour condition (DS7_08). Right: start from the data (many years per area), filter to 2024, then look up the shapes. Blaenau Gwent has no 2024 row, so there is no shape to draw. Fix: a grey base layer underneath (DS7_09, DS7_22).",
+  "hconcat": [
+    {
+      "title": {
+        "text": "Start from the map",
+        "anchor": "start",
+        "subtitle": "Blaenau Gwent has no value, so it is dropped",
+        "subtitleColor": "grey",
+        "subtitleFontSize": 11
+      },
+      "width": 260,
+      "height": 310,
+      "projection": {
+        "type": "mercator"
+      },
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/wales_wages_2024.csv"
+            },
+            "key": "geo_id",
+            "fields": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#999999",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "£ a year",
+          "scale": {
+            "scheme": "blues"
+          },
+          "legend": {
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Council"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Wages (£)"
+          }
+        ]
+      }
+    },
+    {
+      "title": {
+        "text": "Start from the data",
+        "anchor": "start",
+        "subtitle": "Blaenau Gwent has no row, so it has no shape",
+        "subtitleColor": "grey",
+        "subtitleFontSize": 11
+      },
+      "width": 260,
+      "height": 310,
+      "projection": {
+        "type": "mercator"
+      },
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/wages_LAD_WLS.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.date == 2024"
+        },
+        {
+          "lookup": "geo_id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+              "format": {
+                "type": "topojson",
+                "feature": "geog"
+              }
+            },
+            "key": "properties.id"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#999999",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "£ a year",
+          "scale": {
+            "scheme": "blues"
+          },
+          "legend": {
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "geo.properties.name",
+            "title": "Council"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Wages (£)"
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  }
+}

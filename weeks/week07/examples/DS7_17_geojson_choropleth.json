@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "The same GeoJSON, simplified with mapshaper (85 KB), as a choropleth. The lookup works exactly as with TopoJSON: only the name of the code field changes (properties.LAD13CD).",
+  "description": "The same GeoJSON, simplified with mapshaper (85 KB), as a choropleth. The lookup works exactly as with TopoJSON: only the name of the code field changes (properties.LAD13CD). Note \"invalid\": \"show\" in the mark: without it, Vega-Lite drops shapes with a missing value, leaving a hole instead of grey.",
   "title": {
     "text": "Wages in Wales, 2024 (GeoJSON)",
     "anchor": "start",
@@ -36,7 +36,8 @@
   "mark": {
     "type": "geoshape",
     "stroke": "white",
-    "strokeWidth": 0.8
+    "strokeWidth": 0.8,
+    "invalid": "show"
   },
   "encoding": {
     "color": {

@@ -45,6 +45,7 @@
     <li><a href="#points">Point maps</a>: putting points on a map with <strong>layers</strong></li>
     <li><a href="#choropleth">Choropleth maps</a>: colouring areas by a value with a <strong>lookup</strong></li>
     <li><a href="#devolution">Devolution</a>: strategic authorities in England, and Wales</li>
+    <li><a href="#care">Choropleths with care</a>: lookup directions, missing data, codes, colour scales, labels</li>
     <li><a href="#further">Going further</a>: small areas, Scotland, the world, devolution plans, constituencies</li>
     <li><a href="#recipe">A recipe for any map</a>, and <a href="#smaller">making map files smaller</a></li>
   </ol>
@@ -52,7 +53,9 @@
   Open any chart in the Vega Editor from its <strong>…</strong> menu. Map files come from
   <a href="https://github.com/jhellingsdata/map-data">jhellingsdata/map-data</a>; data files are in
   <a href="https://github.com/jhellingsdata/LSE-PP434/tree/main/weeks/week07/data">weeks/week07/data</a>.
-  The same maps in Python: <a href="https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week07/notebooks/DS7_1_Maps_Altair.ipynb">DS7_1_Maps_Altair</a> (Colab).</p>
+  The same maps in Python: <a href="https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week07/notebooks/DS7_1_Maps_Altair.ipynb">DS7_1_Maps_Altair</a> (Colab).
+  Getting coordinates from postcodes and addresses: <a href="https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week07/notebooks/DS7_2_Geocoding.ipynb">DS7_2_Geocoding</a>.
+  Matching country names to codes: <a href="https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week07/notebooks/DS7_3_Country_Codes.ipynb">DS7_3_Country_Codes</a>.</p>
 </nav>
 
 <h2 id="lecture">Lecture practical: from an x/y chart to a map</h2>
@@ -109,7 +112,15 @@ folder for each authority, with its councils and small areas.</p>
 <a href="https://github.com/jhellingsdata/LSE-PP434/tree/main/weeks/week07/data/msa">weeks/week07/data/msa</a>: its README explains
 what each file measures and which map file to use with it.</p>
 
-<h2 id="further">5. Going further</h2>
+<h2 id="care">5. Choropleths with care</h2>
+<p>Most "my map is wrong" problems come from the lookup, missing data or the colour scale. These examples show what goes wrong, and the fixes.</p>
+<div data-example="DS7_21_lookup_directions"></div>
+<div data-example="DS7_22_missing_data"></div>
+<div data-example="DS7_23_codes_dont_match"></div>
+<div data-example="DS7_24_colour_scales"></div>
+<div data-example="DS7_25_labels"></div>
+
+<h2 id="further">6. Going further</h2>
 <div data-example="DS7_13_wales_msoa_density"></div>
 <div data-example="DS7_14_scotland_wages"></div>
 <div data-example="DS7_15_world_gdp"></div>

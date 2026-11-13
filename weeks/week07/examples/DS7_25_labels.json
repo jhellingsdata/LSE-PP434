@@ -1,0 +1,118 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Labels on a map: a text layer. The map has no label positions, so a calculate finds the middle of each shape with geoCentroid(null, datum), which gives [longitude, latitude]. Short names (the 'short' property) keep the labels small. Labels can overlap where areas are small: label fewer areas, or use tooltips instead.",
+  "title": {
+    "text": "England's strategic authorities, July 2026",
+    "anchor": "start",
+    "subtitle": "Labels show each authority's short name",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 420,
+  "height": 500,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_ENG_2026_05.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eeeeee",
+        "stroke": "white",
+        "strokeWidth": 0.3
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "color": {
+          "field": "properties.tier",
+          "type": "nominal",
+          "title": "Tier",
+          "scale": {
+            "domain": [
+              "established",
+              "mayoral",
+              "foundation"
+            ],
+            "range": [
+              "#0f5499",
+              "#58b3c7",
+              "#f4a582"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Strategic authority"
+          },
+          {
+            "field": "properties.tier",
+            "title": "Tier"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "geoCentroid(null, datum)",
+          "as": "centre"
+        },
+        {
+          "calculate": "datum.centre[0]",
+          "as": "lon"
+        },
+        {
+          "calculate": "datum.centre[1]",
+          "as": "lat"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 9,
+        "fontWeight": "bold",
+        "color": "#222222"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "properties.short"
+        }
+      }
+    }
+  ]
+}

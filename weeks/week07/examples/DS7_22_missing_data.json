@@ -1,0 +1,128 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Four techniques together. (1) The CSV marks missing values with '[x]', as ONS tables do; \"parse\": {\"value\": \"number\"} turns '[x]' into a missing number (without it, '[x]' counts as a real value). (2) A grey base layer of every council, so no area is ever a hole. (3) Its colour is a fixed 'No data' category, which adds a grey 'No data' key to the legend ('resolve' keeps the two colour scales separate). (4) The grey layer's tooltip says 'No data', instead of null or NaN. (In a map-first choropleth, a calculate does the same: isValid(datum.value) ? format(datum.value, ',.0f') : 'No data'.)",
+  "title": {
+    "text": "Wages in Wales, 2024",
+    "anchor": "start",
+    "subtitle": "Annual wages (£). Source: ONS",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  },
+  "width": 320,
+  "height": 380,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "'No data'",
+          "as": "no_data"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "color": {
+          "datum": "No data",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "range": [
+              "#cccccc"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Council"
+          },
+          {
+            "field": "no_data",
+            "title": "Wages (£)"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/wales_wages_2024_with_markers.csv",
+        "format": {
+          "parse": {
+            "value": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "isValid(datum.value)"
+        },
+        {
+          "lookup": "geo_id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+              "format": {
+                "type": "topojson",
+                "feature": "geog"
+              }
+            },
+            "key": "properties.id"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "£ a year",
+          "scale": {
+            "scheme": "blues"
+          },
+          "legend": {
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "geo.properties.name",
+            "title": "Council"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Wages (£)"
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  }
+}

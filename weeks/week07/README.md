@@ -7,13 +7,15 @@
 
 **[Week 7 maps page](https://jhellingsdata.github.io/LSE-PP434/weeks/week07/maps/)**: every example below, with an explanation, the chart and its code. Open any chart in the Vega Editor from its **…** menu.
 
-## Notebook
+## Notebooks
 
 Click **Open in Colab**, then **File → Save a copy in Drive** before you start.
 
 | Notebook | Open | What it covers |
 |---|---|---|
 | [`DS7_1_Maps_Altair`](notebooks/DS7_1_Maps_Altair.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week07/notebooks/DS7_1_Maps_Altair.ipynb) | The same maps in Python: base maps, layered point maps, choropleths with a lookup, and strategic authorities |
+| [`DS7_2_Geocoding`](notebooks/DS7_2_Geocoding.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week07/notebooks/DS7_2_Geocoding.ipynb) | Getting coordinates: UK postcodes with postcodes.io (one at a time and in bulk), addresses with Nominatim (one request a second), then a point map. Bonus: postcode → council → strategic authority |
+| [`DS7_3_Country_Codes`](notebooks/DS7_3_Country_Codes.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week07/notebooks/DS7_3_Country_Codes.ipynb) | Matching country names with `country_converter`: different spellings to ISO3, spotting groups like "World", converting to continents, then a world map |
 
 ## Lecture practical: step by step
 
@@ -67,7 +69,17 @@ Each builds on the one before. Copy one into the [Vega Editor](https://vega.gith
 | [`DS7_12_strategic_authority_density`](examples/DS7_12_strategic_authority_density.json) | Zoom in on one strategic authority: small areas coloured by a lookup, with council borders as an outline layer. **A template for the portfolio task** |
 | [`DS7_20_strategic_authority_choropleth`](examples/DS7_20_strategic_authority_choropleth.json) | A choropleth of the strategic authorities themselves, from `msa_latest.csv` (one row per authority, one column per indicator). Change the column to map another indicator |
 
-**5. Going further**
+**5. Choropleths with care**
+
+| Chart | What's new |
+|---|---|
+| [`DS7_21_lookup_directions`](examples/DS7_21_lookup_directions.json) | The two lookup directions side by side, and two different reasons for the same hole: a missing value, or a missing row |
+| [`DS7_22_missing_data`](examples/DS7_22_missing_data.json) | Missing data done properly: `parse` for markers like `[x]`, a grey base layer, a "No data" legend key and tooltip |
+| [`DS7_23_codes_dont_match`](examples/DS7_23_codes_dont_match.json) | Grey areas because codes changed (Barnsley and Sheffield, 2025), and a fix with a conditional `calculate` |
+| [`DS7_24_colour_scales`](examples/DS7_24_colour_scales.json) | One dataset, four colour scales: continuous, quantile, threshold and diverging (around England's figure) |
+| [`DS7_25_labels`](examples/DS7_25_labels.json) | Text labels at the middle of each area, with `geoCentroid` |
+
+**6. Going further**
 
 | Chart | What's new |
 |---|---|
@@ -108,6 +120,7 @@ Also in `data/`:
 
 ## Tips for maps
 
+1. **Missing areas show as holes, not grey?** Add `"invalid": "show"` to the `geoshape` mark (Altair: `mark_geoshape(invalid="show")`). Vega-Lite leaves out shapes with a missing value unless you do. Values copied by a lookup stay as text: use `toNumber()` so empty cells count as missing (DS7_22, DS7_24).
 1. **Nothing appears?** Check the data `format`. TopoJSON needs the right `feature` name (`geog` for map-data files); GeoJSON needs `"property": "features"`.
 2. **Colours missing?** The codes in your map and your CSV must match exactly. Add a tooltip with `properties.id` to see the map's codes.
 3. **Wrong year, or blank?** A lookup keeps one row per area. Use a CSV with one row per area, or the "many years" pattern (DS7_09).

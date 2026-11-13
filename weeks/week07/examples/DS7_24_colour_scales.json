@@ -1,0 +1,455 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "One dataset, four colour scales. Continuous: London's very high value stretches the scale, so everywhere else looks the same. Quantile: each colour has the same number of areas, showing the ranking. Threshold: you choose the breaks (here round numbers). Diverging: colours run either way from a middle value, here England's GVA per head (£38,095, see data/msa/README.md): above or below average. West of England has no figure: it is grey from a base layer, and toNumber() turns its empty cell into a missing number. Values copied by a lookup stay as text, so an empty cell ('') would otherwise count as a value and be coloured.",
+  "columns": 2,
+  "concat": [
+    {
+      "title": {
+        "text": "Continuous",
+        "anchor": "start",
+        "subtitle": "London stretches the scale",
+        "subtitleColor": "grey",
+        "subtitleFontSize": 11
+      },
+      "width": 230,
+      "height": 270,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_ENG_2026_05.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f2f2f2",
+            "stroke": "white",
+            "strokeWidth": 0.2
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#cccccc",
+            "stroke": "white",
+            "strokeWidth": 0.6
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "transform": [
+            {
+              "lookup": "properties.id",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/msa/msa_latest.csv"
+                },
+                "key": "geo_id",
+                "fields": [
+                  "gva_per_head"
+                ]
+              }
+            },
+            {
+              "calculate": "toNumber(datum.gva_per_head)",
+              "as": "gva_per_head"
+            },
+            {
+              "filter": "isValid(datum.gva_per_head)"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "white",
+            "strokeWidth": 0.6
+          },
+          "encoding": {
+            "color": {
+              "field": "gva_per_head",
+              "type": "quantitative",
+              "title": "£",
+              "legend": {
+                "format": ",.0f"
+              },
+              "scale": {
+                "scheme": "blues"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "properties.name",
+                "title": "Strategic authority"
+              },
+              {
+                "field": "gva_per_head",
+                "type": "quantitative",
+                "format": ",.0f",
+                "title": "GVA per head (£)"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Quantile (5 groups)",
+        "anchor": "start",
+        "subtitle": "Same number of areas in each colour",
+        "subtitleColor": "grey",
+        "subtitleFontSize": 11
+      },
+      "width": 230,
+      "height": 270,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_ENG_2026_05.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f2f2f2",
+            "stroke": "white",
+            "strokeWidth": 0.2
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#cccccc",
+            "stroke": "white",
+            "strokeWidth": 0.6
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "transform": [
+            {
+              "lookup": "properties.id",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/msa/msa_latest.csv"
+                },
+                "key": "geo_id",
+                "fields": [
+                  "gva_per_head"
+                ]
+              }
+            },
+            {
+              "calculate": "toNumber(datum.gva_per_head)",
+              "as": "gva_per_head"
+            },
+            {
+              "filter": "isValid(datum.gva_per_head)"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "white",
+            "strokeWidth": 0.6
+          },
+          "encoding": {
+            "color": {
+              "field": "gva_per_head",
+              "type": "quantitative",
+              "title": "£",
+              "legend": {
+                "format": ",.0f"
+              },
+              "scale": {
+                "type": "quantile",
+                "scheme": {
+                  "name": "blues",
+                  "count": 5
+                }
+              }
+            },
+            "tooltip": [
+              {
+                "field": "properties.name",
+                "title": "Strategic authority"
+              },
+              {
+                "field": "gva_per_head",
+                "type": "quantitative",
+                "format": ",.0f",
+                "title": "GVA per head (£)"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Threshold",
+        "anchor": "start",
+        "subtitle": "Breaks you choose",
+        "subtitleColor": "grey",
+        "subtitleFontSize": 11
+      },
+      "width": 230,
+      "height": 270,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_ENG_2026_05.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f2f2f2",
+            "stroke": "white",
+            "strokeWidth": 0.2
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#cccccc",
+            "stroke": "white",
+            "strokeWidth": 0.6
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "transform": [
+            {
+              "lookup": "properties.id",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/msa/msa_latest.csv"
+                },
+                "key": "geo_id",
+                "fields": [
+                  "gva_per_head"
+                ]
+              }
+            },
+            {
+              "calculate": "toNumber(datum.gva_per_head)",
+              "as": "gva_per_head"
+            },
+            {
+              "filter": "isValid(datum.gva_per_head)"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "white",
+            "strokeWidth": 0.6
+          },
+          "encoding": {
+            "color": {
+              "field": "gva_per_head",
+              "type": "quantitative",
+              "title": "£",
+              "legend": {
+                "format": ",.0f"
+              },
+              "scale": {
+                "type": "threshold",
+                "domain": [
+                  27500,
+                  30000,
+                  35000,
+                  40000
+                ],
+                "scheme": "blues"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "properties.name",
+                "title": "Strategic authority"
+              },
+              {
+                "field": "gva_per_head",
+                "type": "quantitative",
+                "format": ",.0f",
+                "title": "GVA per head (£)"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Diverging",
+        "anchor": "start",
+        "subtitle": "Above or below England (£38,095)",
+        "subtitleColor": "grey",
+        "subtitleFontSize": 11
+      },
+      "width": 230,
+      "height": 270,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_ENG_2026_05.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f2f2f2",
+            "stroke": "white",
+            "strokeWidth": 0.2
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#cccccc",
+            "stroke": "white",
+            "strokeWidth": 0.6
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "transform": [
+            {
+              "lookup": "properties.id",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/msa/msa_latest.csv"
+                },
+                "key": "geo_id",
+                "fields": [
+                  "gva_per_head"
+                ]
+              }
+            },
+            {
+              "calculate": "toNumber(datum.gva_per_head)",
+              "as": "gva_per_head"
+            },
+            {
+              "filter": "isValid(datum.gva_per_head)"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "white",
+            "strokeWidth": 0.6
+          },
+          "encoding": {
+            "color": {
+              "field": "gva_per_head",
+              "type": "quantitative",
+              "title": "£",
+              "legend": {
+                "format": ",.0f"
+              },
+              "scale": {
+                "scheme": "redblue",
+                "domainMid": 38095
+              }
+            },
+            "tooltip": [
+              {
+                "field": "properties.name",
+                "title": "Strategic authority"
+              },
+              {
+                "field": "gva_per_head",
+                "type": "quantitative",
+                "format": ",.0f",
+                "title": "GVA per head (£)"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
+  "title": {
+    "text": "GVA per head in England's strategic authorities, 2024",
+    "anchor": "start",
+    "subtitle": "£ per resident. Grey: no data. Source: ONS, via msa-data",
+    "subtitleColor": "grey",
+    "subtitleFontSize": 11
+  }
+}
