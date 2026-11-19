@@ -18,6 +18,7 @@ Click **Open in Colab**, then **File → Save a copy in Drive** before you start
 |---|---|---|
 | [`DS8_1_Menu_Prices_QuickStart`](notebooks/DS8_1_Menu_Prices_QuickStart.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week08/notebooks/DS8_1_Menu_Prices_QuickStart.ipynb) | 270,000 prices, already summarised into a 56 KB CSV. The price of a latte since 2017, which of 12 well-known items rose most since 2019, and a map: is a latte dearer in London? |
 | [`DS8_2_Price_of_a_Pint`](notebooks/DS8_2_Price_of_a_Pint.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week08/notebooks/DS8_2_Price_of_a_Pint.ipynb) | The prices themselves: 220,000 beer and cider prices. Reading only the columns you need, cleaning text to find a pint, medians by year, city and chain, then maps by region and pub by pub |
+| [`DS8_3_Ranges_Over_Time`](notebooks/DS8_3_Ranges_Over_Time.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week08/notebooks/DS8_3_Ranges_Over_Time.ipynb) | More than the median: summarising 87,000 latte prices with percentiles, then a layered chart, an area for the range and a line for the median. Then four dishes side by side with `facet` |
 
 ## Data
 
