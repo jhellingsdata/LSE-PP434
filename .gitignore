@@ -8,3 +8,9 @@ __pycache__/
 
 # Secrets such as API keys
 .env
+
+# Week 8: raw menu-prices data (not for the public repo)
+weeks/week08/data_raw/
+
+# Week 8: scripts that download and build the data (kept local)
+weeks/week08/*.py

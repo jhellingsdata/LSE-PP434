@@ -1,0 +1,1203 @@
+item,year,itl1_id,itl1,prices,median_price
+cappuccino,2017,TLC,North East (England),24,2.3
+cappuccino,2017,TLD,North West (England),91,2.3
+cappuccino,2017,TLE,Yorkshire and The Humber,80,2.25
+cappuccino,2017,TLF,East Midlands (England),50,2.23
+cappuccino,2017,TLG,West Midlands (England),67,2.3
+cappuccino,2017,TLH,East (England),46,2.3
+cappuccino,2017,TLI,London,531,2.5
+cappuccino,2017,TLJ,South East (England),114,2.4
+cappuccino,2017,TLK,South West (England),40,2.35
+cappuccino,2017,TLL,Wales,54,2.3
+cappuccino,2017,TLM,Scotland,97,2.5
+cappuccino,2017,UK,United Kingdom,1212,2.4
+cappuccino,2018,TLC,North East (England),39,2.4
+cappuccino,2018,TLD,North West (England),127,2.3
+cappuccino,2018,TLE,Yorkshire and The Humber,123,2.39
+cappuccino,2018,TLF,East Midlands (England),61,2.4
+cappuccino,2018,TLG,West Midlands (England),100,2.35
+cappuccino,2018,TLH,East (England),62,2.4
+cappuccino,2018,TLI,London,853,2.5
+cappuccino,2018,TLJ,South East (England),129,2.5
+cappuccino,2018,TLK,South West (England),78,2.5
+cappuccino,2018,TLL,Wales,100,2.3
+cappuccino,2018,TLM,Scotland,155,2.5
+cappuccino,2018,UK,United Kingdom,1843,2.5
+cappuccino,2019,TLC,North East (England),25,2.5
+cappuccino,2019,TLD,North West (England),181,2.5
+cappuccino,2019,TLE,Yorkshire and The Humber,133,2.5
+cappuccino,2019,TLF,East Midlands (England),52,2.5
+cappuccino,2019,TLG,West Midlands (England),101,2.45
+cappuccino,2019,TLH,East (England),62,2.3
+cappuccino,2019,TLI,London,1045,2.7
+cappuccino,2019,TLJ,South East (England),170,2.5
+cappuccino,2019,TLK,South West (England),69,2.5
+cappuccino,2019,TLL,Wales,81,2.5
+cappuccino,2019,TLM,Scotland,189,2.5
+cappuccino,2019,TLN,Northern Ireland,20,2.58
+cappuccino,2019,UK,United Kingdom,2128,2.5
+cappuccino,2020,TLC,North East (England),34,2.5
+cappuccino,2020,TLD,North West (England),108,2.5
+cappuccino,2020,TLE,Yorkshire and The Humber,95,2.45
+cappuccino,2020,TLF,East Midlands (England),59,2.5
+cappuccino,2020,TLG,West Midlands (England),87,2.5
+cappuccino,2020,TLH,East (England),51,2.5
+cappuccino,2020,TLI,London,706,2.7
+cappuccino,2020,TLJ,South East (England),130,2.6
+cappuccino,2020,TLK,South West (England),73,2.75
+cappuccino,2020,TLL,Wales,68,2.5
+cappuccino,2020,TLM,Scotland,123,2.7
+cappuccino,2020,UK,United Kingdom,1548,2.6
+cappuccino,2021,TLC,North East (England),59,2.7
+cappuccino,2021,TLD,North West (England),206,2.65
+cappuccino,2021,TLE,Yorkshire and The Humber,194,2.5
+cappuccino,2021,TLF,East Midlands (England),60,2.7
+cappuccino,2021,TLG,West Midlands (England),165,2.6
+cappuccino,2021,TLH,East (England),77,2.6
+cappuccino,2021,TLI,London,965,2.8
+cappuccino,2021,TLJ,South East (England),200,2.7
+cappuccino,2021,TLK,South West (England),101,2.8
+cappuccino,2021,TLL,Wales,175,2.6
+cappuccino,2021,TLM,Scotland,174,2.8
+cappuccino,2021,TLN,Northern Ireland,29,2.75
+cappuccino,2021,UK,United Kingdom,2405,2.75
+cappuccino,2022,TLC,North East (England),70,2.85
+cappuccino,2022,TLD,North West (England),365,2.85
+cappuccino,2022,TLE,Yorkshire and The Humber,317,2.9
+cappuccino,2022,TLF,East Midlands (England),103,2.8
+cappuccino,2022,TLG,West Midlands (England),246,2.75
+cappuccino,2022,TLH,East (England),124,2.9
+cappuccino,2022,TLI,London,1915,3.0
+cappuccino,2022,TLJ,South East (England),333,2.9
+cappuccino,2022,TLK,South West (England),145,2.8
+cappuccino,2022,TLL,Wales,224,2.9
+cappuccino,2022,TLM,Scotland,408,2.95
+cappuccino,2022,TLN,Northern Ireland,36,2.9
+cappuccino,2022,UK,United Kingdom,4286,2.95
+cappuccino,2023,TLC,North East (England),113,3.0
+cappuccino,2023,TLD,North West (England),503,3.0
+cappuccino,2023,TLE,Yorkshire and The Humber,435,3.0
+cappuccino,2023,TLF,East Midlands (England),154,3.0
+cappuccino,2023,TLG,West Midlands (England),361,3.0
+cappuccino,2023,TLH,East (England),191,3.0
+cappuccino,2023,TLI,London,2841,3.2
+cappuccino,2023,TLJ,South East (England),455,3.0
+cappuccino,2023,TLK,South West (England),242,3.1
+cappuccino,2023,TLL,Wales,272,3.0
+cappuccino,2023,TLM,Scotland,552,3.2
+cappuccino,2023,TLN,Northern Ireland,47,3.2
+cappuccino,2023,UK,United Kingdom,6166,3.15
+cappuccino,2024,TLC,North East (England),141,3.0
+cappuccino,2024,TLD,North West (England),670,3.2
+cappuccino,2024,TLE,Yorkshire and The Humber,494,3.2
+cappuccino,2024,TLF,East Midlands (England),221,3.15
+cappuccino,2024,TLG,West Midlands (England),459,3.0
+cappuccino,2024,TLH,East (England),174,3.18
+cappuccino,2024,TLI,London,3272,3.5
+cappuccino,2024,TLJ,South East (England),523,3.2
+cappuccino,2024,TLK,South West (England),265,3.3
+cappuccino,2024,TLL,Wales,397,3.2
+cappuccino,2024,TLM,Scotland,591,3.3
+cappuccino,2024,TLN,Northern Ireland,60,3.28
+cappuccino,2024,UK,United Kingdom,7267,3.3
+cappuccino,2025,TLC,North East (England),191,3.4
+cappuccino,2025,TLD,North West (England),961,3.5
+cappuccino,2025,TLE,Yorkshire and The Humber,710,3.5
+cappuccino,2025,TLF,East Midlands (England),262,3.45
+cappuccino,2025,TLG,West Midlands (England),528,3.5
+cappuccino,2025,TLH,East (England),266,3.5
+cappuccino,2025,TLI,London,4432,3.6
+cappuccino,2025,TLJ,South East (England),664,3.5
+cappuccino,2025,TLK,South West (England),309,3.5
+cappuccino,2025,TLL,Wales,498,3.45
+cappuccino,2025,TLM,Scotland,885,3.5
+cappuccino,2025,TLN,Northern Ireland,55,3.6
+cappuccino,2025,UK,United Kingdom,9761,3.5
+cappuccino,2026,TLC,North East (England),182,3.5
+cappuccino,2026,TLD,North West (England),777,3.5
+cappuccino,2026,TLE,Yorkshire and The Humber,642,3.6
+cappuccino,2026,TLF,East Midlands (England),220,3.5
+cappuccino,2026,TLG,West Midlands (England),476,3.5
+cappuccino,2026,TLH,East (England),185,3.5
+cappuccino,2026,TLI,London,2896,3.75
+cappuccino,2026,TLJ,South East (England),533,3.6
+cappuccino,2026,TLK,South West (England),297,3.6
+cappuccino,2026,TLL,Wales,363,3.5
+cappuccino,2026,TLM,Scotland,623,3.75
+cappuccino,2026,TLN,Northern Ireland,54,3.5
+cappuccino,2026,UK,United Kingdom,7248,3.6
+cheeseburger,2017,TLD,North West (England),71,3.45
+cheeseburger,2017,TLE,Yorkshire and The Humber,56,5.08
+cheeseburger,2017,TLG,West Midlands (England),42,5.25
+cheeseburger,2017,TLH,East (England),23,6.75
+cheeseburger,2017,TLI,London,285,6.7
+cheeseburger,2017,TLJ,South East (England),56,4.35
+cheeseburger,2017,TLK,South West (England),27,3.95
+cheeseburger,2017,TLL,Wales,23,6.5
+cheeseburger,2017,TLM,Scotland,50,6.73
+cheeseburger,2017,UK,United Kingdom,661,5.5
+cheeseburger,2018,TLC,North East (England),33,4.2
+cheeseburger,2018,TLD,North West (England),84,4.35
+cheeseburger,2018,TLE,Yorkshire and The Humber,57,4.99
+cheeseburger,2018,TLF,East Midlands (England),25,6.05
+cheeseburger,2018,TLG,West Midlands (England),64,3.5
+cheeseburger,2018,TLH,East (England),43,5.95
+cheeseburger,2018,TLI,London,460,6.2
+cheeseburger,2018,TLJ,South East (England),51,4.8
+cheeseburger,2018,TLK,South West (England),32,6.5
+cheeseburger,2018,TLL,Wales,40,5.35
+cheeseburger,2018,TLM,Scotland,95,5.95
+cheeseburger,2018,UK,United Kingdom,989,5.7
+cheeseburger,2019,TLD,North West (England),82,4.25
+cheeseburger,2019,TLE,Yorkshire and The Humber,55,5.6
+cheeseburger,2019,TLF,East Midlands (England),42,8.95
+cheeseburger,2019,TLG,West Midlands (England),59,4.09
+cheeseburger,2019,TLH,East (England),33,6.0
+cheeseburger,2019,TLI,London,560,7.58
+cheeseburger,2019,TLJ,South East (England),87,4.5
+cheeseburger,2019,TLK,South West (England),46,6.73
+cheeseburger,2019,TLL,Wales,33,5.5
+cheeseburger,2019,TLM,Scotland,127,7.95
+cheeseburger,2019,UK,United Kingdom,1147,6.75
+cheeseburger,2020,TLD,North West (England),79,4.99
+cheeseburger,2020,TLE,Yorkshire and The Humber,47,4.0
+cheeseburger,2020,TLF,East Midlands (England),64,5.5
+cheeseburger,2020,TLG,West Midlands (England),38,4.15
+cheeseburger,2020,TLH,East (England),39,6.0
+cheeseburger,2020,TLI,London,364,7.47
+cheeseburger,2020,TLJ,South East (England),63,5.0
+cheeseburger,2020,TLK,South West (England),48,6.75
+cheeseburger,2020,TLL,Wales,41,4.7
+cheeseburger,2020,TLM,Scotland,61,7.0
+cheeseburger,2020,UK,United Kingdom,859,6.0
+cheeseburger,2021,TLD,North West (England),126,5.5
+cheeseburger,2021,TLE,Yorkshire and The Humber,58,7.25
+cheeseburger,2021,TLF,East Midlands (England),32,6.0
+cheeseburger,2021,TLG,West Midlands (England),87,4.0
+cheeseburger,2021,TLH,East (England),37,7.29
+cheeseburger,2021,TLI,London,436,6.99
+cheeseburger,2021,TLJ,South East (England),72,7.5
+cheeseburger,2021,TLK,South West (England),70,7.0
+cheeseburger,2021,TLL,Wales,69,5.0
+cheeseburger,2021,TLM,Scotland,112,7.63
+cheeseburger,2021,UK,United Kingdom,1120,6.5
+cheeseburger,2022,TLC,North East (England),39,7.95
+cheeseburger,2022,TLD,North West (England),176,5.9
+cheeseburger,2022,TLE,Yorkshire and The Humber,97,6.49
+cheeseburger,2022,TLF,East Midlands (England),59,7.19
+cheeseburger,2022,TLG,West Midlands (England),128,7.5
+cheeseburger,2022,TLH,East (England),50,7.03
+cheeseburger,2022,TLI,London,852,8.95
+cheeseburger,2022,TLJ,South East (England),138,8.95
+cheeseburger,2022,TLK,South West (England),76,8.25
+cheeseburger,2022,TLL,Wales,97,7.5
+cheeseburger,2022,TLM,Scotland,150,8.5
+cheeseburger,2022,TLN,Northern Ireland,25,6.9
+cheeseburger,2022,UK,United Kingdom,1887,8.0
+cheeseburger,2023,TLC,North East (England),48,7.82
+cheeseburger,2023,TLD,North West (England),289,7.75
+cheeseburger,2023,TLE,Yorkshire and The Humber,237,6.5
+cheeseburger,2023,TLF,East Midlands (England),67,6.75
+cheeseburger,2023,TLG,West Midlands (England),136,7.19
+cheeseburger,2023,TLH,East (England),59,6.9
+cheeseburger,2023,TLI,London,1102,10.65
+cheeseburger,2023,TLJ,South East (England),226,7.82
+cheeseburger,2023,TLK,South West (England),130,8.5
+cheeseburger,2023,TLL,Wales,158,9.23
+cheeseburger,2023,TLM,Scotland,233,8.0
+cheeseburger,2023,UK,United Kingdom,2699,8.59
+cheeseburger,2024,TLC,North East (England),78,6.95
+cheeseburger,2024,TLD,North West (England),251,7.0
+cheeseburger,2024,TLE,Yorkshire and The Humber,240,6.99
+cheeseburger,2024,TLF,East Midlands (England),71,8.0
+cheeseburger,2024,TLG,West Midlands (England),203,7.0
+cheeseburger,2024,TLH,East (England),105,8.5
+cheeseburger,2024,TLI,London,1295,10.25
+cheeseburger,2024,TLJ,South East (England),279,7.0
+cheeseburger,2024,TLK,South West (England),125,9.99
+cheeseburger,2024,TLL,Wales,226,9.35
+cheeseburger,2024,TLM,Scotland,240,7.5
+cheeseburger,2024,TLN,Northern Ireland,33,6.5
+cheeseburger,2024,UK,United Kingdom,3146,8.95
+cheeseburger,2025,TLC,North East (England),64,9.5
+cheeseburger,2025,TLD,North West (England),403,6.99
+cheeseburger,2025,TLE,Yorkshire and The Humber,347,7.0
+cheeseburger,2025,TLF,East Midlands (England),106,7.0
+cheeseburger,2025,TLG,West Midlands (England),275,7.0
+cheeseburger,2025,TLH,East (England),134,8.0
+cheeseburger,2025,TLI,London,1531,11.95
+cheeseburger,2025,TLJ,South East (England),320,8.0
+cheeseburger,2025,TLK,South West (England),118,8.5
+cheeseburger,2025,TLL,Wales,293,8.6
+cheeseburger,2025,TLM,Scotland,342,9.95
+cheeseburger,2025,TLN,Northern Ireland,24,8.65
+cheeseburger,2025,UK,United Kingdom,3957,9.5
+cheeseburger,2026,TLC,North East (England),40,7.5
+cheeseburger,2026,TLD,North West (England),361,8.0
+cheeseburger,2026,TLE,Yorkshire and The Humber,237,7.0
+cheeseburger,2026,TLF,East Midlands (England),72,6.25
+cheeseburger,2026,TLG,West Midlands (England),224,6.5
+cheeseburger,2026,TLH,East (England),81,8.5
+cheeseburger,2026,TLI,London,1064,10.97
+cheeseburger,2026,TLJ,South East (England),222,8.95
+cheeseburger,2026,TLK,South West (England),134,9.53
+cheeseburger,2026,TLL,Wales,192,9.5
+cheeseburger,2026,TLM,Scotland,269,9.52
+cheeseburger,2026,UK,United Kingdom,2908,9.5
+chicken tikka masala,2017,TLD,North West (England),44,7.19
+chicken tikka masala,2017,TLE,Yorkshire and The Humber,46,7.5
+chicken tikka masala,2017,TLG,West Midlands (England),50,6.65
+chicken tikka masala,2017,TLI,London,92,7.5
+chicken tikka masala,2017,TLJ,South East (England),26,7.95
+chicken tikka masala,2017,TLK,South West (England),26,12.1
+chicken tikka masala,2017,TLL,Wales,27,8.45
+chicken tikka masala,2017,UK,United Kingdom,357,7.49
+chicken tikka masala,2018,TLD,North West (England),61,8.29
+chicken tikka masala,2018,TLE,Yorkshire and The Humber,63,7.19
+chicken tikka masala,2018,TLF,East Midlands (England),27,8.49
+chicken tikka masala,2018,TLG,West Midlands (England),105,7.25
+chicken tikka masala,2018,TLH,East (England),21,7.79
+chicken tikka masala,2018,TLI,London,147,8.39
+chicken tikka masala,2018,TLJ,South East (England),34,7.9
+chicken tikka masala,2018,TLK,South West (England),23,8.95
+chicken tikka masala,2018,TLL,Wales,52,8.0
+chicken tikka masala,2018,TLM,Scotland,33,7.5
+chicken tikka masala,2018,UK,United Kingdom,588,7.95
+chicken tikka masala,2019,TLD,North West (England),52,8.1
+chicken tikka masala,2019,TLE,Yorkshire and The Humber,61,8.45
+chicken tikka masala,2019,TLF,East Midlands (England),23,7.5
+chicken tikka masala,2019,TLG,West Midlands (England),74,7.7
+chicken tikka masala,2019,TLI,London,167,8.5
+chicken tikka masala,2019,TLJ,South East (England),36,7.95
+chicken tikka masala,2019,TLL,Wales,43,8.0
+chicken tikka masala,2019,TLM,Scotland,37,8.75
+chicken tikka masala,2019,UK,United Kingdom,532,8.07
+chicken tikka masala,2020,TLD,North West (England),51,7.9
+chicken tikka masala,2020,TLE,Yorkshire and The Humber,57,7.95
+chicken tikka masala,2020,TLG,West Midlands (England),71,7.95
+chicken tikka masala,2020,TLI,London,118,8.7
+chicken tikka masala,2020,TLL,Wales,39,7.9
+chicken tikka masala,2020,UK,United Kingdom,423,8.2
+chicken tikka masala,2021,TLC,North East (England),25,7.15
+chicken tikka masala,2021,TLD,North West (England),65,7.69
+chicken tikka masala,2021,TLE,Yorkshire and The Humber,42,8.5
+chicken tikka masala,2021,TLG,West Midlands (England),112,8.0
+chicken tikka masala,2021,TLI,London,186,8.5
+chicken tikka masala,2021,TLJ,South East (England),32,9.0
+chicken tikka masala,2021,TLL,Wales,52,8.95
+chicken tikka masala,2021,TLM,Scotland,29,7.95
+chicken tikka masala,2021,UK,United Kingdom,586,8.45
+chicken tikka masala,2022,TLD,North West (England),86,9.0
+chicken tikka masala,2022,TLE,Yorkshire and The Humber,109,9.2
+chicken tikka masala,2022,TLF,East Midlands (England),33,9.0
+chicken tikka masala,2022,TLG,West Midlands (England),152,8.2
+chicken tikka masala,2022,TLI,London,324,9.7
+chicken tikka masala,2022,TLJ,South East (England),41,10.29
+chicken tikka masala,2022,TLL,Wales,92,8.95
+chicken tikka masala,2022,TLM,Scotland,52,8.85
+chicken tikka masala,2022,UK,United Kingdom,945,9.05
+chicken tikka masala,2023,TLD,North West (England),147,10.79
+chicken tikka masala,2023,TLE,Yorkshire and The Humber,113,9.95
+chicken tikka masala,2023,TLF,East Midlands (England),39,9.75
+chicken tikka masala,2023,TLG,West Midlands (England),176,9.53
+chicken tikka masala,2023,TLH,East (England),23,9.95
+chicken tikka masala,2023,TLI,London,373,10.5
+chicken tikka masala,2023,TLJ,South East (England),46,10.95
+chicken tikka masala,2023,TLK,South West (England),22,10.97
+chicken tikka masala,2023,TLL,Wales,84,9.95
+chicken tikka masala,2023,TLM,Scotland,93,10.95
+chicken tikka masala,2023,UK,United Kingdom,1142,10.05
+chicken tikka masala,2024,TLC,North East (England),28,10.27
+chicken tikka masala,2024,TLD,North West (England),147,10.79
+chicken tikka masala,2024,TLE,Yorkshire and The Humber,146,10.49
+chicken tikka masala,2024,TLF,East Midlands (England),77,9.95
+chicken tikka masala,2024,TLG,West Midlands (England),262,9.5
+chicken tikka masala,2024,TLH,East (England),35,10.08
+chicken tikka masala,2024,TLI,London,496,10.95
+chicken tikka masala,2024,TLJ,South East (England),63,9.99
+chicken tikka masala,2024,TLK,South West (England),34,11.98
+chicken tikka masala,2024,TLL,Wales,111,10.5
+chicken tikka masala,2024,TLM,Scotland,99,10.95
+chicken tikka masala,2024,UK,United Kingdom,1516,10.45
+chicken tikka masala,2025,TLC,North East (England),45,9.99
+chicken tikka masala,2025,TLD,North West (England),209,10.95
+chicken tikka masala,2025,TLE,Yorkshire and The Humber,171,10.0
+chicken tikka masala,2025,TLF,East Midlands (England),71,9.95
+chicken tikka masala,2025,TLG,West Midlands (England),290,9.99
+chicken tikka masala,2025,TLH,East (England),56,10.62
+chicken tikka masala,2025,TLI,London,549,10.95
+chicken tikka masala,2025,TLJ,South East (England),128,10.99
+chicken tikka masala,2025,TLK,South West (England),47,10.95
+chicken tikka masala,2025,TLL,Wales,129,10.99
+chicken tikka masala,2025,TLM,Scotland,141,10.95
+chicken tikka masala,2025,TLN,Northern Ireland,28,11.25
+chicken tikka masala,2025,UK,United Kingdom,1864,10.8
+chicken tikka masala,2026,TLC,North East (England),40,9.9
+chicken tikka masala,2026,TLD,North West (England),139,10.62
+chicken tikka masala,2026,TLE,Yorkshire and The Humber,106,11.25
+chicken tikka masala,2026,TLF,East Midlands (England),53,10.3
+chicken tikka masala,2026,TLG,West Midlands (England),247,10.49
+chicken tikka masala,2026,TLH,East (England),28,11.95
+chicken tikka masala,2026,TLI,London,373,11.83
+chicken tikka masala,2026,TLJ,South East (England),62,10.95
+chicken tikka masala,2026,TLK,South West (England),42,10.13
+chicken tikka masala,2026,TLL,Wales,86,10.99
+chicken tikka masala,2026,TLM,Scotland,100,10.5
+chicken tikka masala,2026,UK,United Kingdom,1280,10.95
+croissant,2017,TLI,London,159,2.5
+croissant,2017,TLJ,South East (England),21,2.5
+croissant,2017,TLM,Scotland,44,2.95
+croissant,2017,UK,United Kingdom,265,2.5
+croissant,2018,TLI,London,276,2.75
+croissant,2018,TLM,Scotland,63,3.0
+croissant,2018,UK,United Kingdom,411,2.8
+croissant,2019,TLD,North West (England),26,2.5
+croissant,2019,TLH,East (England),21,2.4
+croissant,2019,TLI,London,291,2.9
+croissant,2019,TLM,Scotland,60,3.33
+croissant,2019,UK,United Kingdom,460,2.75
+croissant,2020,TLI,London,229,2.5
+croissant,2020,TLJ,South East (England),21,2.5
+croissant,2020,TLM,Scotland,35,2.95
+croissant,2020,UK,United Kingdom,355,2.6
+croissant,2021,TLH,East (England),28,2.6
+croissant,2021,TLI,London,341,3.0
+croissant,2021,TLJ,South East (England),25,2.5
+croissant,2021,TLM,Scotland,49,3.5
+croissant,2021,UK,United Kingdom,537,2.9
+croissant,2022,TLC,North East (England),27,2.95
+croissant,2022,TLD,North West (England),32,2.95
+croissant,2022,TLE,Yorkshire and The Humber,44,2.85
+croissant,2022,TLH,East (England),26,2.75
+croissant,2022,TLI,London,617,3.2
+croissant,2022,TLJ,South East (England),50,3.0
+croissant,2022,TLK,South West (England),26,2.35
+croissant,2022,TLL,Wales,22,2.95
+croissant,2022,TLM,Scotland,103,3.5
+croissant,2022,UK,United Kingdom,987,3.0
+croissant,2023,TLC,North East (England),32,3.65
+croissant,2023,TLD,North West (England),70,3.0
+croissant,2023,TLE,Yorkshire and The Humber,81,2.95
+croissant,2023,TLG,West Midlands (England),33,2.95
+croissant,2023,TLH,East (England),29,3.1
+croissant,2023,TLI,London,1194,3.5
+croissant,2023,TLJ,South East (England),101,3.2
+croissant,2023,TLK,South West (England),50,3.0
+croissant,2023,TLL,Wales,41,3.5
+croissant,2023,TLM,Scotland,168,3.8
+croissant,2023,UK,United Kingdom,1830,3.45
+croissant,2024,TLC,North East (England),42,4.0
+croissant,2024,TLD,North West (England),91,3.5
+croissant,2024,TLE,Yorkshire and The Humber,93,3.8
+croissant,2024,TLF,East Midlands (England),20,4.85
+croissant,2024,TLG,West Midlands (England),75,3.0
+croissant,2024,TLH,East (England),29,3.75
+croissant,2024,TLI,London,1453,3.65
+croissant,2024,TLJ,South East (England),105,3.5
+croissant,2024,TLK,South West (England),58,3.0
+croissant,2024,TLL,Wales,53,4.25
+croissant,2024,TLM,Scotland,197,4.2
+croissant,2024,UK,United Kingdom,2227,3.75
+croissant,2025,TLC,North East (England),65,3.95
+croissant,2025,TLD,North West (England),116,4.22
+croissant,2025,TLE,Yorkshire and The Humber,106,3.6
+croissant,2025,TLF,East Midlands (England),47,4.99
+croissant,2025,TLG,West Midlands (England),98,4.42
+croissant,2025,TLH,East (England),62,3.5
+croissant,2025,TLI,London,1841,4.0
+croissant,2025,TLJ,South East (England),120,3.78
+croissant,2025,TLK,South West (England),53,3.0
+croissant,2025,TLL,Wales,52,3.7
+croissant,2025,TLM,Scotland,326,4.5
+croissant,2025,TLN,Northern Ireland,27,3.75
+croissant,2025,UK,United Kingdom,2913,4.0
+croissant,2026,TLC,North East (England),60,3.9
+croissant,2026,TLD,North West (England),117,3.95
+croissant,2026,TLE,Yorkshire and The Humber,121,3.9
+croissant,2026,TLF,East Midlands (England),31,3.5
+croissant,2026,TLG,West Midlands (England),113,5.0
+croissant,2026,TLH,East (England),57,3.2
+croissant,2026,TLI,London,1018,3.95
+croissant,2026,TLJ,South East (England),121,3.5
+croissant,2026,TLK,South West (England),46,3.5
+croissant,2026,TLL,Wales,50,3.85
+croissant,2026,TLM,Scotland,238,5.2
+croissant,2026,TLN,Northern Ireland,25,4.5
+croissant,2026,UK,United Kingdom,1997,4.0
+english breakfast,2017,TLD,North West (England),20,5.48
+english breakfast,2017,TLG,West Midlands (England),22,5.87
+english breakfast,2017,TLI,London,122,5.73
+english breakfast,2017,TLJ,South East (England),28,5.25
+english breakfast,2017,UK,United Kingdom,259,5.0
+english breakfast,2018,TLD,North West (England),39,5.49
+english breakfast,2018,TLE,Yorkshire and The Humber,34,5.95
+english breakfast,2018,TLG,West Midlands (England),37,4.99
+english breakfast,2018,TLI,London,209,4.99
+english breakfast,2018,TLJ,South East (England),35,4.99
+english breakfast,2018,TLK,South West (England),21,2.85
+english breakfast,2018,UK,United Kingdom,437,4.99
+english breakfast,2019,TLD,North West (England),37,4.5
+english breakfast,2019,TLE,Yorkshire and The Humber,22,5.5
+english breakfast,2019,TLG,West Midlands (England),25,4.4
+english breakfast,2019,TLI,London,257,4.9
+english breakfast,2019,TLJ,South East (England),44,6.0
+english breakfast,2019,UK,United Kingdom,446,4.99
+english breakfast,2020,TLD,North West (England),37,6.49
+english breakfast,2020,TLE,Yorkshire and The Humber,40,5.99
+english breakfast,2020,TLG,West Midlands (England),23,5.0
+english breakfast,2020,TLI,London,184,5.27
+english breakfast,2020,TLJ,South East (England),24,6.73
+english breakfast,2020,UK,United Kingdom,365,5.95
+english breakfast,2021,TLD,North West (England),50,5.6
+english breakfast,2021,TLE,Yorkshire and The Humber,41,5.25
+english breakfast,2021,TLG,West Midlands (England),42,3.65
+english breakfast,2021,TLI,London,257,5.5
+english breakfast,2021,TLJ,South East (England),48,4.27
+english breakfast,2021,UK,United Kingdom,523,5.49
+english breakfast,2022,TLC,North East (England),26,5.98
+english breakfast,2022,TLD,North West (England),83,6.99
+english breakfast,2022,TLE,Yorkshire and The Humber,60,6.65
+english breakfast,2022,TLF,East Midlands (England),23,6.5
+english breakfast,2022,TLG,West Midlands (England),83,5.0
+english breakfast,2022,TLH,East (England),39,6.45
+english breakfast,2022,TLI,London,547,5.95
+english breakfast,2022,TLJ,South East (England),68,5.73
+english breakfast,2022,TLK,South West (England),26,5.73
+english breakfast,2022,TLL,Wales,21,3.0
+english breakfast,2022,UK,United Kingdom,996,5.97
+english breakfast,2023,TLC,North East (England),25,8.95
+english breakfast,2023,TLD,North West (England),105,4.99
+english breakfast,2023,TLE,Yorkshire and The Humber,105,7.0
+english breakfast,2023,TLF,East Midlands (England),35,5.99
+english breakfast,2023,TLG,West Midlands (England),116,5.0
+english breakfast,2023,TLH,East (England),46,7.79
+english breakfast,2023,TLI,London,855,5.9
+english breakfast,2023,TLJ,South East (England),79,3.2
+english breakfast,2023,TLK,South West (England),39,6.5
+english breakfast,2023,TLL,Wales,30,2.88
+english breakfast,2023,TLM,Scotland,23,3.2
+english breakfast,2023,UK,United Kingdom,1462,5.99
+english breakfast,2024,TLC,North East (England),40,7.55
+english breakfast,2024,TLD,North West (England),200,7.93
+english breakfast,2024,TLE,Yorkshire and The Humber,91,6.25
+english breakfast,2024,TLF,East Midlands (England),80,8.44
+english breakfast,2024,TLG,West Midlands (England),147,6.49
+english breakfast,2024,TLH,East (England),42,8.24
+english breakfast,2024,TLI,London,1007,7.5
+english breakfast,2024,TLJ,South East (England),91,6.5
+english breakfast,2024,TLK,South West (England),30,3.7
+english breakfast,2024,TLL,Wales,20,7.75
+english breakfast,2024,TLM,Scotland,37,3.0
+english breakfast,2024,UK,United Kingdom,1785,7.0
+english breakfast,2025,TLC,North East (England),56,7.6
+english breakfast,2025,TLD,North West (England),285,8.5
+english breakfast,2025,TLE,Yorkshire and The Humber,152,8.38
+english breakfast,2025,TLF,East Midlands (England),83,7.9
+english breakfast,2025,TLG,West Midlands (England),193,7.0
+english breakfast,2025,TLH,East (England),67,6.5
+english breakfast,2025,TLI,London,1347,6.99
+english breakfast,2025,TLJ,South East (England),163,8.2
+english breakfast,2025,TLK,South West (England),49,7.45
+english breakfast,2025,TLL,Wales,45,8.29
+english breakfast,2025,TLM,Scotland,69,3.5
+english breakfast,2025,UK,United Kingdom,2512,7.5
+english breakfast,2026,TLC,North East (England),59,7.5
+english breakfast,2026,TLD,North West (England),218,8.23
+english breakfast,2026,TLE,Yorkshire and The Humber,178,10.0
+english breakfast,2026,TLF,East Midlands (England),75,4.0
+english breakfast,2026,TLG,West Midlands (England),156,9.0
+english breakfast,2026,TLH,East (England),57,7.95
+english breakfast,2026,TLI,London,811,8.0
+english breakfast,2026,TLJ,South East (England),161,8.99
+english breakfast,2026,TLK,South West (England),55,5.0
+english breakfast,2026,TLL,Wales,28,5.88
+english breakfast,2026,TLM,Scotland,51,3.8
+english breakfast,2026,UK,United Kingdom,1854,8.23
+fish & chips,2017,TLC,North East (England),25,5.99
+fish & chips,2017,TLD,North West (England),116,7.99
+fish & chips,2017,TLE,Yorkshire and The Humber,67,8.19
+fish & chips,2017,TLF,East Midlands (England),35,7.5
+fish & chips,2017,TLG,West Midlands (England),57,7.5
+fish & chips,2017,TLI,London,331,11.5
+fish & chips,2017,TLJ,South East (England),83,9.69
+fish & chips,2017,TLK,South West (England),38,9.5
+fish & chips,2017,TLL,Wales,69,7.99
+fish & chips,2017,TLM,Scotland,54,9.25
+fish & chips,2017,UK,United Kingdom,903,9.49
+fish & chips,2018,TLC,North East (England),46,8.22
+fish & chips,2018,TLD,North West (England),162,7.95
+fish & chips,2018,TLE,Yorkshire and The Humber,137,6.79
+fish & chips,2018,TLF,East Midlands (England),49,6.99
+fish & chips,2018,TLG,West Midlands (England),120,7.3
+fish & chips,2018,TLH,East (England),63,8.5
+fish & chips,2018,TLI,London,626,12.49
+fish & chips,2018,TLJ,South East (England),149,9.49
+fish & chips,2018,TLK,South West (England),80,9.05
+fish & chips,2018,TLL,Wales,82,7.33
+fish & chips,2018,TLM,Scotland,101,10.95
+fish & chips,2018,UK,United Kingdom,1633,9.95
+fish & chips,2019,TLC,North East (England),38,6.88
+fish & chips,2019,TLD,North West (England),153,6.59
+fish & chips,2019,TLE,Yorkshire and The Humber,116,7.5
+fish & chips,2019,TLF,East Midlands (England),37,8.95
+fish & chips,2019,TLG,West Midlands (England),141,8.05
+fish & chips,2019,TLH,East (England),46,10.25
+fish & chips,2019,TLI,London,725,12.5
+fish & chips,2019,TLJ,South East (England),145,10.49
+fish & chips,2019,TLK,South West (England),83,7.45
+fish & chips,2019,TLL,Wales,79,7.75
+fish & chips,2019,TLM,Scotland,160,9.95
+fish & chips,2019,UK,United Kingdom,1736,9.99
+fish & chips,2020,TLC,North East (England),26,8.73
+fish & chips,2020,TLD,North West (England),123,7.75
+fish & chips,2020,TLE,Yorkshire and The Humber,95,7.99
+fish & chips,2020,TLF,East Midlands (England),48,8.48
+fish & chips,2020,TLG,West Midlands (England),81,8.3
+fish & chips,2020,TLH,East (England),34,10.87
+fish & chips,2020,TLI,London,323,12.5
+fish & chips,2020,TLJ,South East (England),86,11.98
+fish & chips,2020,TLK,South West (England),49,11.75
+fish & chips,2020,TLL,Wales,55,7.99
+fish & chips,2020,TLM,Scotland,88,9.93
+fish & chips,2020,UK,United Kingdom,1012,9.99
+fish & chips,2021,TLC,North East (England),31,8.95
+fish & chips,2021,TLD,North West (England),124,8.48
+fish & chips,2021,TLE,Yorkshire and The Humber,121,9.29
+fish & chips,2021,TLF,East Midlands (England),23,12.79
+fish & chips,2021,TLG,West Midlands (England),99,7.59
+fish & chips,2021,TLH,East (England),39,10.95
+fish & chips,2021,TLI,London,308,12.5
+fish & chips,2021,TLJ,South East (England),141,12.9
+fish & chips,2021,TLK,South West (England),49,9.95
+fish & chips,2021,TLL,Wales,90,10.95
+fish & chips,2021,TLM,Scotland,85,10.0
+fish & chips,2021,UK,United Kingdom,1122,10.5
+fish & chips,2022,TLC,North East (England),50,10.55
+fish & chips,2022,TLD,North West (England),201,9.0
+fish & chips,2022,TLE,Yorkshire and The Humber,176,9.0
+fish & chips,2022,TLF,East Midlands (England),79,9.99
+fish & chips,2022,TLG,West Midlands (England),155,8.95
+fish & chips,2022,TLH,East (England),46,12.98
+fish & chips,2022,TLI,London,703,13.99
+fish & chips,2022,TLJ,South East (England),168,13.6
+fish & chips,2022,TLK,South West (England),83,11.5
+fish & chips,2022,TLL,Wales,112,11.39
+fish & chips,2022,TLM,Scotland,197,13.95
+fish & chips,2022,TLN,Northern Ireland,20,13.23
+fish & chips,2022,UK,United Kingdom,1990,12.0
+fish & chips,2023,TLC,North East (England),66,11.48
+fish & chips,2023,TLD,North West (England),308,10.84
+fish & chips,2023,TLE,Yorkshire and The Humber,241,9.25
+fish & chips,2023,TLF,East Midlands (England),81,11.0
+fish & chips,2023,TLG,West Midlands (England),219,9.5
+fish & chips,2023,TLH,East (England),78,14.0
+fish & chips,2023,TLI,London,1056,15.0
+fish & chips,2023,TLJ,South East (England),248,14.68
+fish & chips,2023,TLK,South West (England),114,12.0
+fish & chips,2023,TLL,Wales,204,12.97
+fish & chips,2023,TLM,Scotland,304,13.95
+fish & chips,2023,TLN,Northern Ireland,24,15.0
+fish & chips,2023,UK,United Kingdom,2943,13.0
+fish & chips,2024,TLC,North East (England),111,11.95
+fish & chips,2024,TLD,North West (England),376,10.98
+fish & chips,2024,TLE,Yorkshire and The Humber,276,9.99
+fish & chips,2024,TLF,East Midlands (England),111,10.99
+fish & chips,2024,TLG,West Midlands (England),261,9.99
+fish & chips,2024,TLH,East (England),77,13.75
+fish & chips,2024,TLI,London,1131,16.9
+fish & chips,2024,TLJ,South East (England),277,14.95
+fish & chips,2024,TLK,South West (England),114,14.63
+fish & chips,2024,TLL,Wales,267,12.95
+fish & chips,2024,TLM,Scotland,353,14.95
+fish & chips,2024,UK,United Kingdom,3371,13.95
+fish & chips,2025,TLC,North East (England),102,12.0
+fish & chips,2025,TLD,North West (England),453,11.49
+fish & chips,2025,TLE,Yorkshire and The Humber,424,9.95
+fish & chips,2025,TLF,East Midlands (England),128,14.0
+fish & chips,2025,TLG,West Midlands (England),314,11.45
+fish & chips,2025,TLH,East (England),79,13.99
+fish & chips,2025,TLI,London,1472,17.0
+fish & chips,2025,TLJ,South East (England),353,14.5
+fish & chips,2025,TLK,South West (England),165,13.45
+fish & chips,2025,TLL,Wales,312,13.97
+fish & chips,2025,TLM,Scotland,416,15.0
+fish & chips,2025,TLN,Northern Ireland,25,14.95
+fish & chips,2025,UK,United Kingdom,4243,14.49
+fish & chips,2026,TLC,North East (England),99,12.95
+fish & chips,2026,TLD,North West (England),394,12.25
+fish & chips,2026,TLE,Yorkshire and The Humber,357,10.95
+fish & chips,2026,TLF,East Midlands (England),95,14.0
+fish & chips,2026,TLG,West Midlands (England),256,11.95
+fish & chips,2026,TLH,East (England),104,14.95
+fish & chips,2026,TLI,London,870,17.95
+fish & chips,2026,TLJ,South East (England),264,16.49
+fish & chips,2026,TLK,South West (England),115,14.0
+fish & chips,2026,TLL,Wales,212,14.23
+fish & chips,2026,TLM,Scotland,355,15.0
+fish & chips,2026,UK,United Kingdom,3133,14.79
+flat white,2017,TLD,North West (England),25,2.6
+flat white,2017,TLE,Yorkshire and The Humber,30,2.3
+flat white,2017,TLG,West Midlands (England),22,2.63
+flat white,2017,TLH,East (England),20,2.5
+flat white,2017,TLI,London,243,2.6
+flat white,2017,TLJ,South East (England),50,2.6
+flat white,2017,TLM,Scotland,54,2.6
+flat white,2017,UK,United Kingdom,497,2.6
+flat white,2018,TLC,North East (England),21,2.3
+flat white,2018,TLD,North West (England),53,2.5
+flat white,2018,TLE,Yorkshire and The Humber,62,2.5
+flat white,2018,TLG,West Midlands (England),42,2.6
+flat white,2018,TLH,East (England),31,2.5
+flat white,2018,TLI,London,499,2.6
+flat white,2018,TLJ,South East (England),72,2.5
+flat white,2018,TLK,South West (England),36,2.6
+flat white,2018,TLL,Wales,38,2.1
+flat white,2018,TLM,Scotland,73,2.7
+flat white,2018,UK,United Kingdom,953,2.6
+flat white,2019,TLD,North West (England),80,2.57
+flat white,2019,TLE,Yorkshire and The Humber,61,2.5
+flat white,2019,TLF,East Midlands (England),26,2.6
+flat white,2019,TLG,West Midlands (England),38,2.63
+flat white,2019,TLH,East (England),30,2.5
+flat white,2019,TLI,London,636,2.7
+flat white,2019,TLJ,South East (England),96,2.6
+flat white,2019,TLK,South West (England),39,2.5
+flat white,2019,TLL,Wales,32,2.5
+flat white,2019,TLM,Scotland,107,2.55
+flat white,2019,UK,United Kingdom,1175,2.65
+flat white,2020,TLD,North West (England),62,2.55
+flat white,2020,TLE,Yorkshire and The Humber,56,2.6
+flat white,2020,TLF,East Midlands (England),28,2.65
+flat white,2020,TLG,West Midlands (England),42,2.47
+flat white,2020,TLH,East (England),28,2.7
+flat white,2020,TLI,London,448,2.8
+flat white,2020,TLJ,South East (England),76,2.73
+flat white,2020,TLK,South West (England),47,2.8
+flat white,2020,TLL,Wales,35,2.5
+flat white,2020,TLM,Scotland,80,2.7
+flat white,2020,UK,United Kingdom,934,2.7
+flat white,2021,TLC,North East (England),45,2.7
+flat white,2021,TLD,North West (England),134,2.75
+flat white,2021,TLE,Yorkshire and The Humber,121,2.7
+flat white,2021,TLF,East Midlands (England),34,2.68
+flat white,2021,TLG,West Midlands (England),95,2.7
+flat white,2021,TLH,East (England),35,2.55
+flat white,2021,TLI,London,701,2.85
+flat white,2021,TLJ,South East (England),129,2.7
+flat white,2021,TLK,South West (England),83,2.75
+flat white,2021,TLL,Wales,104,2.7
+flat white,2021,TLM,Scotland,142,2.8
+flat white,2021,UK,United Kingdom,1642,2.8
+flat white,2022,TLC,North East (England),49,2.9
+flat white,2022,TLD,North West (England),222,2.9
+flat white,2022,TLE,Yorkshire and The Humber,213,2.9
+flat white,2022,TLF,East Midlands (England),56,2.88
+flat white,2022,TLG,West Midlands (England),139,2.8
+flat white,2022,TLH,East (England),84,2.85
+flat white,2022,TLI,London,1436,3.0
+flat white,2022,TLJ,South East (England),260,2.93
+flat white,2022,TLK,South West (England),106,2.9
+flat white,2022,TLL,Wales,156,2.9
+flat white,2022,TLM,Scotland,303,2.95
+flat white,2022,TLN,Northern Ireland,29,2.9
+flat white,2022,UK,United Kingdom,3053,2.95
+flat white,2023,TLC,North East (England),89,3.0
+flat white,2023,TLD,North West (England),321,3.05
+flat white,2023,TLE,Yorkshire and The Humber,284,3.0
+flat white,2023,TLF,East Midlands (England),114,2.97
+flat white,2023,TLG,West Midlands (England),217,3.0
+flat white,2023,TLH,East (England),133,3.15
+flat white,2023,TLI,London,2128,3.25
+flat white,2023,TLJ,South East (England),375,3.0
+flat white,2023,TLK,South West (England),194,3.0
+flat white,2023,TLL,Wales,198,3.1
+flat white,2023,TLM,Scotland,449,3.2
+flat white,2023,TLN,Northern Ireland,32,3.2
+flat white,2023,UK,United Kingdom,4534,3.2
+flat white,2024,TLC,North East (England),103,3.0
+flat white,2024,TLD,North West (England),450,3.2
+flat white,2024,TLE,Yorkshire and The Humber,376,3.2
+flat white,2024,TLF,East Midlands (England),145,3.2
+flat white,2024,TLG,West Midlands (England),274,3.2
+flat white,2024,TLH,East (England),124,3.2
+flat white,2024,TLI,London,2678,3.5
+flat white,2024,TLJ,South East (England),402,3.2
+flat white,2024,TLK,South West (England),200,3.2
+flat white,2024,TLL,Wales,270,3.2
+flat white,2024,TLM,Scotland,513,3.35
+flat white,2024,TLN,Northern Ireland,50,3.25
+flat white,2024,UK,United Kingdom,5585,3.3
+flat white,2025,TLC,North East (England),162,3.45
+flat white,2025,TLD,North West (England),686,3.5
+flat white,2025,TLE,Yorkshire and The Humber,560,3.45
+flat white,2025,TLF,East Midlands (England),179,3.4
+flat white,2025,TLG,West Midlands (England),342,3.47
+flat white,2025,TLH,East (England),227,3.5
+flat white,2025,TLI,London,3743,3.6
+flat white,2025,TLJ,South East (England),573,3.5
+flat white,2025,TLK,South West (England),271,3.5
+flat white,2025,TLL,Wales,344,3.47
+flat white,2025,TLM,Scotland,766,3.5
+flat white,2025,TLN,Northern Ireland,52,3.6
+flat white,2025,UK,United Kingdom,7905,3.5
+flat white,2026,TLC,North East (England),153,3.5
+flat white,2026,TLD,North West (England),626,3.5
+flat white,2026,TLE,Yorkshire and The Humber,514,3.5
+flat white,2026,TLF,East Midlands (England),145,3.5
+flat white,2026,TLG,West Midlands (England),344,3.58
+flat white,2026,TLH,East (England),140,3.5
+flat white,2026,TLI,London,2462,3.75
+flat white,2026,TLJ,South East (England),465,3.6
+flat white,2026,TLK,South West (England),264,3.6
+flat white,2026,TLL,Wales,270,3.5
+flat white,2026,TLM,Scotland,558,3.7
+flat white,2026,TLN,Northern Ireland,61,3.6
+flat white,2026,UK,United Kingdom,6002,3.6
+guinness,2017,TLD,North West (England),24,3.65
+guinness,2017,TLI,London,46,3.55
+guinness,2017,UK,United Kingdom,155,3.39
+guinness,2018,TLI,London,51,4.3
+guinness,2018,UK,United Kingdom,129,3.89
+guinness,2019,TLI,London,86,4.15
+guinness,2019,TLM,Scotland,35,4.0
+guinness,2019,UK,United Kingdom,182,3.9
+guinness,2020,TLI,London,60,4.93
+guinness,2020,UK,United Kingdom,133,4.3
+guinness,2021,TLD,North West (England),24,4.0
+guinness,2021,TLI,London,110,5.0
+guinness,2021,UK,United Kingdom,249,4.5
+guinness,2022,TLD,North West (England),50,4.0
+guinness,2022,TLE,Yorkshire and The Humber,25,3.55
+guinness,2022,TLG,West Midlands (England),27,4.0
+guinness,2022,TLI,London,176,5.0
+guinness,2022,TLM,Scotland,52,5.0
+guinness,2022,UK,United Kingdom,427,4.6
+guinness,2023,TLC,North East (England),24,4.53
+guinness,2023,TLD,North West (England),63,3.5
+guinness,2023,TLE,Yorkshire and The Humber,25,4.2
+guinness,2023,TLG,West Midlands (England),24,3.98
+guinness,2023,TLI,London,229,5.6
+guinness,2023,TLJ,South East (England),24,3.43
+guinness,2023,TLM,Scotland,68,5.35
+guinness,2023,UK,United Kingdom,527,4.9
+guinness,2024,TLD,North West (England),72,4.45
+guinness,2024,TLE,Yorkshire and The Humber,41,4.0
+guinness,2024,TLG,West Midlands (England),40,4.5
+guinness,2024,TLI,London,291,6.0
+guinness,2024,TLJ,South East (England),38,5.5
+guinness,2024,TLL,Wales,26,4.2
+guinness,2024,TLM,Scotland,61,5.25
+guinness,2024,UK,United Kingdom,626,5.0
+guinness,2025,TLC,North East (England),25,5.3
+guinness,2025,TLD,North West (England),104,5.1
+guinness,2025,TLE,Yorkshire and The Humber,74,5.2
+guinness,2025,TLF,East Midlands (England),22,3.97
+guinness,2025,TLG,West Midlands (England),40,4.55
+guinness,2025,TLI,London,370,6.0
+guinness,2025,TLJ,South East (England),68,5.5
+guinness,2025,TLK,South West (England),35,5.0
+guinness,2025,TLL,Wales,45,4.5
+guinness,2025,TLM,Scotland,77,5.5
+guinness,2025,UK,United Kingdom,877,5.5
+guinness,2026,TLD,North West (England),106,5.24
+guinness,2026,TLE,Yorkshire and The Humber,61,5.0
+guinness,2026,TLF,East Midlands (England),24,4.8
+guinness,2026,TLG,West Midlands (England),35,4.8
+guinness,2026,TLH,East (England),20,5.85
+guinness,2026,TLI,London,257,6.0
+guinness,2026,TLJ,South East (England),38,5.5
+guinness,2026,TLL,Wales,32,4.05
+guinness,2026,TLM,Scotland,69,6.2
+guinness,2026,UK,United Kingdom,682,5.5
+latte,2017,TLC,North East (England),34,2.5
+latte,2017,TLD,North West (England),102,2.42
+latte,2017,TLE,Yorkshire and The Humber,96,2.25
+latte,2017,TLF,East Midlands (England),47,2.3
+latte,2017,TLG,West Midlands (England),75,2.35
+latte,2017,TLH,East (England),49,2.5
+latte,2017,TLI,London,757,2.7
+latte,2017,TLJ,South East (England),147,2.55
+latte,2017,TLK,South West (England),63,2.5
+latte,2017,TLL,Wales,73,2.4
+latte,2017,TLM,Scotland,93,2.5
+latte,2017,UK,United Kingdom,1549,2.5
+latte,2018,TLC,North East (England),57,2.65
+latte,2018,TLD,North West (England),170,2.5
+latte,2018,TLE,Yorkshire and The Humber,177,2.59
+latte,2018,TLF,East Midlands (England),74,2.55
+latte,2018,TLG,West Midlands (England),134,2.5
+latte,2018,TLH,East (England),72,2.5
+latte,2018,TLI,London,1214,2.77
+latte,2018,TLJ,South East (England),178,2.55
+latte,2018,TLK,South West (England),121,2.5
+latte,2018,TLL,Wales,104,2.47
+latte,2018,TLM,Scotland,177,2.6
+latte,2018,UK,United Kingdom,2495,2.65
+latte,2019,TLC,North East (England),33,2.65
+latte,2019,TLD,North West (England),225,2.6
+latte,2019,TLE,Yorkshire and The Humber,182,2.53
+latte,2019,TLF,East Midlands (England),73,2.5
+latte,2019,TLG,West Midlands (England),128,2.5
+latte,2019,TLH,East (England),85,2.5
+latte,2019,TLI,London,1619,2.95
+latte,2019,TLJ,South East (England),240,2.7
+latte,2019,TLK,South West (England),101,2.79
+latte,2019,TLL,Wales,94,2.5
+latte,2019,TLM,Scotland,240,2.7
+latte,2019,TLN,Northern Ireland,32,2.83
+latte,2019,UK,United Kingdom,3052,2.8
+latte,2020,TLC,North East (England),52,2.78
+latte,2020,TLD,North West (England),159,2.5
+latte,2020,TLE,Yorkshire and The Humber,135,2.6
+latte,2020,TLF,East Midlands (England),72,2.5
+latte,2020,TLG,West Midlands (England),106,2.5
+latte,2020,TLH,East (England),100,2.9
+latte,2020,TLI,London,1112,3.0
+latte,2020,TLJ,South East (England),176,2.75
+latte,2020,TLK,South West (England),109,2.85
+latte,2020,TLL,Wales,57,2.5
+latte,2020,TLM,Scotland,167,2.8
+latte,2020,TLN,Northern Ireland,25,2.8
+latte,2020,UK,United Kingdom,2270,2.8
+latte,2021,TLC,North East (England),93,2.8
+latte,2021,TLD,North West (England),331,2.95
+latte,2021,TLE,Yorkshire and The Humber,312,2.8
+latte,2021,TLF,East Midlands (England),81,2.8
+latte,2021,TLG,West Midlands (England),263,2.95
+latte,2021,TLH,East (England),95,2.75
+latte,2021,TLI,London,1771,3.0
+latte,2021,TLJ,South East (England),303,2.8
+latte,2021,TLK,South West (England),155,2.95
+latte,2021,TLL,Wales,206,2.7
+latte,2021,TLM,Scotland,253,2.95
+latte,2021,TLN,Northern Ireland,45,2.9
+latte,2021,UK,United Kingdom,3908,2.95
+latte,2022,TLC,North East (England),138,3.18
+latte,2022,TLD,North West (England),536,3.0
+latte,2022,TLE,Yorkshire and The Humber,541,3.0
+latte,2022,TLF,East Midlands (England),174,3.05
+latte,2022,TLG,West Midlands (England),355,2.99
+latte,2022,TLH,East (England),219,2.99
+latte,2022,TLI,London,3596,3.3
+latte,2022,TLJ,South East (England),540,3.0
+latte,2022,TLK,South West (England),234,3.0
+latte,2022,TLL,Wales,297,3.0
+latte,2022,TLM,Scotland,599,3.2
+latte,2022,TLN,Northern Ireland,64,3.0
+latte,2022,UK,United Kingdom,7293,3.2
+latte,2023,TLC,North East (England),170,3.2
+latte,2023,TLD,North West (England),845,3.3
+latte,2023,TLE,Yorkshire and The Humber,774,3.2
+latte,2023,TLF,East Midlands (England),266,3.3
+latte,2023,TLG,West Midlands (England),643,3.3
+latte,2023,TLH,East (England),338,3.3
+latte,2023,TLI,London,5736,3.5
+latte,2023,TLJ,South East (England),749,3.25
+latte,2023,TLK,South West (England),444,3.43
+latte,2023,TLL,Wales,378,3.13
+latte,2023,TLM,Scotland,891,3.5
+latte,2023,TLN,Northern Ireland,82,3.3
+latte,2023,UK,United Kingdom,11316,3.5
+latte,2024,TLC,North East (England),251,3.5
+latte,2024,TLD,North West (England),1166,3.5
+latte,2024,TLE,Yorkshire and The Humber,929,3.5
+latte,2024,TLF,East Midlands (England),396,3.5
+latte,2024,TLG,West Midlands (England),814,3.5
+latte,2024,TLH,East (England),253,3.49
+latte,2024,TLI,London,7448,3.8
+latte,2024,TLJ,South East (England),929,3.5
+latte,2024,TLK,South West (England),499,3.5
+latte,2024,TLL,Wales,594,3.4
+latte,2024,TLM,Scotland,1015,3.6
+latte,2024,TLN,Northern Ireland,107,3.5
+latte,2024,UK,United Kingdom,14401,3.65
+latte,2025,TLC,North East (England),482,3.85
+latte,2025,TLD,North West (England),1898,3.8
+latte,2025,TLE,Yorkshire and The Humber,1496,3.8
+latte,2025,TLF,East Midlands (England),555,3.7
+latte,2025,TLG,West Midlands (England),1224,3.9
+latte,2025,TLH,East (England),564,3.8
+latte,2025,TLI,London,11803,4.0
+latte,2025,TLJ,South East (England),1362,3.8
+latte,2025,TLK,South West (England),673,3.85
+latte,2025,TLL,Wales,809,3.5
+latte,2025,TLM,Scotland,1843,3.9
+latte,2025,TLN,Northern Ireland,137,3.95
+latte,2025,UK,United Kingdom,22846,3.95
+latte,2026,TLC,North East (England),449,3.9
+latte,2026,TLD,North West (England),1874,3.99
+latte,2026,TLE,Yorkshire and The Humber,1550,3.97
+latte,2026,TLF,East Midlands (England),457,3.95
+latte,2026,TLG,West Midlands (England),1176,4.0
+latte,2026,TLH,East (England),417,4.0
+latte,2026,TLI,London,7832,4.2
+latte,2026,TLJ,South East (England),1215,3.95
+latte,2026,TLK,South West (England),662,3.9
+latte,2026,TLL,Wales,597,3.7
+latte,2026,TLM,Scotland,1439,4.0
+latte,2026,TLN,Northern Ireland,186,4.25
+latte,2026,UK,United Kingdom,17854,4.0
+margherita,2017,TLC,North East (England),22,5.0
+margherita,2017,TLD,North West (England),61,5.0
+margherita,2017,TLE,Yorkshire and The Humber,69,6.0
+margherita,2017,TLF,East Midlands (England),21,6.9
+margherita,2017,TLG,West Midlands (England),46,5.0
+margherita,2017,TLI,London,181,7.5
+margherita,2017,TLJ,South East (England),35,7.95
+margherita,2017,TLK,South West (England),20,7.65
+margherita,2017,TLL,Wales,36,7.39
+margherita,2017,TLM,Scotland,38,6.38
+margherita,2017,UK,United Kingdom,549,6.99
+margherita,2018,TLC,North East (England),32,5.1
+margherita,2018,TLD,North West (England),125,6.0
+margherita,2018,TLE,Yorkshire and The Humber,100,5.49
+margherita,2018,TLF,East Midlands (England),37,5.49
+margherita,2018,TLG,West Midlands (England),61,5.99
+margherita,2018,TLH,East (England),21,7.5
+margherita,2018,TLI,London,290,7.5
+margherita,2018,TLJ,South East (England),72,7.65
+margherita,2018,TLK,South West (England),42,6.49
+margherita,2018,TLL,Wales,42,6.5
+margherita,2018,TLM,Scotland,51,7.5
+margherita,2018,UK,United Kingdom,885,6.5
+margherita,2019,TLC,North East (England),30,5.64
+margherita,2019,TLD,North West (England),112,6.98
+margherita,2019,TLE,Yorkshire and The Humber,125,5.5
+margherita,2019,TLF,East Midlands (England),32,6.54
+margherita,2019,TLG,West Midlands (England),89,6.9
+margherita,2019,TLI,London,460,8.0
+margherita,2019,TLJ,South East (England),65,7.5
+margherita,2019,TLK,South West (England),48,7.5
+margherita,2019,TLL,Wales,65,6.5
+margherita,2019,TLM,Scotland,71,7.95
+margherita,2019,TLN,Northern Ireland,31,6.0
+margherita,2019,UK,United Kingdom,1145,7.49
+margherita,2020,TLD,North West (England),97,6.9
+margherita,2020,TLE,Yorkshire and The Humber,119,6.0
+margherita,2020,TLF,East Midlands (England),26,7.13
+margherita,2020,TLG,West Midlands (England),52,6.73
+margherita,2020,TLH,East (England),22,8.5
+margherita,2020,TLI,London,265,7.99
+margherita,2020,TLJ,South East (England),78,8.27
+margherita,2020,TLK,South West (England),37,8.2
+margherita,2020,TLL,Wales,31,7.0
+margherita,2020,TLM,Scotland,47,7.5
+margherita,2020,UK,United Kingdom,800,7.5
+margherita,2021,TLC,North East (England),41,6.95
+margherita,2021,TLD,North West (England),123,7.0
+margherita,2021,TLE,Yorkshire and The Humber,123,6.75
+margherita,2021,TLF,East Midlands (England),47,6.5
+margherita,2021,TLG,West Midlands (England),69,7.35
+margherita,2021,TLH,East (England),40,8.5
+margherita,2021,TLI,London,405,8.5
+margherita,2021,TLJ,South East (England),66,8.93
+margherita,2021,TLK,South West (England),46,8.63
+margherita,2021,TLL,Wales,76,8.93
+margherita,2021,TLM,Scotland,78,8.75
+margherita,2021,UK,United Kingdom,1126,8.0
+margherita,2022,TLC,North East (England),62,7.85
+margherita,2022,TLD,North West (England),221,7.95
+margherita,2022,TLE,Yorkshire and The Humber,219,7.45
+margherita,2022,TLF,East Midlands (England),65,9.0
+margherita,2022,TLG,West Midlands (England),129,8.79
+margherita,2022,TLH,East (England),50,8.9
+margherita,2022,TLI,London,748,9.5
+margherita,2022,TLJ,South East (England),125,9.0
+margherita,2022,TLK,South West (England),87,8.95
+margherita,2022,TLL,Wales,129,8.75
+margherita,2022,TLM,Scotland,159,8.5
+margherita,2022,TLN,Northern Ireland,32,7.5
+margherita,2022,UK,United Kingdom,2026,8.95
+margherita,2023,TLC,North East (England),100,7.3
+margherita,2023,TLD,North West (England),267,8.5
+margherita,2023,TLE,Yorkshire and The Humber,329,7.9
+margherita,2023,TLF,East Midlands (England),102,9.5
+margherita,2023,TLG,West Midlands (England),229,8.5
+margherita,2023,TLH,East (England),81,10.0
+margherita,2023,TLI,London,1153,10.2
+margherita,2023,TLJ,South East (England),159,9.95
+margherita,2023,TLK,South West (England),106,9.95
+margherita,2023,TLL,Wales,127,9.95
+margherita,2023,TLM,Scotland,226,9.5
+margherita,2023,TLN,Northern Ireland,55,9.95
+margherita,2023,UK,United Kingdom,2934,9.75
+margherita,2024,TLC,North East (England),150,8.5
+margherita,2024,TLD,North West (England),432,8.95
+margherita,2024,TLE,Yorkshire and The Humber,370,8.5
+margherita,2024,TLF,East Midlands (England),90,9.38
+margherita,2024,TLG,West Midlands (England),232,7.99
+margherita,2024,TLH,East (England),67,10.0
+margherita,2024,TLI,London,1303,10.95
+margherita,2024,TLJ,South East (England),221,10.5
+margherita,2024,TLK,South West (England),122,10.95
+margherita,2024,TLL,Wales,170,10.0
+margherita,2024,TLM,Scotland,250,10.0
+margherita,2024,TLN,Northern Ireland,30,10.38
+margherita,2024,UK,United Kingdom,3437,9.99
+margherita,2025,TLC,North East (England),165,8.9
+margherita,2025,TLD,North West (England),579,9.5
+margherita,2025,TLE,Yorkshire and The Humber,475,8.5
+margherita,2025,TLF,East Midlands (England),157,9.95
+margherita,2025,TLG,West Midlands (England),326,8.99
+margherita,2025,TLH,East (England),98,10.5
+margherita,2025,TLI,London,1713,11.5
+margherita,2025,TLJ,South East (England),253,10.9
+margherita,2025,TLK,South West (England),162,10.99
+margherita,2025,TLL,Wales,227,10.0
+margherita,2025,TLM,Scotland,351,10.0
+margherita,2025,TLN,Northern Ireland,59,10.0
+margherita,2025,UK,United Kingdom,4565,10.0
+margherita,2026,TLC,North East (England),130,9.5
+margherita,2026,TLD,North West (England),420,9.5
+margherita,2026,TLE,Yorkshire and The Humber,426,8.3
+margherita,2026,TLF,East Midlands (England),142,10.5
+margherita,2026,TLG,West Midlands (England),267,9.95
+margherita,2026,TLH,East (England),70,9.99
+margherita,2026,TLI,London,1090,11.5
+margherita,2026,TLJ,South East (England),196,11.0
+margherita,2026,TLK,South West (England),139,11.0
+margherita,2026,TLL,Wales,199,10.9
+margherita,2026,TLM,Scotland,268,10.25
+margherita,2026,TLN,Northern Ireland,36,10.0
+margherita,2026,UK,United Kingdom,3383,10.5
+pad thai,2017,TLI,London,53,8.95
+pad thai,2017,UK,United Kingdom,93,8.95
+pad thai,2018,TLI,London,80,8.0
+pad thai,2018,UK,United Kingdom,157,8.0
+pad thai,2019,TLI,London,134,8.93
+pad thai,2019,TLJ,South East (England),23,8.5
+pad thai,2019,UK,United Kingdom,239,8.95
+pad thai,2020,TLI,London,79,9.5
+pad thai,2020,TLJ,South East (England),48,9.95
+pad thai,2020,UK,United Kingdom,192,9.63
+pad thai,2021,TLD,North West (England),28,7.0
+pad thai,2021,TLE,Yorkshire and The Humber,39,9.95
+pad thai,2021,TLH,East (England),27,9.95
+pad thai,2021,TLI,London,100,8.95
+pad thai,2021,TLJ,South East (England),30,9.38
+pad thai,2021,TLK,South West (England),34,9.95
+pad thai,2021,UK,United Kingdom,330,9.0
+pad thai,2022,TLD,North West (England),28,9.5
+pad thai,2022,TLE,Yorkshire and The Humber,30,8.0
+pad thai,2022,TLI,London,236,10.5
+pad thai,2022,TLJ,South East (England),26,10.0
+pad thai,2022,TLM,Scotland,60,10.5
+pad thai,2022,UK,United Kingdom,465,10.45
+pad thai,2023,TLD,North West (England),41,10.45
+pad thai,2023,TLE,Yorkshire and The Humber,32,10.0
+pad thai,2023,TLG,West Midlands (England),48,11.95
+pad thai,2023,TLH,East (England),31,9.95
+pad thai,2023,TLI,London,314,11.0
+pad thai,2023,TLJ,South East (England),46,10.5
+pad thai,2023,TLK,South West (England),24,8.95
+pad thai,2023,TLM,Scotland,27,11.2
+pad thai,2023,UK,United Kingdom,597,10.95
+pad thai,2024,TLC,North East (England),26,14.0
+pad thai,2024,TLD,North West (England),63,8.5
+pad thai,2024,TLE,Yorkshire and The Humber,68,12.0
+pad thai,2024,TLF,East Midlands (England),24,13.5
+pad thai,2024,TLG,West Midlands (England),43,11.75
+pad thai,2024,TLI,London,394,11.5
+pad thai,2024,TLJ,South East (England),48,11.47
+pad thai,2024,TLK,South West (England),42,9.9
+pad thai,2024,TLL,Wales,37,7.5
+pad thai,2024,TLM,Scotland,37,11.5
+pad thai,2024,UK,United Kingdom,799,11.0
+pad thai,2025,TLC,North East (England),34,13.5
+pad thai,2025,TLD,North West (England),106,11.0
+pad thai,2025,TLE,Yorkshire and The Humber,64,11.25
+pad thai,2025,TLF,East Midlands (England),48,12.95
+pad thai,2025,TLG,West Midlands (England),26,9.55
+pad thai,2025,TLH,East (England),32,10.95
+pad thai,2025,TLI,London,452,11.95
+pad thai,2025,TLJ,South East (England),106,9.95
+pad thai,2025,TLK,South West (England),55,7.9
+pad thai,2025,TLL,Wales,40,10.25
+pad thai,2025,TLM,Scotland,93,13.75
+pad thai,2025,UK,United Kingdom,1059,11.95
+pad thai,2026,TLC,North East (England),23,10.8
+pad thai,2026,TLD,North West (England),52,12.0
+pad thai,2026,TLE,Yorkshire and The Humber,56,10.95
+pad thai,2026,TLG,West Midlands (England),21,10.0
+pad thai,2026,TLH,East (England),24,11.2
+pad thai,2026,TLI,London,290,12.0
+pad thai,2026,TLJ,South East (England),45,11.95
+pad thai,2026,TLK,South West (England),32,9.11
+pad thai,2026,TLL,Wales,34,13.25
+pad thai,2026,TLM,Scotland,30,11.98
+pad thai,2026,UK,United Kingdom,631,11.95
+sausage roll,2017,TLI,London,79,3.5
+sausage roll,2017,UK,United Kingdom,166,3.0
+sausage roll,2018,TLI,London,99,4.25
+sausage roll,2018,UK,United Kingdom,212,3.15
+sausage roll,2019,TLI,London,121,4.0
+sausage roll,2019,TLJ,South East (England),27,2.5
+sausage roll,2019,TLM,Scotland,23,3.5
+sausage roll,2019,UK,United Kingdom,262,3.5
+sausage roll,2020,TLI,London,108,4.25
+sausage roll,2020,TLJ,South East (England),26,3.1
+sausage roll,2020,TLL,Wales,21,1.99
+sausage roll,2020,UK,United Kingdom,248,3.5
+sausage roll,2021,TLE,Yorkshire and The Humber,21,1.5
+sausage roll,2021,TLH,East (England),21,2.8
+sausage roll,2021,TLI,London,189,4.0
+sausage roll,2021,TLJ,South East (England),43,3.0
+sausage roll,2021,TLL,Wales,28,2.65
+sausage roll,2021,UK,United Kingdom,379,3.25
+sausage roll,2022,TLD,North West (England),36,3.4
+sausage roll,2022,TLE,Yorkshire and The Humber,29,2.0
+sausage roll,2022,TLG,West Midlands (England),31,3.95
+sausage roll,2022,TLH,East (England),30,3.0
+sausage roll,2022,TLI,London,298,5.0
+sausage roll,2022,TLJ,South East (England),72,3.2
+sausage roll,2022,TLK,South West (England),30,3.25
+sausage roll,2022,TLL,Wales,53,3.5
+sausage roll,2022,TLM,Scotland,41,3.99
+sausage roll,2022,UK,United Kingdom,669,3.95
+sausage roll,2023,TLC,North East (England),21,3.75
+sausage roll,2023,TLD,North West (England),31,3.0
+sausage roll,2023,TLE,Yorkshire and The Humber,65,2.5
+sausage roll,2023,TLF,East Midlands (England),24,2.2
+sausage roll,2023,TLH,East (England),31,4.0
+sausage roll,2023,TLI,London,349,5.5
+sausage roll,2023,TLJ,South East (England),120,4.0
+sausage roll,2023,TLK,South West (England),53,3.25
+sausage roll,2023,TLL,Wales,57,3.5
+sausage roll,2023,TLM,Scotland,74,3.5
+sausage roll,2023,UK,United Kingdom,861,4.0
+sausage roll,2024,TLD,North West (England),41,3.5
+sausage roll,2024,TLE,Yorkshire and The Humber,68,3.38
+sausage roll,2024,TLF,East Midlands (England),22,2.35
+sausage roll,2024,TLG,West Midlands (England),32,3.87
+sausage roll,2024,TLH,East (England),24,3.95
+sausage roll,2024,TLI,London,369,4.9
+sausage roll,2024,TLJ,South East (England),88,4.0
+sausage roll,2024,TLK,South West (England),48,3.45
+sausage roll,2024,TLL,Wales,63,4.0
+sausage roll,2024,TLM,Scotland,73,3.5
+sausage roll,2024,UK,United Kingdom,849,4.0
+sausage roll,2025,TLD,North West (England),72,3.28
+sausage roll,2025,TLE,Yorkshire and The Humber,85,2.75
+sausage roll,2025,TLF,East Midlands (England),24,3.0
+sausage roll,2025,TLG,West Midlands (England),42,3.28
+sausage roll,2025,TLH,East (England),49,4.0
+sausage roll,2025,TLI,London,463,6.0
+sausage roll,2025,TLJ,South East (England),123,4.5
+sausage roll,2025,TLK,South West (England),61,3.5
+sausage roll,2025,TLL,Wales,77,4.0
+sausage roll,2025,TLM,Scotland,102,4.25
+sausage roll,2025,TLN,Northern Ireland,23,4.0
+sausage roll,2025,UK,United Kingdom,1137,4.5
+sausage roll,2026,TLC,North East (England),20,3.5
+sausage roll,2026,TLD,North West (England),57,4.0
+sausage roll,2026,TLE,Yorkshire and The Humber,111,4.0
+sausage roll,2026,TLF,East Midlands (England),24,2.5
+sausage roll,2026,TLG,West Midlands (England),43,4.2
+sausage roll,2026,TLH,East (England),30,4.5
+sausage roll,2026,TLI,London,315,6.0
+sausage roll,2026,TLJ,South East (England),101,4.5
+sausage roll,2026,TLK,South West (England),45,3.95
+sausage roll,2026,TLL,Wales,53,4.0
+sausage roll,2026,TLM,Scotland,72,4.25
+sausage roll,2026,TLN,Northern Ireland,25,3.75
+sausage roll,2026,UK,United Kingdom,896,4.5
