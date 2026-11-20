@@ -1,0 +1,179 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Small multiples: the same layered chart (an area for the middle 80% of prices, a line for the median) for six items, with 'facet'. In a faceted layer, the data goes at the top, then 'spec' holds the layers. Each item gets its own y-axis ('resolve'), because a latte and fish & chips are on very different scales.",
+  "title": {
+    "text": "Six menu staples: the median and the middle 80% of prices",
+    "subtitle": [
+      "£, UK menus. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#555",
+    "offset": 12
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "date:'%Y'",
+        "p10": "number",
+        "p25": "number",
+        "median": "number",
+        "p75": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": {
+        "field": "item",
+        "oneOf": [
+          "latte",
+          "cappuccino",
+          "croissant",
+          "fish & chips",
+          "margherita",
+          "chicken tikka masala"
+        ]
+      }
+    }
+  ],
+  "facet": {
+    "field": "item",
+    "type": "nominal",
+    "title": null,
+    "sort": [
+      "latte",
+      "cappuccino",
+      "croissant",
+      "fish & chips",
+      "margherita",
+      "chicken tikka masala"
+    ],
+    "header": {
+      "labelFontSize": 13,
+      "labelFontWeight": "bold",
+      "labelAnchor": "start"
+    }
+  },
+  "columns": 3,
+  "spec": {
+    "width": 200,
+    "height": 130,
+    "encoding": {
+      "x": {
+        "field": "year",
+        "type": "temporal",
+        "title": null,
+        "axis": {
+          "format": "%Y",
+          "values": [
+            {
+              "year": 2018,
+              "month": 1,
+              "date": 1
+            },
+            {
+              "year": 2022,
+              "month": 1,
+              "date": 1
+            },
+            {
+              "year": 2026,
+              "month": 1,
+              "date": 1
+            }
+          ]
+        }
+      }
+    },
+    "layer": [
+      {
+        "mark": {
+          "type": "area",
+          "color": "#f5c6c6"
+        },
+        "encoding": {
+          "y": {
+            "field": "p10",
+            "type": "quantitative",
+            "title": null,
+            "scale": {
+              "zero": true
+            }
+          },
+          "y2": {
+            "field": "p90"
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "line",
+          "color": "#c8102e",
+          "strokeWidth": 2
+        },
+        "encoding": {
+          "y": {
+            "field": "median",
+            "type": "quantitative"
+          },
+          "tooltip": [
+            {
+              "field": "item",
+              "type": "nominal",
+              "title": "Item"
+            },
+            {
+              "field": "year",
+              "type": "temporal",
+              "format": "%Y",
+              "title": "Year"
+            },
+            {
+              "field": "p10",
+              "type": "quantitative",
+              "format": ".2f",
+              "title": "10th percentile (£)"
+            },
+            {
+              "field": "median",
+              "type": "quantitative",
+              "format": ".2f",
+              "title": "Median (£)"
+            },
+            {
+              "field": "p90",
+              "type": "quantitative",
+              "format": ".2f",
+              "title": "90th percentile (£)"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "scale": {
+      "y": "independent"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleColor": "#444",
+      "labelColor": "#444",
+      "gridColor": "#eee",
+      "domainColor": "#999",
+      "tickColor": "#999"
+    },
+    "font": "Helvetica, Arial, sans-serif"
+  }
+}

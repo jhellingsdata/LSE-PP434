@@ -1,0 +1,214 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A histogram: how 22,846 latte prices from 2025 are spread out. The data is already counted (prices to the nearest 10p, and how many there are), so the bars are drawn straight from the CSV. Three dashed rules mark the 10th percentile, the median and the 90th percentile; their values come from 'datum' entries in a small inline dataset.",
+  "title": {
+    "text": "Lattes in 2025: spikes at round prices",
+    "subtitle": [
+      "How many latte prices there are at each price, to the nearest 10p. 22,846 prices.",
+      "Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#555",
+    "offset": 12
+  },
+  "width": 640,
+  "height": 300,
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/latte_prices_2025.csv"
+      },
+      "mark": {
+        "type": "bar",
+        "color": "#8c5a2b",
+        "width": 6
+      },
+      "encoding": {
+        "x": {
+          "field": "price",
+          "type": "quantitative",
+          "title": "Price of a latte (£)",
+          "scale": {
+            "domain": [
+              1,
+              8
+            ],
+            "nice": false
+          },
+          "axis": {
+            "format": ".0f",
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          }
+        },
+        "y": {
+          "field": "prices",
+          "type": "quantitative",
+          "title": "Prices"
+        },
+        "tooltip": [
+          {
+            "field": "price",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Price (£)"
+          },
+          {
+            "field": "prices",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Prices"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "price": 3.0,
+            "label": "10th percentile: £3.00",
+            "align": "right",
+            "dx": -6,
+            "y": 0
+          },
+          {
+            "price": 3.95,
+            "label": "Median: £3.95",
+            "align": "center",
+            "dx": 0,
+            "y": -18
+          },
+          {
+            "price": 5.0,
+            "label": "90th percentile: £5.00",
+            "align": "left",
+            "dx": 6,
+            "y": 0
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [
+              4,
+              3
+            ],
+            "color": "#333",
+            "strokeWidth": 1.2
+          },
+          "encoding": {
+            "x": {
+              "field": "price",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.align == 'right'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "#333",
+            "baseline": "top",
+            "align": "right",
+            "dx": -6,
+            "y": 0
+          },
+          "encoding": {
+            "x": {
+              "field": "price",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.align == 'left'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "#333",
+            "baseline": "top",
+            "align": "left",
+            "dx": 6,
+            "y": 0
+          },
+          "encoding": {
+            "x": {
+              "field": "price",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.align == 'center'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "#333",
+            "baseline": "bottom",
+            "align": "center",
+            "y": -4
+          },
+          "encoding": {
+            "x": {
+              "field": "price",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleColor": "#444",
+      "labelColor": "#444",
+      "gridColor": "#eee",
+      "domainColor": "#999",
+      "tickColor": "#999"
+    },
+    "font": "Helvetica, Arial, sans-serif"
+  }
+}

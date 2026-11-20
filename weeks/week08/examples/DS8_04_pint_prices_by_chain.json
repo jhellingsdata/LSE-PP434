@@ -1,0 +1,190 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A range per group: for each pub chain, a thin rule from the 10th to the 90th percentile, a thick bar for the middle half (25th to 75th) and a dot for the median. Each mark uses x and x2. Groups are sorted by their median. The data is already summarised: one row per group.",
+  "title": {
+    "text": "A Wetherspoon pint costs about half as much as a BrewDog one",
+    "subtitle": [
+      "The price of a pint, 2025–26. Line: the middle 80% of prices. Bar: the middle half. Dot: the median.",
+      "Chains with 150 or more prices. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#555",
+    "offset": 12
+  },
+  "width": 560,
+  "height": 250,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/pint_prices_by_chain.csv"
+  },
+  "encoding": {
+    "y": {
+      "field": "group",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "median",
+        "order": "ascending"
+      },
+      "axis": {
+        "labelFontSize": 13,
+        "domain": false,
+        "ticks": false,
+        "labelPadding": 8
+      }
+    },
+    "color": {
+      "condition": {
+        "test": "datum.group == 'Independent pubs'",
+        "value": "#555"
+      },
+      "value": "#c8102e"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1.5,
+        "opacity": 0.6
+      },
+      "encoding": {
+        "x": {
+          "field": "p10",
+          "type": "quantitative",
+          "title": "Price of a pint (£)",
+          "scale": {
+            "domain": [
+              2,
+              11
+            ]
+          },
+          "axis": {
+            "format": ".0f",
+            "tickMinStep": 1
+          }
+        },
+        "x2": {
+          "field": "p90"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "height": 14,
+        "opacity": 0.35,
+        "cornerRadius": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "p25",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "p75"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 110,
+        "stroke": "white",
+        "strokeWidth": 1.5,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "median",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Pubs"
+          },
+          {
+            "field": "p10",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "10th percentile (£)"
+          },
+          {
+            "field": "p25",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "25th percentile (£)"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Median (£)"
+          },
+          {
+            "field": "p75",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "75th percentile (£)"
+          },
+          {
+            "field": "p90",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "90th percentile (£)"
+          },
+          {
+            "field": "prices",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Prices"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 0,
+        "dy": -14,
+        "fontSize": 11,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "field": "median",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "'£' + format(datum.median, '.2f')",
+          "as": "label"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleColor": "#444",
+      "labelColor": "#444",
+      "gridColor": "#eee",
+      "domainColor": "#999",
+      "tickColor": "#999"
+    },
+    "font": "Helvetica, Arial, sans-serif"
+  }
+}

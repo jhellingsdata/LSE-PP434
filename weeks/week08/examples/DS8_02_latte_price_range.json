@@ -1,0 +1,227 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A layered 'swathe' chart: two areas for ranges of prices (the middle 80%, 10th to 90th percentile, and the middle half, 25th to 75th), then a line for the median. An area uses y (bottom edge) and y2 (top edge). Years are parsed as dates with \"date:'%Y'\", so the x-axis is a time axis. Labels at the right are text marks on the 2026 row.",
+  "title": {
+    "text": "Lattes got dearer, and the cheapest rose fastest",
+    "subtitle": [
+      "The price of a latte on UK menus: the median, the middle half of prices and the middle 80%.",
+      "2026 is January to August. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#555",
+    "offset": 12
+  },
+  "width": 600,
+  "height": 320,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "date:'%Y'",
+        "p10": "number",
+        "p25": "number",
+        "median": "number",
+        "p75": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.item == 'latte'"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%Y",
+        "tickCount": "year"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "color": "#ecdfd0"
+      },
+      "encoding": {
+        "y": {
+          "field": "p10",
+          "type": "quantitative",
+          "title": "£",
+          "scale": {
+            "domain": [
+              0,
+              6
+            ]
+          }
+        },
+        "y2": {
+          "field": "p90"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "area",
+        "color": "#cfae8c"
+      },
+      "encoding": {
+        "y": {
+          "field": "p25",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "p75"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#8c5a2b",
+        "strokeWidth": 2.5,
+        "point": {
+          "color": "#8c5a2b",
+          "size": 40
+        }
+      },
+      "encoding": {
+        "y": {
+          "field": "median",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "temporal",
+            "format": "%Y",
+            "title": "Year"
+          },
+          {
+            "field": "p10",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "10th percentile (£)"
+          },
+          {
+            "field": "p25",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "25th percentile (£)"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Median (£)"
+          },
+          {
+            "field": "p75",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "75th percentile (£)"
+          },
+          {
+            "field": "p90",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "90th percentile (£)"
+          },
+          {
+            "field": "prices",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Prices"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "year(datum.year) == 2026"
+        },
+        {
+          "fold": [
+            "p90",
+            "median",
+            "p25"
+          ],
+          "as": [
+            "edge",
+            "value"
+          ]
+        },
+        {
+          "calculate": "{'p90': 'Middle 80%', 'median': 'Median', 'p25': 'Middle half'}[datum.edge]",
+          "as": "label"
+        },
+        {
+          "calculate": "datum.edge == 'p90' ? -10 : datum.edge == 'p25' ? 12 : 0",
+          "as": "nudge"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "y": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "yOffset": {
+          "field": "nudge",
+          "type": "quantitative",
+          "scale": null
+        },
+        "text": {
+          "field": "label"
+        },
+        "color": {
+          "field": "edge",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "p90",
+              "median",
+              "p25"
+            ],
+            "range": [
+              "#b39070",
+              "#8c5a2b",
+              "#9a6f45"
+            ]
+          },
+          "legend": null
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleColor": "#444",
+      "labelColor": "#444",
+      "gridColor": "#eee",
+      "domainColor": "#999",
+      "tickColor": "#999"
+    },
+    "font": "Helvetica, Arial, sans-serif"
+  }
+}

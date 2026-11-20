@@ -20,6 +20,18 @@ Click **Open in Colab**, then **File → Save a copy in Drive** before you start
 | [`DS8_2_Price_of_a_Pint`](notebooks/DS8_2_Price_of_a_Pint.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week08/notebooks/DS8_2_Price_of_a_Pint.ipynb) | The prices themselves: 220,000 beer and cider prices. Reading only the columns you need, cleaning text to find a pint, medians by year, city and chain, then maps by region and pub by pub |
 | [`DS8_3_Ranges_Over_Time`](notebooks/DS8_3_Ranges_Over_Time.ipynb) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week08/notebooks/DS8_3_Ranges_Over_Time.ipynb) | More than the median: summarising 87,000 latte prices with percentiles, then a layered chart, an area for the range and a line for the median. Then four dishes side by side with `facet` |
 
+## Vega-Lite examples
+
+In [`examples/`](examples/). Copy one into the [Vega Editor](https://vega.github.io/editor/) to try it. Each reads a small summary CSV from [`data/`](data/): the counting and percentiles were done in pandas, as in the notebooks.
+
+| Chart | What's new |
+|---|---|
+| [`DS8_01_latte_histogram`](examples/DS8_01_latte_histogram.json) | A histogram from counts: lattes in 2025, with dashed rules for the 10th percentile, median and 90th percentile |
+| [`DS8_02_latte_price_range`](examples/DS8_02_latte_price_range.json) | Ranges over time: two `area` layers (`y` and `y2`) for the middle 80% and middle half of prices, a `line` for the median, and labels instead of a legend. Years parsed as dates with `"date:'%Y'"` |
+| [`DS8_03_price_ranges_by_item`](examples/DS8_03_price_ranges_by_item.json) | The same layers for six items with `facet`, each with its own y-axis (`resolve`) |
+| [`DS8_04_pint_prices_by_chain`](examples/DS8_04_pint_prices_by_chain.json) | A range per group: a rule (10th to 90th percentile), a bar (25th to 75th) and a dot (median) for each pub chain, using `x` and `x2` |
+| [`DS8_05_pint_price_heatmap`](examples/DS8_05_pint_price_heatmap.json) | 93,000 pints condensed into a grid of years and 50p bands. `joinaggregate` turns counts into each year's share; `rect` with `x2` and `y2` |
+
 ## Data
 
 In [`data/`](data/). Read a `.parquet` file with `pd.read_parquet()`, just like `pd.read_csv()`. In Colab it works straight away; on your own computer, install `pyarrow` first (`uv pip install pyarrow`).
@@ -27,6 +39,8 @@ In [`data/`](data/). Read a `.parquet` file with `pd.read_parquet()`, just like 
 | File | Rows | What it is |
 |---|---:|---|
 | [`menu_iconic_by_year_region.csv`](data/menu_iconic_by_year_region.csv) | 1,202 | The median price of 12 items (latte, flat white, cappuccino, fish & chips, margherita, cheeseburger, chicken tikka masala, english breakfast, guinness, sausage roll, croissant, pad thai) by year and ITL1 region, plus the UK (`itl1_id` = `UK`). `prices` is how many prices each median comes from; regions need at least 20 |
+| [`menu_percentiles_by_year.csv`](data/menu_percentiles_by_year.csv) | 120 | The 10th, 25th, 50th (median), 75th and 90th percentile price of the 12 items, by year, UK |
+| [`latte_prices_2025.csv`](data/latte_prices_2025.csv), [`pint_prices_by_chain.csv`](data/pint_prices_by_chain.csv), [`pint_prices_by_year.csv`](data/pint_prices_by_year.csv) | small | Summaries for the Vega-Lite examples: latte prices counted to the nearest 10p; pint percentiles by chain (2025–26); pints counted by year and 50p band |
 | [`menu_iconic_items.parquet`](data/menu_iconic_items.parquet) | 273,700 | Every price for those 12 items |
 | [`menu_beer_cider.parquet`](data/menu_beer_cider.parquet) | 221,388 | Every beer and cider price, with a `size` where the menu gave one |
 | [`menu_quotes_sample.parquet`](data/menu_quotes_sample.parquet) | 632,478 | Every price at a random 5% of venues (4,041 venues), so you can follow a menu over time |

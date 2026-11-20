@@ -1,0 +1,157 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A heatmap that condenses 93,000 pint prices into a grid: one column per year, one row per 50p band of price. The CSV has the number of prices in each cell. A 'joinaggregate' adds up each year's total, so the colour is the share of that year's pints in each band (more photos are taken every year, so raw counts would mostly show that). Each rect runs from the start of its year (x) to the start of the next (x2), and from the bottom of its band (y) to the top (y2): both ends are made with 'calculate'.",
+  "title": {
+    "text": "The most common pint price climbed from £4.50 to £5.50",
+    "subtitle": [
+      "Share of each year's pint prices in each 50p band. 2026 is January to August.",
+      "Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#555",
+    "offset": 12
+  },
+  "width": 600,
+  "height": 320,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/pint_prices_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "date:'%Y'",
+        "band": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "prices",
+          "as": "year_total"
+        }
+      ],
+      "groupby": [
+        "year"
+      ]
+    },
+    {
+      "calculate": "datum.prices / datum.year_total",
+      "as": "share"
+    },
+    {
+      "calculate": "datum.band + 0.5",
+      "as": "band_end"
+    },
+    {
+      "calculate": "datetime(year(datum.year) + 1, 0, 1)",
+      "as": "year_end"
+    },
+    {
+      "filter": "datum.band >= 2.5 && datum.band < 8.5"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%Y",
+        "tickCount": "year",
+        "labelAlign": "left",
+        "labelOffset": 4,
+        "labelExpr": "year(datum.value) > 2026 ? '' : datum.label"
+      }
+    },
+    "x2": {
+      "field": "year_end"
+    },
+    "y": {
+      "field": "band",
+      "type": "quantitative",
+      "title": "Price of a pint (£)",
+      "axis": {
+        "format": ".2f",
+        "tickMinStep": 0.5
+      },
+      "scale": {
+        "domain": [
+          2.5,
+          8.5
+        ],
+        "nice": false
+      }
+    },
+    "y2": {
+      "field": "band_end"
+    },
+    "color": {
+      "field": "share",
+      "type": "quantitative",
+      "title": "Share",
+      "scale": {
+        "scheme": "reds"
+      },
+      "legend": {
+        "format": ".0%",
+        "gradientLength": 160
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "temporal",
+        "format": "%Y",
+        "title": "Year"
+      },
+      {
+        "field": "band",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "From (£)"
+      },
+      {
+        "field": "band_end",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Up to (£)"
+      },
+      {
+        "field": "share",
+        "type": "quantitative",
+        "format": ".1%",
+        "title": "Share of the year's pints"
+      },
+      {
+        "field": "prices",
+        "type": "quantitative",
+        "format": ",",
+        "title": "Prices"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleColor": "#444",
+      "labelColor": "#444",
+      "gridColor": "#eee",
+      "domainColor": "#999",
+      "tickColor": "#999"
+    },
+    "font": "Helvetica, Arial, sans-serif"
+  }
+}
