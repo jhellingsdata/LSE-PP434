@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "A fan chart: forecast lines with bands for the 10th-90th percentile ranges. OBR, November 2025.",
+  "description": "A fan chart: forecast lines with bands for the 10th-90th percentile ranges. OBR, October 2026 (with the March 2026 forecast for comparison).",
   "width": 600,
   "height": 400,
   "layer": [

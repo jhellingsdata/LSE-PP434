@@ -1,0 +1,375 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A regional explorer for Wales's 22 councils, using the Week 7 data. A dropdown picks the indicator, a slider picks the year for the map, and hovering a council on the map picks out its line in the chart. The data is one long table (council, indicator, year, value), so the map starts from the data and looks up each council's shape (the DS7_09 pattern). The map's colours refit for each indicator and year: compare councils on the map, and change over time on the right. The dashed line is Wales, where the data has it. Grey on the map: no data for that year.",
+  "title": {
+    "text": {
+      "expr": "{'pay': 'Annual pay (£)', 'gdp_per_head': 'GDP per head (£)', 'productivity': 'Output per hour (£)', 'unemployment': 'Unemployment rate (%)', 'employment': 'Employment rate, ages 16-64 (%)', 'aged_65_plus': 'Aged 65 and over (%)', 'anxiety': 'Anxiety, average score (0-10)'}[indicator] + ', ' + mapYear"
+    },
+    "subtitle": "Welsh councils. Hover over the map to pick out a council. Source: ONS, via Week 7's data",
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "params": [
+    {
+      "name": "indicator",
+      "value": "pay",
+      "bind": {
+        "input": "select",
+        "options": [
+          "pay",
+          "gdp_per_head",
+          "productivity",
+          "unemployment",
+          "employment",
+          "aged_65_plus",
+          "anxiety"
+        ],
+        "labels": [
+          "Annual pay (£)",
+          "GDP per head (£)",
+          "Output per hour (£)",
+          "Unemployment rate (%)",
+          "Employment rate, ages 16-64 (%)",
+          "Aged 65 and over (%)",
+          "Anxiety, average score (0-10)"
+        ],
+        "name": "Indicator "
+      }
+    },
+    {
+      "name": "mapYear",
+      "value": 2022,
+      "bind": {
+        "input": "range",
+        "min": 2004,
+        "max": 2025,
+        "step": 1,
+        "name": "Map year "
+      }
+    }
+  ],
+  "hconcat": [
+    {
+      "width": 300,
+      "height": 360,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#e3e3e3",
+            "stroke": "white",
+            "strokeWidth": 0.8
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/wales_indicators_LAD.csv",
+            "format": {
+              "parse": {
+                "year": "number",
+                "value": "number"
+              }
+            }
+          },
+          "params": [
+            {
+              "name": "council",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "geo_id"
+                ],
+                "on": "pointerover",
+                "clear": "pointerout"
+              }
+            }
+          ],
+          "transform": [
+            {
+              "filter": "datum.indicator == indicator && datum.year == mapYear && datum.geo_id != 'W92000004'"
+            },
+            {
+              "lookup": "geo_id",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+                  "format": {
+                    "type": "topojson",
+                    "feature": "geog"
+                  }
+                },
+                "key": "properties.id"
+              },
+              "as": "geo"
+            },
+            {
+              "calculate": "datum.geo.properties.name",
+              "as": "council_name"
+            }
+          ],
+          "mark": {
+            "type": "geoshape"
+          },
+          "encoding": {
+            "shape": {
+              "field": "geo",
+              "type": "geojson"
+            },
+            "color": {
+              "field": "value",
+              "type": "quantitative",
+              "title": null,
+              "scale": {
+                "scheme": "teals"
+              },
+              "legend": {
+                "orient": "bottom-left",
+                "format": ",.3~r"
+              }
+            },
+            "stroke": {
+              "condition": {
+                "param": "council",
+                "empty": false,
+                "value": "#c8102e"
+              },
+              "value": "white"
+            },
+            "strokeWidth": {
+              "condition": {
+                "param": "council",
+                "empty": false,
+                "value": 2.5
+              },
+              "value": 0.8
+            },
+            "tooltip": [
+              {
+                "field": "council_name",
+                "type": "nominal",
+                "title": "Council"
+              },
+              {
+                "field": "year",
+                "type": "ordinal",
+                "title": "Year"
+              },
+              {
+                "field": "value",
+                "type": "quantitative",
+                "format": ",.5~r",
+                "title": "Value"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 380,
+      "height": 360,
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/wales_indicators_LAD.csv",
+        "format": {
+          "parse": {
+            "year": "number",
+            "value": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.indicator == indicator"
+        },
+        {
+          "lookup": "geo_id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/LAD_WLS_2026_05.json",
+              "format": {
+                "type": "topojson",
+                "feature": "geog"
+              }
+            },
+            "key": "properties.id",
+            "fields": [
+              "properties.name"
+            ]
+          },
+          "as": [
+            "council_name"
+          ]
+        },
+        {
+          "calculate": "datum.geo_id == 'W92000004' ? 'Wales' : datum.council_name",
+          "as": "council_name"
+        },
+        {
+          "calculate": "datetime(datum.year, 0, 1)",
+          "as": "date"
+        }
+      ],
+      "layer": [
+        {
+          "transform": [
+            {
+              "filter": "datum.geo_id != 'W92000004'"
+            }
+          ],
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "title": null,
+              "axis": {
+                "format": "%Y"
+              }
+            },
+            "y": {
+              "field": "value",
+              "type": "quantitative",
+              "title": null,
+              "scale": {
+                "zero": false
+              },
+              "axis": {
+                "format": ",.3~r"
+              }
+            },
+            "detail": {
+              "field": "geo_id",
+              "type": "nominal"
+            },
+            "color": {
+              "condition": {
+                "param": "council",
+                "empty": false,
+                "value": "#c8102e"
+              },
+              "value": "#cfcfcf"
+            },
+            "strokeWidth": {
+              "condition": {
+                "param": "council",
+                "empty": false,
+                "value": 3
+              },
+              "value": 1.2
+            },
+            "order": {
+              "condition": {
+                "param": "council",
+                "empty": false,
+                "value": 1
+              },
+              "value": 0
+            },
+            "tooltip": [
+              {
+                "field": "council_name",
+                "type": "nominal",
+                "title": "Council"
+              },
+              {
+                "field": "year",
+                "type": "ordinal",
+                "title": "Year"
+              },
+              {
+                "field": "value",
+                "type": "quantitative",
+                "format": ",.5~r",
+                "title": "Value"
+              }
+            ]
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.geo_id == 'W92000004'"
+            }
+          ],
+          "mark": {
+            "type": "line",
+            "color": "#222",
+            "strokeDash": [
+              5,
+              3
+            ],
+            "strokeWidth": 2
+          },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "title": null,
+              "axis": {
+                "format": "%Y"
+              }
+            },
+            "y": {
+              "field": "value",
+              "type": "quantitative",
+              "title": null,
+              "scale": {
+                "zero": false
+              },
+              "axis": {
+                "format": ",.3~r"
+              }
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {}
+            ]
+          },
+          "mark": {
+            "type": "rule",
+            "color": "#888",
+            "strokeDash": [
+              2,
+              2
+            ]
+          },
+          "encoding": {
+            "x": {
+              "datum": {
+                "expr": "datetime(mapYear, 0, 1)"
+              },
+              "type": "temporal"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

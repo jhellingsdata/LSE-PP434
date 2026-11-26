@@ -1,0 +1,130 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A year slider on a map: the param picks the year in the filter. The colour scale has a fixed domain, so colours mean the same price in every year and the map darkens as prices rise. Without a fixed domain, each year would refit and the map would hardly change. 2026 is a part year.",
+  "title": {
+    "text": {
+      "expr": "'The price of a latte, ' + pickYear"
+    },
+    "subtitle": [
+      "Median price on menus, by region. Grey: too few prices. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "width": 320,
+  "height": 440,
+  "projection": {
+    "type": "mercator"
+  },
+  "params": [
+    {
+      "name": "pickYear",
+      "value": 2017,
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2026,
+        "step": 1,
+        "name": "Year "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/ITL1_UK_2021.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e3e3e3",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_iconic_by_year_region.csv",
+        "format": {
+          "parse": {
+            "year": "number",
+            "prices": "number",
+            "median_price": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.item == 'latte' && datum.year == pickYear"
+        },
+        {
+          "filter": "datum.itl1 != 'United Kingdom'"
+        },
+        {
+          "lookup": "itl1_id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/ITL1_UK_2021.json",
+              "format": {
+                "type": "topojson",
+                "feature": "geog"
+              }
+            },
+            "key": "properties.id"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "median_price",
+          "type": "quantitative",
+          "title": "£",
+          "scale": {
+            "scheme": "oranges",
+            "domain": [
+              2.25,
+              4.25
+            ],
+            "clamp": true
+          },
+          "legend": {
+            "format": ".2f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "itl1",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "median_price",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Median price (£)"
+          },
+          {
+            "field": "prices",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Prices"
+          }
+        ]
+      }
+    }
+  ]
+}

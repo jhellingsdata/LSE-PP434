@@ -16,7 +16,11 @@
     "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/ons_rpi_inflation_long_run.json",
     "format": {
       "type": "json",
-      "property": "years"
+      "property": "years",
+      "parse": {
+        "value": "number",
+        "year": "number"
+      }
     }
   },
   "mark": {

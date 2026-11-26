@@ -1,0 +1,176 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A dropdown and a year slider together. Prices differ by dish and rise every year, so one colour scale can't fit them all. Instead, colour shows each region's price relative to the UK median for the same dish and year: the UK row is kept with 'calculate', copied to every row with 'joinaggregate', then each region is divided by it. Red: dearer than the UK; blue: cheaper.",
+  "title": {
+    "text": {
+      "expr": "'Menu prices: ' + dish + ', ' + pickYear"
+    },
+    "subtitle": [
+      "Median price compared with the UK median for the same year. Grey: too few prices. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "width": 320,
+  "height": 440,
+  "projection": {
+    "type": "mercator"
+  },
+  "params": [
+    {
+      "name": "dish",
+      "value": "latte",
+      "bind": {
+        "input": "select",
+        "options": [
+          "latte",
+          "flat white",
+          "cappuccino",
+          "croissant",
+          "sausage roll",
+          "fish & chips",
+          "margherita",
+          "cheeseburger",
+          "chicken tikka masala",
+          "english breakfast",
+          "pad thai",
+          "guinness"
+        ],
+        "name": "Dish "
+      }
+    },
+    {
+      "name": "pickYear",
+      "value": 2017,
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2026,
+        "step": 1,
+        "name": "Year "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/ITL1_UK_2021.json",
+        "format": {
+          "type": "topojson",
+          "feature": "geog"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e3e3e3",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_iconic_by_year_region.csv",
+        "format": {
+          "parse": {
+            "year": "number",
+            "prices": "number",
+            "median_price": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.item == dish && datum.year == pickYear"
+        },
+        {
+          "calculate": "datum.itl1 == 'United Kingdom' ? datum.median_price : null",
+          "as": "uk_value"
+        },
+        {
+          "joinaggregate": [
+            {
+              "op": "max",
+              "field": "uk_value",
+              "as": "uk"
+            }
+          ]
+        },
+        {
+          "calculate": "datum.median_price / datum.uk - 1",
+          "as": "vs_uk"
+        },
+        {
+          "filter": "datum.itl1 != 'United Kingdom'"
+        },
+        {
+          "lookup": "itl1_id",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/ITL1_UK_2021.json",
+              "format": {
+                "type": "topojson",
+                "feature": "geog"
+              }
+            },
+            "key": "properties.id"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "vs_uk",
+          "type": "quantitative",
+          "title": "vs UK",
+          "scale": {
+            "scheme": "redblue",
+            "reverse": true,
+            "domain": [
+              -0.15,
+              0.15
+            ],
+            "clamp": true
+          },
+          "legend": {
+            "format": "+.0%"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "itl1",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "median_price",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Median price (£)"
+          },
+          {
+            "field": "uk",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "UK median (£)"
+          },
+          {
+            "field": "vs_uk",
+            "type": "quantitative",
+            "format": "+.0%",
+            "title": "Compared with the UK"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "England's strategic authorities (the 20 in force in July 2026), using Week 7's msa_latest.csv: one row per authority, one column per indicator. The dropdown holds a column name, and datum[indicator] picks it (as in DS9_08). The map and the ranked bars share one hover selection, defined once at the top with 'views', so hovering either highlights the same authority in both. Grey on the map: areas outside a strategic authority. The two authorities not yet in force are left out, and West of England has no GVA figure. Latest year for each indicator: see Week 7's msa README.",
+  "title": {
+    "text": {
+      "expr": "{'gva_per_head': 'Economic output (GVA) per head (£)', 'pay_fulltime': 'Median full-time pay (£)', 'employment_rate': 'Employment rate, ages 16-64 (%)', 'degree_level': 'Qualified to degree level, ages 16-64 (%)', 'old_age_dependency': 'Aged 65+ for every 100 aged 16-64', 'life_expectancy_female': 'Life expectancy, women (years)', 'life_expectancy_male': 'Life expectancy, men (years)', 'child_poverty': 'Children in low-income families (%)', 'most_deprived_10pct': 'Living in the most deprived 10% of areas in England (%)', 'emissions_per_head': 'Emissions per head (tonnes CO2e)'}[indicator]"
+    },
+    "subtitle": "England's strategic authorities, latest year. Hover over the map or the bars. Source: ONS, DWP, MHCLG, DESNZ, via Week 7's data",
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "params": [
+    {
+      "name": "indicator",
+      "value": "gva_per_head",
+      "bind": {
+        "input": "select",
+        "options": [
+          "gva_per_head",
+          "pay_fulltime",
+          "employment_rate",
+          "degree_level",
+          "old_age_dependency",
+          "life_expectancy_female",
+          "life_expectancy_male",
+          "child_poverty",
+          "most_deprived_10pct",
+          "emissions_per_head"
+        ],
+        "labels": [
+          "Economic output (GVA) per head (£)",
+          "Median full-time pay (£)",
+          "Employment rate, ages 16-64 (%)",
+          "Qualified to degree level, ages 16-64 (%)",
+          "Aged 65+ for every 100 aged 16-64",
+          "Life expectancy, women (years)",
+          "Life expectancy, men (years)",
+          "Children in low-income families (%)",
+          "Living in the most deprived 10% of areas in England (%)",
+          "Emissions per head (tonnes CO2e)"
+        ],
+        "name": "Indicator "
+      }
+    },
+    {
+      "name": "sa",
+      "select": {
+        "type": "point",
+        "fields": [
+          "sa_id"
+        ],
+        "on": "pointerover",
+        "clear": "pointerout"
+      },
+      "views": [
+        "sa_map",
+        "sa_bars"
+      ]
+    }
+  ],
+  "hconcat": [
+    {
+      "width": 340,
+      "height": 400,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/CTRY_GB-ENG.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#ececec",
+            "stroke": "#bbb",
+            "strokeWidth": 0.5
+          }
+        },
+        {
+          "name": "sa_map",
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/SA_ENG_2026_07.json",
+            "format": {
+              "type": "topojson",
+              "feature": "geog"
+            }
+          },
+          "transform": [
+            {
+              "lookup": "properties.id",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/msa/msa_latest.csv",
+                  "format": {
+                    "parse": {
+                      "gva_per_head": "number",
+                      "pay_fulltime": "number",
+                      "employment_rate": "number",
+                      "degree_level": "number",
+                      "old_age_dependency": "number",
+                      "life_expectancy_female": "number",
+                      "life_expectancy_male": "number",
+                      "child_poverty": "number",
+                      "most_deprived_10pct": "number",
+                      "emissions_per_head": "number"
+                    }
+                  }
+                },
+                "key": "geo_id",
+                "fields": [
+                  "name",
+                  "gva_per_head",
+                  "pay_fulltime",
+                  "employment_rate",
+                  "degree_level",
+                  "old_age_dependency",
+                  "life_expectancy_female",
+                  "life_expectancy_male",
+                  "child_poverty",
+                  "most_deprived_10pct",
+                  "emissions_per_head"
+                ]
+              }
+            },
+            {
+              "calculate": "datum[indicator]",
+              "as": "value"
+            },
+            {
+              "calculate": "datum.properties.id",
+              "as": "sa_id"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "white",
+            "strokeWidth": 0.6
+          },
+          "encoding": {
+            "color": {
+              "field": "value",
+              "type": "quantitative",
+              "title": null,
+              "scale": {
+                "scheme": "purples"
+              },
+              "legend": null
+            },
+            "stroke": {
+              "condition": {
+                "param": "sa",
+                "empty": false,
+                "value": "#e8a400"
+              },
+              "value": "white"
+            },
+            "strokeWidth": {
+              "condition": {
+                "param": "sa",
+                "empty": false,
+                "value": 3
+              },
+              "value": 0.6
+            },
+            "tooltip": [
+              {
+                "field": "name",
+                "type": "nominal",
+                "title": "Strategic authority"
+              },
+              {
+                "field": "value",
+                "type": "quantitative",
+                "format": ",.5~r",
+                "title": "Value"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "sa_bars",
+      "width": 300,
+      "height": 400,
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week07/data/msa/msa_latest.csv",
+        "format": {
+          "parse": {
+            "gva_per_head": "number",
+            "pay_fulltime": "number",
+            "employment_rate": "number",
+            "degree_level": "number",
+            "old_age_dependency": "number",
+            "life_expectancy_female": "number",
+            "life_expectancy_male": "number",
+            "child_poverty": "number",
+            "most_deprived_10pct": "number",
+            "emissions_per_head": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum[indicator]",
+          "as": "value"
+        },
+        {
+          "calculate": "datum.geo_id",
+          "as": "sa_id"
+        },
+        {
+          "filter": "isValid(datum.value) && datum.tier != 'not yet in force'"
+        }
+      ],
+      "mark": {
+        "type": "bar"
+      },
+      "encoding": {
+        "y": {
+          "field": "name",
+          "type": "nominal",
+          "title": null,
+          "sort": "-x"
+        },
+        "x": {
+          "field": "value",
+          "type": "quantitative",
+          "title": null,
+          "axis": {
+            "format": ",.3~r"
+          }
+        },
+        "color": {
+          "field": "value",
+          "type": "quantitative",
+          "title": null,
+          "scale": {
+            "scheme": "purples"
+          },
+          "legend": null
+        },
+        "stroke": {
+          "condition": {
+            "param": "sa",
+            "empty": false,
+            "value": "#e8a400"
+          },
+          "value": null
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "sa",
+            "empty": false,
+            "value": 3
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Strategic authority"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "format": ",.5~r",
+            "title": "Value"
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "shared"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

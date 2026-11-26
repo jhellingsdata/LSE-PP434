@@ -69,7 +69,7 @@ Data: the Week 8 menu prices summary, [`menu_percentiles_by_year.csv`](../week08
 
 ## Interactive charts (lecture section 9.4)
 
-The lecture's figures 1 to 11, in [`examples/interactive/`](examples/interactive/).
+The lecture's figures 1 to 11, plus five new interactive maps (12 to 16), in [`examples/interactive/`](examples/interactive/).
 
 | Chart | What it shows |
 |---|---|
@@ -88,6 +88,11 @@ The lecture's figures 1 to 11, in [`examples/interactive/`](examples/interactive
 | [`DS9_10b_checkbox_layers`](examples/interactive/DS9_10b_checkbox_layers.json) | The checkbox chart with extra layers: recession bands and a shaded recovery gap. |
 | [`DS9_10c_checkbox_slider`](examples/interactive/DS9_10c_checkbox_slider.json) | The checkbox and a year slider together. |
 | [`DS9_11_hover_select_concat`](examples/interactive/DS9_11_hover_select_concat.json) | Linked views: hover a borough on the map or a point on the scatter, and it's highlighted in both. Both views define the same point selection (point_paintbrush) on Name. Map: map-data's Greater London boroughs, matched on the ONS code. |
+| [`DS9_12_dropdown_map`](examples/interactive/DS9_12_dropdown_map.json) | New. A dropdown picks the dish to map (menu prices by region, 2025). The data has one row per dish, year and region, so the chart starts from the CSV, filters, then looks up each region's shape (Week 7's DS7_09 pattern). |
+| [`DS9_13_year_slider_map`](examples/interactive/DS9_13_year_slider_map.json) | New. A range slider picks the year (the price of a latte by region, 2017-2026). The colour scale has a fixed domain, so the map darkens as prices rise. |
+| [`DS9_14_dropdown_slider_map`](examples/interactive/DS9_14_dropdown_slider_map.json) | New. Both together. One colour scale can't fit every dish and year, so colour shows each region against the UK median for the same dish and year ('joinaggregate'). |
+| [`DS9_15_wales_explorer`](examples/interactive/DS9_15_wales_explorer.json) | New. A regional explorer for Wales's 22 councils, with Week 7's data: a dropdown picks the indicator (pay, GDP per head, productivity, unemployment, employment, aged 65+, anxiety), a slider picks the map's year, and hovering a council picks out its line in the chart beside it. Data: [`wales_indicators_LAD.csv`](data/wales_indicators_LAD.csv). |
+| [`DS9_16_strategic_authorities_explorer`](examples/interactive/DS9_16_strategic_authorities_explorer.json) | New. England's strategic authorities, with Week 7's `msa_latest.csv`: a dropdown picks one of ten indicators for the map and a ranked bar chart. One hover selection, defined once at the top with `views`, links the two. |
 
 ## Uncertainty (seminar)
 
@@ -97,7 +102,7 @@ Error bars, error bands and fan charts, in [`examples/uncertainty/`](examples/un
 |---|---|
 | [`DS9_20_error_bars_simple`](examples/uncertainty/DS9_20_error_bars_simple.json) | Error bars from a table of results: a point for the estimate (Beta), a rule from the lower to the upper 95% confidence interval (y and y2). Economics Observatory, youth club closures. |
 | [`DS9_21_error_bars_two_methods`](examples/uncertainty/DS9_21_error_bars_two_methods.json) | Two estimation methods side by side, using xOffset. |
-| [`DS9_22_fan_chart_simple`](examples/uncertainty/DS9_22_fan_chart_simple.json) | A fan chart: forecast lines with bands for the 10th-90th percentile ranges. OBR, November 2025. |
+| [`DS9_22_fan_chart_simple`](examples/uncertainty/DS9_22_fan_chart_simple.json) | A fan chart: forecast lines with bands for the 10th-90th percentile ranges. OBR, October 2026 (with the March 2026 forecast for comparison). |
 | [`DS9_23_fan_chart_styled`](examples/uncertainty/DS9_23_fan_chart_styled.json) | The same fan chart, styled. |
 
 ## More practice
@@ -128,6 +133,7 @@ Last year's practical, in [`examples/practice/`](examples/practice/): each has a
 | `us_real_gdp_per_capita.csv`, `us_recessions.json` | US real GDP per person; US recession dates | FRED; recession dates *to add* |
 | `council_finances_2023.csv` | Council borrowing, assets and population change, 2023 | *to add* |
 | `us_states_socioeconomic.csv` | US states: median income and firearm deaths | *to add* |
+| `wales_indicators_LAD.csv` | Seven indicators for Wales's 22 councils (and Wales, where published), 2004-2025, in one long table: council, indicator, year, value. Built from Week 7's Wales files; unemployment is the year to December | ONS |
 | `uk_productivity.csv` | UK output per hour worked, whole economy, 1997-2025 (2024 = 100) | ONS (LZVB), 17 November 2026 |
 | `youth_clubs_crime_effects.csv` | Effect of youth club closures on crime, with 95% confidence intervals | Economics Observatory |
-| `obr_growth_forecasts.csv`, `obr_growth_uncertainty_ranges.csv` | UK GDP growth forecasts and their uncertainty ranges, November 2025 (*update to October 2026*) | OBR |
+| `obr_growth_forecasts.csv`, `obr_growth_uncertainty_ranges.csv` | UK GDP growth forecasts and their uncertainty ranges: the October 2026 forecast (with March 2026), from `data_raw/` (chart 2.12) | OBR |
