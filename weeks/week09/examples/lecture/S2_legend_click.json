@@ -1,12 +1,12 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "6. Clickable legend: the same point selection, with 'bind': 'legend'. Click a dish in the legend (shift-click for more than one); double-click to reset.",
+  "description": "6. Clickable legend: S1 with two changes. (1) Colour by dish: a legend only exists when an encoding (colour, size, shape...) makes one, so S1, with every line brown, has no legend to click. The colour encoding also splits the lines, so 'detail' goes. (2) In the selection, replace 'on' and 'nearest' with 'bind': 'legend'. (The selection must sit on the first layer for the legend binding to work: that's why S1 puts the points layer first.) Click a dish in the legend (shift-click for more than one); double-click the chart to reset.",
   "width": 500,
   "height": 280,
   "title": {
     "text": "Which menu prices rose most?",
     "subtitle": [
-      "Median price, 2019 = 100. Click the legend. Source: LSE Growth Lab, AutoCPI (menu photos)"
+      "Median price, 2019 = 100. Click a dish in the legend. Source: LSE Growth Lab, AutoCPI (menu photos)"
     ],
     "anchor": "start",
     "fontSize": 16,
@@ -52,23 +52,6 @@
       "as": "index"
     }
   ],
-  "params": [
-    {
-      "name": "pick",
-      "select": {
-        "type": "point",
-        "fields": [
-          "item"
-        ]
-      },
-      "bind": "legend"
-    }
-  ],
-  "mark": {
-    "type": "line",
-    "strokeWidth": 2,
-    "point": true
-  },
   "encoding": {
     "x": {
       "field": "date",
@@ -94,37 +77,75 @@
       "scale": {
         "scheme": "tableau20"
       }
-    },
-    "opacity": {
-      "condition": {
-        "param": "pick",
-        "value": 1
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "pick",
+          "select": {
+            "type": "point",
+            "fields": [
+              "item"
+            ]
+          },
+          "bind": "legend"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 40
       },
-      "value": 0.1
-    },
-    "tooltip": [
-      {
-        "field": "item",
-        "type": "nominal",
-        "title": "Dish"
-      },
-      {
-        "field": "year",
-        "type": "ordinal",
-        "title": "Year"
-      },
-      {
-        "field": "index",
-        "type": "quantitative",
-        "format": ".0f",
-        "title": "Index (2019 = 100)"
-      },
-      {
-        "field": "median",
-        "type": "quantitative",
-        "format": ".2f",
-        "title": "Median (£)"
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "param": "pick",
+            "value": 1
+          },
+          "value": 0.15
+        },
+        "tooltip": [
+          {
+            "field": "item",
+            "type": "nominal",
+            "title": "Dish"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "index",
+            "type": "quantitative",
+            "format": ".0f",
+            "title": "Index (2019 = 100)"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Median (£)"
+          }
+        ]
       }
-    ]
-  }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "param": "pick",
+            "value": 1
+          },
+          "value": 0.15
+        }
+      }
+    }
+  ]
 }
