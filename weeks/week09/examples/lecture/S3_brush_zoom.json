@@ -1,0 +1,116 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "7. Brush to zoom: an 'interval' selection on x in the small chart (drag across it; double-click to reset). The big chart keeps only the rows inside the brush: {\"filter\": {\"param\": \"brush\"}}, so both axes fit the years you picked. Two views, one above the other (vconcat). Another way: \"scale\": {\"domain\": {\"param\": \"brush\"}} on the big chart's x.",
+  "title": {
+    "text": "UK prices since 1800",
+    "subtitle": [
+      "Retail prices index, 1974 = 100. Drag across the lower chart to zoom. Source: ONS"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/uk_prices_long_run.csv",
+    "format": {
+      "parse": {
+        "year": "number",
+        "index": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 500,
+      "height": 240,
+      "mark": {
+        "type": "line",
+        "color": "#179fdb"
+      },
+      "transform": [
+        {
+          "filter": {
+            "param": "brush"
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%Y"
+          }
+        },
+        "y": {
+          "field": "index",
+          "type": "quantitative",
+          "title": "Index (1974 = 100)",
+          "scale": {
+            "type": "log"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "index",
+            "type": "quantitative",
+            "format": ",.1f",
+            "title": "Index"
+          }
+        ]
+      }
+    },
+    {
+      "width": 500,
+      "height": 70,
+      "mark": {
+        "type": "line",
+        "color": "#179fdb"
+      },
+      "params": [
+        {
+          "name": "brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%Y"
+          }
+        },
+        "y": {
+          "field": "index",
+          "type": "quantitative",
+          "title": null,
+          "scale": {
+            "type": "log"
+          },
+          "axis": {
+            "tickCount": 2
+          }
+        }
+      }
+    }
+  ]
+}

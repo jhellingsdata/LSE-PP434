@@ -1,0 +1,181 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Step 4 (finished): rebase with a slider. Mark the base year's price ('calculate' with a condition), copy it to every row ('joinaggregate' with max, which ignores the nulls), then divide: median / base * 100. Every dish is 100 in the base year, so dishes become comparable.",
+  "width": 500,
+  "height": 280,
+  "title": {
+    "text": {
+      "expr": "'The price of a ' + dish + ', ' + baseYear + ' = 100'"
+    },
+    "subtitle": [
+      "Median price, and the middle 80% of prices, as an index. Pick a dish and a base year. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "number",
+        "p10": "number",
+        "median": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "dish",
+      "value": "latte",
+      "bind": {
+        "input": "select",
+        "options": [
+          "latte",
+          "flat white",
+          "cappuccino",
+          "croissant",
+          "sausage roll",
+          "fish & chips",
+          "margherita",
+          "cheeseburger",
+          "chicken tikka masala",
+          "english breakfast",
+          "pad thai",
+          "guinness"
+        ],
+        "name": "Dish "
+      }
+    },
+    {
+      "name": "baseYear",
+      "value": 2019,
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2025,
+        "step": 1,
+        "name": "Base year "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.item == dish"
+    },
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    },
+    {
+      "calculate": "datum.year == baseYear ? datum.median : null",
+      "as": "base_price"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "base_price",
+          "as": "base"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.median / datum.base * 100",
+      "as": "index"
+    },
+    {
+      "calculate": "datum.p10 / datum.base * 100",
+      "as": "index_p10"
+    },
+    {
+      "calculate": "datum.p90 / datum.base * 100",
+      "as": "index_p90"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "color": "#ecdfd0"
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%Y"
+          }
+        },
+        "y": {
+          "field": "index_p10",
+          "type": "quantitative",
+          "title": "Index (base year = 100)"
+        },
+        "y2": {
+          "field": "index_p90"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#888",
+        "strokeDash": [
+          4,
+          3
+        ]
+      },
+      "encoding": {
+        "y": {
+          "datum": 100
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#8c5a2b",
+        "point": {
+          "color": "#8c5a2b"
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%Y"
+          }
+        },
+        "y": {
+          "field": "index",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "index",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Index"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Median (£)"
+          }
+        ]
+      }
+    }
+  ]
+}

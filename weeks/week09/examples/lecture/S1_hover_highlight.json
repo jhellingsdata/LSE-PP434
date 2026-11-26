@@ -1,0 +1,150 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "5. Hover highlight: a 'point' selection on the dish, triggered by the pointer. Recipe: (1) add a select param; (2) use it in a condition: opacity 1 when selected, 0.15 otherwise; (3) choose the trigger ('on': 'pointerover', 'nearest': true finds the closest point). With 'empty': true (the default), every line is full strength until you hover.",
+  "width": 500,
+  "height": 280,
+  "title": {
+    "text": "Which menu prices rose most?",
+    "subtitle": [
+      "Median price, 2019 = 100. Hover over a line. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "number",
+        "p10": "number",
+        "p25": "number",
+        "median": "number",
+        "p75": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    },
+    {
+      "calculate": "datum.year == 2019 ? datum.median : null",
+      "as": "base_price"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "base_price",
+          "as": "base"
+        }
+      ],
+      "groupby": [
+        "item"
+      ]
+    },
+    {
+      "calculate": "datum.median / datum.base * 100",
+      "as": "index"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%Y",
+        "tickCount": "year"
+      }
+    },
+    "y": {
+      "field": "index",
+      "type": "quantitative",
+      "title": "Index (2019 = 100)",
+      "scale": {
+        "zero": false
+      }
+    },
+    "detail": {
+      "field": "item",
+      "type": "nominal"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2,
+        "color": "#8c5a2b"
+      },
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "param": "hover",
+            "value": 1
+          },
+          "value": 0.15
+        }
+      }
+    },
+    {
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": [
+              "item"
+            ],
+            "on": "pointerover",
+            "nearest": true
+          }
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 40,
+        "color": "#8c5a2b"
+      },
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "param": "hover",
+            "value": 1
+          },
+          "value": 0.15
+        },
+        "tooltip": [
+          {
+            "field": "item",
+            "type": "nominal",
+            "title": "Dish"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "index",
+            "type": "quantitative",
+            "format": ".0f",
+            "title": "Index (2019 = 100)"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Median (£)"
+          }
+        ]
+      }
+    }
+  ]
+}

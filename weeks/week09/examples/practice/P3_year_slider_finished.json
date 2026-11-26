@@ -1,0 +1,167 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Practice 3, finished: a range slider picks the year; clicking the legend picks a region.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/maternal_mortality_gdp.json"
+  },
+  "view": {
+    "stroke": "transparent"
+  },
+  "title": {
+    "text": "GDP and Maternal Mortality",
+    "subtitle": [
+      "Maternal mortality per 100,000 live births. Source: WHO",
+      "GDP: per capita PPP (2021 $). Source: World Bank",
+      ""
+    ],
+    "anchor": "start"
+  },
+  "width": 500,
+  "height": 300,
+  "params": [
+    {
+      "name": "yearSelector",
+      "value": 2000,
+      "bind": {
+        "input": "range",
+        "min": 2000,
+        "max": 2017,
+        "step": 1,
+        "name": "Select year:"
+      }
+    },
+    {
+      "name": "leg_region",
+      "select": {
+        "type": "point",
+        "fields": [
+          "Region"
+        ]
+      },
+      "bind": "legend"
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.Year == yearSelector"
+    }
+  ],
+  "mark": {
+    "type": "circle"
+  },
+  "encoding": {
+    "x": {
+      "field": "GDP pc",
+      "type": "quantitative",
+      "scale": {
+        "type": "log",
+        "domain": [
+          400,
+          150000
+        ]
+      },
+      "axis": {
+        "title": "GDP (log scale)",
+        "values": [
+          400,
+          1000,
+          2000,
+          4000,
+          10000,
+          20000,
+          40000,
+          100000
+        ],
+        "gridOpacity": 0.3,
+        "labelFontSize": 12,
+        "labelPadding": 5,
+        "titlePadding": 6,
+        "ticks": false,
+        "format": "$,"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Year"
+      },
+      {
+        "field": "Country"
+      },
+      {
+        "field": "Maternal Mortality",
+        "format": ","
+      },
+      {
+        "field": "GDP pc",
+        "format": "$,d",
+        "title": "GDP Per Capita"
+      }
+    ],
+    "y": {
+      "field": "Maternal Mortality",
+      "type": "quantitative",
+      "axis": {
+        "title": "Mortality (log scale)",
+        "values": [
+          1,
+          2,
+          10,
+          20,
+          100,
+          200,
+          1000,
+          2000,
+          10000
+        ],
+        "gridOpacity": 0.3,
+        "labelFontSize": 13,
+        "labelPadding": 5,
+        "ticks": false,
+        "titlePadding": -4
+      },
+      "scale": {
+        "type": "log"
+      }
+    },
+    "color": {
+      "field": "Region",
+      "type": "nominal",
+      "legend": {
+        "title": null,
+        "direction": "horizontal",
+        "orient": "top",
+        "offset": 12,
+        "labelFontSize": 12,
+        "labelPadding": 10,
+        "columns": 3,
+        "labelOffset": 2
+      }
+    },
+    "size": {
+      "field": "Population",
+      "type": "quantitative",
+      "legend": null,
+      "scale": {
+        "type": "linear",
+        "range": [
+          10,
+          1200
+        ]
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "leg_region",
+        "value": 1
+      },
+      "value": 0.2
+    },
+    "order": {
+      "condition": {
+        "param": "leg_region",
+        "value": 1
+      },
+      "value": 0
+    }
+  }
+}

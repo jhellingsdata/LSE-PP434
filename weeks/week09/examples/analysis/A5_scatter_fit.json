@@ -1,0 +1,208 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A scatter with two fitted lines. transform_regression fits a straight line (method 'linear'; also 'log', 'exp', 'poly'...). transform_loess fits a smooth local curve: bandwidth sets how local (smaller = wigglier). Each fit is its own layer.",
+  "title": {
+    "text": "Richer states have fewer gun deaths",
+    "subtitle": [
+      "US states. Source: CDC, US Census Bureau"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "width": 520,
+  "height": 340,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/us_states_socioeconomic.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "size": 70,
+        "color": "#555",
+        "opacity": 0.7
+      },
+      "encoding": {
+        "x": {
+          "field": "medIncome",
+          "type": "quantitative",
+          "title": "Median household income (US$)",
+          "scale": {
+            "zero": false
+          },
+          "axis": {
+            "format": "$,.0f"
+          }
+        },
+        "y": {
+          "field": "DeathRate",
+          "type": "quantitative",
+          "title": "Firearm deaths per 100,000"
+        },
+        "tooltip": [
+          {
+            "field": "State",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "medIncome",
+            "type": "quantitative",
+            "format": "$,.0f",
+            "title": "Median income"
+          },
+          {
+            "field": "DeathRate",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Firearm deaths per 100k"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 9,
+        "dx": 8,
+        "align": "left",
+        "color": "#555"
+      },
+      "transform": [
+        {
+          "filter": {
+            "field": "StateInitials",
+            "oneOf": [
+              "AK",
+              "AL",
+              "LA",
+              "MS",
+              "OK",
+              "ME",
+              "CO",
+              "MD",
+              "NH",
+              "NY",
+              "NJ",
+              "HI",
+              "MA",
+              "CT",
+              "CA"
+            ]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "medIncome",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "DeathRate",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "StateInitials"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "regression": "DeathRate",
+          "on": "medIncome"
+        },
+        {
+          "calculate": "'Linear (OLS)'",
+          "as": "fit"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5,
+        "strokeDash": [
+          6,
+          3
+        ]
+      },
+      "encoding": {
+        "x": {
+          "field": "medIncome",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "DeathRate",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "fit",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Linear (OLS)",
+              "Loess"
+            ],
+            "range": [
+              "#c8102e",
+              "#1f77b4"
+            ]
+          },
+          "legend": {
+            "orient": "top-right"
+          }
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "loess": "DeathRate",
+          "on": "medIncome",
+          "bandwidth": 0.75
+        },
+        {
+          "calculate": "'Loess'",
+          "as": "fit"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5,
+        "strokeDash": [
+          1,
+          0
+        ]
+      },
+      "encoding": {
+        "x": {
+          "field": "medIncome",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "DeathRate",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "fit",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Linear (OLS)",
+              "Loess"
+            ],
+            "range": [
+              "#c8102e",
+              "#1f77b4"
+            ]
+          },
+          "legend": {
+            "orient": "top-right"
+          }
+        }
+      }
+    }
+  ]
+}

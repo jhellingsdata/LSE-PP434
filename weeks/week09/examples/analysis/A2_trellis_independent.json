@@ -1,0 +1,128 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Trellis (small multiples): one panel per dish with facet. Prices differ (a latte is about £4, fish & chips about £14), so resolve gives each panel its own y axis. The band is the middle 80% of prices.",
+  "title": {
+    "text": "Menu prices, 2017 to 2026",
+    "subtitle": [
+      "Median price, and the middle 80% of prices. Each panel has its own scale. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "number",
+        "p10": "number",
+        "p25": "number",
+        "median": "number",
+        "p75": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": {
+        "field": "item",
+        "oneOf": [
+          "latte",
+          "fish & chips",
+          "margherita",
+          "guinness"
+        ]
+      }
+    },
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    }
+  ],
+  "facet": {
+    "field": "item",
+    "type": "nominal",
+    "title": null,
+    "sort": [
+      "latte",
+      "fish & chips",
+      "margherita",
+      "guinness"
+    ],
+    "header": {
+      "labelFontSize": 13,
+      "labelAnchor": "start"
+    }
+  },
+  "columns": 2,
+  "spec": {
+    "width": 230,
+    "height": 140,
+    "layer": [
+      {
+        "mark": {
+          "type": "area",
+          "color": "#f2c4c4"
+        },
+        "encoding": {
+          "x": {
+            "field": "date",
+            "type": "temporal",
+            "title": null,
+            "axis": {
+              "format": "%Y"
+            }
+          },
+          "y": {
+            "field": "p10",
+            "type": "quantitative",
+            "title": "£"
+          },
+          "y2": {
+            "field": "p90"
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "line",
+          "color": "#c8102e"
+        },
+        "encoding": {
+          "x": {
+            "field": "date",
+            "type": "temporal",
+            "title": null,
+            "axis": {
+              "format": "%Y"
+            }
+          },
+          "y": {
+            "field": "median",
+            "type": "quantitative"
+          },
+          "tooltip": [
+            {
+              "field": "year",
+              "type": "ordinal",
+              "title": "Year"
+            },
+            {
+              "field": "median",
+              "type": "quantitative",
+              "format": ".2f",
+              "title": "Median (£)"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "scale": {
+      "y": "independent"
+    }
+  }
+}

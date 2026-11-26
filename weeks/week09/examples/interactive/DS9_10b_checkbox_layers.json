@@ -1,0 +1,161 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "The checkbox chart with extra layers: recession bands and a shaded recovery gap.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/us_real_gdp_per_capita.csv"
+  },
+  "width": 300,
+  "height": 250,
+  "title": {
+    "text": "Real GDP Per Capita",
+    "subtitle": [
+      "2011 USD. Source: FRED"
+    ],
+    "align": "left",
+    "anchor": "start",
+    "fontSize": 14,
+    "offset": 10,
+    "subtitleFontSize": 11,
+    "subtitleFontStyle": "italic"
+  },
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "Date",
+      "type": "temporal",
+      "axis": {
+        "grid": false,
+        "tickOpacity": 0,
+        "labelPadding": 5
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "toggleZero",
+      "value": false,
+      "bind": {
+        "input": "checkbox",
+        "name": "Start y-axis at 0"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "year(datum.Date) >= 2000"
+    }
+  ],
+  "layer": [
+    {
+      "transform": [
+        {
+          "filter": "year(datum.Date) >= 2000"
+        }
+      ],
+      "data": {
+        "values": [
+          {
+            "Date": 1199145600000
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "dy": -6,
+        "dx": -1,
+        "fontWeight": "bold",
+        "color": "rgba(128,0,0,0.5)",
+        "align": "left",
+        "text": "Recovery"
+      },
+      "encoding": {
+        "y": {
+          "datum": 52066
+        }
+      }
+    },
+    {
+      "description": "Layer with shaded rectangles showing USA recessionary periods.",
+      "mark": {
+        "type": "rect"
+      },
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/us_recessions.json"
+      },
+      "encoding": {
+        "x": {
+          "field": "Start",
+          "type": "temporal",
+          "axis": {
+            "title": null,
+            "grid": false,
+            "ticks": false,
+            "labelSeparation": 10
+          }
+        },
+        "x2": {
+          "field": "End"
+        },
+        "color": {
+          "value": "rgba(0,0,0,0.05)"
+        }
+      },
+      "transform": [
+        {
+          "filter": "year(datum.Start) >= 2000"
+        }
+      ]
+    },
+    {
+      "description": "layer main line",
+      "encoding": {
+        "y": {
+          "field": "Value",
+          "type": "quantitative",
+          "scale": {
+            "domainMin": {
+              "expr": "toggleZero ? 0 : 42000"
+            }
+          },
+          "axis": {
+            "title": null,
+            "tickOpacity": 0,
+            "grid": false,
+            "format": "$,.0d"
+          }
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "color": "rgb(128,0,0)"
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.Date <= 1372636800000 & datum.Date >= 1191196800000"
+            }
+          ],
+          "mark": {
+            "type": "area",
+            "color": "rgba(128,0,0, 0.4)"
+          },
+          "encoding": {
+            "y2": {
+              "field": "Value"
+            },
+            "y": {
+              "datum": 52066
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

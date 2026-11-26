@@ -1,0 +1,274 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "An event study: fit the trend before an event (1997-2007, before the financial crisis), extend it, and compare. The trend is a log-linear fit done with joinaggregate on the pre-crisis years only (other years are null, which mean and sum skip). The shaded gap is how far productivity fell short of the old trend. A counterfactual is an assumption: would the trend have continued? (The 2020 jump is mostly composition: lower-paid hours fell most in lockdown.)",
+  "title": {
+    "text": "The UK's productivity puzzle",
+    "subtitle": [
+      "Output per hour worked, whole economy (2024 = 100). Dashed: the 1997-2007 trend, extended. Source: ONS (LZVB), Nov 2026"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "width": 520,
+  "height": 320,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/uk_productivity.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.year <= 2007 ? log(datum.output_per_hour) : null",
+      "as": "y_pre"
+    },
+    {
+      "calculate": "datum.year <= 2007 ? datum.year : null",
+      "as": "t_pre"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "mean",
+          "field": "t_pre",
+          "as": "t_mean"
+        },
+        {
+          "op": "mean",
+          "field": "y_pre",
+          "as": "y_mean"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.year <= 2007 ? (datum.year - datum.t_mean) * (datum.y_pre - datum.y_mean) : null",
+      "as": "dtdy"
+    },
+    {
+      "calculate": "datum.year <= 2007 ? pow(datum.year - datum.t_mean, 2) : null",
+      "as": "dt2"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "dtdy",
+          "as": "sxy"
+        },
+        {
+          "op": "sum",
+          "field": "dt2",
+          "as": "sxx"
+        }
+      ]
+    },
+    {
+      "calculate": "exp(datum.y_mean + datum.sxy / datum.sxx * (datum.year - datum.t_mean))",
+      "as": "trend"
+    },
+    {
+      "calculate": "1 - datum.output_per_hour / datum.trend",
+      "as": "gap"
+    },
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    }
+  ],
+  "layer": [
+    {
+      "transform": [
+        {
+          "filter": "datum.year >= 2007"
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "color": "#f4c2c2",
+        "opacity": 0.7
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%Y"
+          }
+        },
+        "y": {
+          "field": "output_per_hour",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "trend"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#999",
+        "strokeDash": [
+          2,
+          2
+        ]
+      },
+      "encoding": {
+        "x": {
+          "datum": {
+            "year": 2008
+          },
+          "type": "temporal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 4,
+        "y": 10,
+        "color": "#666",
+        "fontSize": 11,
+        "text": "Financial crisis"
+      },
+      "encoding": {
+        "x": {
+          "datum": {
+            "year": 2008
+          },
+          "type": "temporal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#999",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%Y"
+          }
+        },
+        "y": {
+          "field": "trend",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#c8102e",
+        "strokeWidth": 2.5,
+        "point": {
+          "color": "#c8102e",
+          "size": 20
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%Y"
+          }
+        },
+        "y": {
+          "field": "output_per_hour",
+          "type": "quantitative",
+          "title": "Output per hour (2024 = 100)",
+          "scale": {
+            "zero": false
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "output_per_hour",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Output per hour"
+          },
+          {
+            "field": "trend",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Pre-crisis trend"
+          },
+          {
+            "field": "gap",
+            "type": "quantitative",
+            "format": ".0%",
+            "title": "Below trend"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2025"
+        },
+        {
+          "calculate": "format(datum.gap, '.0%') + ' below trend'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -6,
+        "dy": -40,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#c8102e"
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%Y"
+          }
+        },
+        "y": {
+          "field": "output_per_hour",
+          "type": "quantitative",
+          "title": "Output per hour (2024 = 100)",
+          "scale": {
+            "zero": false
+          }
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Removing a time trend. Fit a straight line to log GDP per capita (a constant growth rate), then chart each quarter's gap from it. New: the regression is done with two joinaggregates (means, then sums), so you can see the arithmetic. transform_regression draws the same trend line, but doesn't give you the deviations. Grey: recessions (NBER).",
+  "title": {
+    "text": "US real GDP per person: trend and cycle",
+    "subtitle": [
+      "Top: GDP per person (log scale) and its log-linear trend. Bottom: % above or below trend. Grey: recessions. Source: FRED, NBER"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/us_real_gdp_per_capita.csv",
+    "format": {
+      "parse": {
+        "Date": "date",
+        "Value": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "year(datum.Date) + month(datum.Date) / 12",
+      "as": "t"
+    },
+    {
+      "calculate": "log(datum.Value)",
+      "as": "y"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "mean",
+          "field": "t",
+          "as": "t_mean"
+        },
+        {
+          "op": "mean",
+          "field": "y",
+          "as": "y_mean"
+        }
+      ]
+    },
+    {
+      "calculate": "(datum.t - datum.t_mean) * (datum.y - datum.y_mean)",
+      "as": "dtdy"
+    },
+    {
+      "calculate": "pow(datum.t - datum.t_mean, 2)",
+      "as": "dt2"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "dtdy",
+          "as": "sxy"
+        },
+        {
+          "op": "sum",
+          "field": "dt2",
+          "as": "sxx"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.sxy / datum.sxx",
+      "as": "slope"
+    },
+    {
+      "calculate": "exp(datum.y_mean + datum.slope * (datum.t - datum.t_mean))",
+      "as": "trend"
+    },
+    {
+      "calculate": "datum.Value / datum.trend - 1",
+      "as": "deviation"
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 560,
+      "height": 220,
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/us_recessions.json"
+          },
+          "transform": [
+            {
+              "filter": "datum.Start >= datetime(1947, 0, 1)"
+            }
+          ],
+          "mark": {
+            "type": "rect",
+            "color": "#e5e5e5"
+          },
+          "encoding": {
+            "x": {
+              "field": "Start",
+              "type": "temporal"
+            },
+            "x2": {
+              "field": "End"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "line",
+            "color": "#999",
+            "strokeDash": [
+              5,
+              4
+            ]
+          },
+          "encoding": {
+            "x": {
+              "field": "Date",
+              "type": "temporal",
+              "title": null
+            },
+            "y": {
+              "field": "trend",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "line",
+            "color": "#1f4e79",
+            "strokeWidth": 2
+          },
+          "encoding": {
+            "x": {
+              "field": "Date",
+              "type": "temporal",
+              "title": null
+            },
+            "y": {
+              "field": "Value",
+              "type": "quantitative",
+              "title": "US$ (2017 prices)",
+              "scale": {
+                "type": "log",
+                "domain": [
+                  12000,
+                  70000
+                ],
+                "nice": false
+              },
+              "axis": {
+                "format": "$,.0f"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 560,
+      "height": 160,
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/us_recessions.json"
+          },
+          "transform": [
+            {
+              "filter": "datum.Start >= datetime(1947, 0, 1)"
+            }
+          ],
+          "mark": {
+            "type": "rect",
+            "color": "#e5e5e5"
+          },
+          "encoding": {
+            "x": {
+              "field": "Start",
+              "type": "temporal"
+            },
+            "x2": {
+              "field": "End"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "rule",
+            "color": "#666"
+          },
+          "encoding": {
+            "y": {
+              "datum": 0
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "area",
+            "color": "#1f4e79",
+            "opacity": 0.8
+          },
+          "encoding": {
+            "x": {
+              "field": "Date",
+              "type": "temporal",
+              "title": null
+            },
+            "y": {
+              "field": "deviation",
+              "type": "quantitative",
+              "title": "Gap from trend",
+              "axis": {
+                "format": "+.0%"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "Date",
+                "type": "temporal",
+                "format": "%b %Y",
+                "title": "Quarter"
+              },
+              {
+                "field": "Value",
+                "type": "quantitative",
+                "format": "$,.0f",
+                "title": "GDP per person"
+              },
+              {
+                "field": "trend",
+                "type": "quantitative",
+                "format": "$,.0f",
+                "title": "Trend"
+              },
+              {
+                "field": "deviation",
+                "type": "quantitative",
+                "format": "+.1%",
+                "title": "Gap from trend"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "x": "shared"
+    }
+  }
+}

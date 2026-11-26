@@ -1,0 +1,104 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A dropdown picks the series to map. The param holds a column name; 'calculate': 'datum[SelectParam]' copies that column into varSelected, which the colour uses. Map: map-data's ITL3 areas (TopoJSON), matched on properties.id.",
+  "width": 250,
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/map-data/refs/heads/main/gbr/ITL3_UK_2021.json",
+    "format": {
+      "type": "topojson",
+      "feature": "geog"
+    }
+  },
+  "title": {
+    "text": "UK - ITL3 regions",
+    "fontSize": 12,
+    "subtitle": [],
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "middle",
+    "color": "black"
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": "geoshape",
+  "params": [
+    {
+      "name": "SelectParam",
+      "value": "Population",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Population",
+          "Gross Domestic Product (£m)",
+          "GDP Growth 2010-19 (%)",
+          "Gross Value Added (£)",
+          "GDP per capita (£)",
+          "Employment (%)",
+          "Unemployment (%)",
+          "Economic Inactivity (%)",
+          "Unemployment Claimants (%)"
+        ],
+        "name": "Select series:"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "lookup": "properties.id",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/itl3_indicators.csv"
+        },
+        "key": "ITL code",
+        "fields": [
+          "Population",
+          "Gross Domestic Product (£m)",
+          "GDP Growth 2010-19 (%)",
+          "Gross Value Added (£)",
+          "GDP per capita (£)",
+          "Employment (%)",
+          "Unemployment (%)",
+          "Economic Inactivity (%)",
+          "Unemployment Claimants (%)"
+        ]
+      }
+    },
+    {
+      "calculate": "datum[SelectParam]",
+      "as": "varSelected"
+    },
+    {
+      "filter": "datum.properties.name != 'Shetland Islands'"
+    }
+  ],
+  "encoding": {
+    "color": {
+      "field": "varSelected",
+      "legend": {
+        "title": "",
+        "legendX": 220,
+        "legendY": 0,
+        "orient": "none",
+        "direction": "vertical"
+      },
+      "type": "quantitative",
+      "scale": {
+        "scheme": "goldred",
+        "reverse": false
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.name",
+        "title": "Region"
+      },
+      {
+        "field": "varSelected",
+        "title": "Value",
+        "format": ","
+      }
+    ]
+  }
+}

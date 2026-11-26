@@ -1,0 +1,100 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Step 2: a param bound to a dropdown ('select' input). The filter now uses the param (datum.item == dish), so the reader picks the dish. The title uses it too, through an expression. Don't call the param 'item': Vega reserves that name.",
+  "width": 500,
+  "height": 280,
+  "title": {
+    "text": {
+      "expr": "'The price of a ' + dish"
+    },
+    "subtitle": [
+      "Median price on UK menus. Pick a dish below. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "number",
+        "p10": "number",
+        "median": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "dish",
+      "value": "latte",
+      "bind": {
+        "input": "select",
+        "options": [
+          "latte",
+          "flat white",
+          "cappuccino",
+          "croissant",
+          "sausage roll",
+          "fish & chips",
+          "margherita",
+          "cheeseburger",
+          "chicken tikka masala",
+          "english breakfast",
+          "pad thai",
+          "guinness"
+        ],
+        "name": "Dish "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.item == dish"
+    },
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "color": "#8c5a2b",
+    "point": {
+      "color": "#8c5a2b"
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%Y"
+      }
+    },
+    "y": {
+      "field": "median",
+      "type": "quantitative",
+      "title": "£",
+      "scale": {
+        "zero": false
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "median",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Median (£)"
+      }
+    ]
+  }
+}

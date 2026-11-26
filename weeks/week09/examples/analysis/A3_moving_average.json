@@ -1,0 +1,106 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Moving average: a window transform takes the mean over a frame of rows around each day. frame [-15, 15] is a centred 31-day average; [-30, 0] would be a trailing 31-day one. Sort by date first.",
+  "title": {
+    "text": "Bitcoin: smoothing a noisy series",
+    "subtitle": [
+      "Daily closing price (grey) and a centred 31-day moving average. Source: Investing.com"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "width": 560,
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/bitcoin_price.csv",
+    "format": {
+      "parse": {
+        "Date": "date",
+        "Price": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "year(datum.Date) >= 2020"
+    },
+    {
+      "window": [
+        {
+          "op": "mean",
+          "field": "Price",
+          "as": "ma31"
+        }
+      ],
+      "sort": [
+        {
+          "field": "Date"
+        }
+      ],
+      "frame": [
+        -15,
+        15
+      ]
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Date",
+      "type": "temporal",
+      "title": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "#bbb",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "Price",
+          "type": "quantitative",
+          "title": "US$",
+          "axis": {
+            "format": "$,.0f"
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#f2a900",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "y": {
+          "field": "ma31",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "Date",
+            "type": "temporal",
+            "format": "%d %b %Y",
+            "title": "Date"
+          },
+          {
+            "field": "Price",
+            "type": "quantitative",
+            "format": "$,.0f",
+            "title": "Price"
+          },
+          {
+            "field": "ma31",
+            "type": "quantitative",
+            "format": "$,.0f",
+            "title": "31-day average"
+          }
+        ]
+      }
+    }
+  ]
+}

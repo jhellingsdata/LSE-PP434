@@ -1,0 +1,51 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "The same with a text box: type any CSS colour (red, magenta, rgb(10,30,150)). The data is a saved copy; the live ONS series is at https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/cdsi/mm23/data (format: property 'years').",
+  "title": {
+    "text": "Inflation - since 1800",
+    "subtitle": "RPI: long series: annual percentage change ",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "color": "black"
+  },
+  "width": 300,
+  "height": 300,
+  "data": {
+    "name": "staticData",
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/ons_rpi_inflation_long_run.json",
+    "format": {
+      "type": "json",
+      "property": "years"
+    }
+  },
+  "params": [
+    {
+      "name": "myColour",
+      "value": "red",
+      "bind": {
+        "input": "text",
+        "name": "Choose colour:"
+      }
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "color": {
+      "expr": "myColour"
+    },
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": null
+    }
+  }
+}

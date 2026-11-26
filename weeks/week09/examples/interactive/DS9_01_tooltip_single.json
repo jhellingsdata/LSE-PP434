@@ -1,0 +1,61 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A tooltip with one field: hover over a bar to see its value.",
+  "title": {
+    "text": "Millions without work",
+    "subtitle": [
+      "Youth Unemployment (15-24 yrs), 2021. 21 most populous countries",
+      "Source: World Bank"
+    ],
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 11,
+    "anchor": "start",
+    "color": "black",
+    "offset": 10
+  },
+  "view": {
+    "stroke": "transparent"
+  },
+  "width": 300,
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/youth_unemployment_2021.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.p21==1"
+    },
+    {
+      "calculate": "datum.value2021/100",
+      "as": "unempPercent"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "color": "rgb(128,0,0)"
+  },
+  "encoding": {
+    "x": {
+      "field": "unempPercent",
+      "type": "quantitative",
+      "title": null,
+      "axis": {
+        "zindex": 1,
+        "gridColor": "white",
+        "gridWidth": 0.5,
+        "labelAngle": 0,
+        "format": ".0%"
+      }
+    },
+    "y": {
+      "field": "nameSimple",
+      "title": null,
+      "type": "nominal",
+      "sort": "-x"
+    },
+    "tooltip": {
+      "field": "unempPercent",
+      "format": ".1%"
+    }
+  }
+}

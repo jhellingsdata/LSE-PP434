@@ -1,0 +1,130 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "6. Clickable legend: the same point selection, with 'bind': 'legend'. Click a dish in the legend (shift-click for more than one); double-click to reset.",
+  "width": 500,
+  "height": 280,
+  "title": {
+    "text": "Which menu prices rose most?",
+    "subtitle": [
+      "Median price, 2019 = 100. Click the legend. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "number",
+        "p10": "number",
+        "p25": "number",
+        "median": "number",
+        "p75": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    },
+    {
+      "calculate": "datum.year == 2019 ? datum.median : null",
+      "as": "base_price"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "base_price",
+          "as": "base"
+        }
+      ],
+      "groupby": [
+        "item"
+      ]
+    },
+    {
+      "calculate": "datum.median / datum.base * 100",
+      "as": "index"
+    }
+  ],
+  "params": [
+    {
+      "name": "pick",
+      "select": {
+        "type": "point",
+        "fields": [
+          "item"
+        ]
+      },
+      "bind": "legend"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "strokeWidth": 2,
+    "point": true
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%Y",
+        "tickCount": "year"
+      }
+    },
+    "y": {
+      "field": "index",
+      "type": "quantitative",
+      "title": "Index (2019 = 100)",
+      "scale": {
+        "zero": false
+      }
+    },
+    "color": {
+      "field": "item",
+      "type": "nominal",
+      "title": "Dish",
+      "scale": {
+        "scheme": "tableau20"
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "pick",
+        "value": 1
+      },
+      "value": 0.1
+    },
+    "tooltip": [
+      {
+        "field": "item",
+        "type": "nominal",
+        "title": "Dish"
+      },
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "index",
+        "type": "quantitative",
+        "format": ".0f",
+        "title": "Index (2019 = 100)"
+      },
+      {
+        "field": "median",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Median (£)"
+      }
+    ]
+  }
+}

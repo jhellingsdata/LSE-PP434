@@ -1,0 +1,160 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Two estimation methods side by side, using xOffset.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/youth_clubs_crime_effects.csv"
+  },
+  "title": {
+    "text": "Youth offending rates before and after closures",
+    "subtitle": "Source: Difference-in-differences models: two-way fixed effects (TWFE), stacked ",
+    "color": "#676a86",
+    "subtitleColor": "#676a86d1",
+    "dx": 0,
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "frame": "group",
+    "offset": 7
+  },
+  "width": 450,
+  "height": 300,
+  "transform": [
+    {
+      "calculate": "datum.Estimates == 'TWFE' ? toNumber(datum.Year) - 0.1 : toNumber(datum.Year) + 0.1",
+      "as": "Year_offset"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Year_offset",
+      "type": "quantitative",
+      "title": "Years since closure",
+      "axis": {
+        "gridOpacity": 0.3,
+        "labelExpr": "datum.value == 0 ? 'closure' : datum.value > 0 ? '+' + datum.label : datum.label",
+        "labelAngle": 0
+      },
+      "scale": {
+        "padding": 15,
+        "nice": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "errorbar",
+        "size": 5,
+        "ticks": true
+      },
+      "encoding": {
+        "y": {
+          "field": "CI95_lower",
+          "title": "",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "CI95_upper",
+          "title": ""
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "size": 40,
+        "filled": true
+      },
+      "encoding": {
+        "color": {
+          "field": "Estimates",
+          "legend": {
+            "title": "Estimation method",
+            "orient": "bottom-right"
+          },
+          "type": "nominal"
+        },
+        "shape": {
+          "field": "Estimates",
+          "type": "nominal"
+        },
+        "y": {
+          "axis": {
+            "title": "Crime participation coefficient, age 10-18",
+            "gridOpacity": {
+              "expr": "datum.value == 0 ? 1 : 0.6"
+            },
+            "gridWidth": {
+              "expr": "datum.value == 0 ? 2 : 1"
+            },
+            "gridDash": {
+              "expr": "datum.value == 0 ? [4,2] : [1, 5]"
+            }
+          },
+          "field": "Beta",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 0,
+            "label1": "Years to",
+            "label2": "Years since"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": -5
+      },
+      "encoding": {
+        "text": {
+          "field": "label2",
+          "type": "nominal"
+        },
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "value": 300
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 0,
+            "label1": "Years to",
+            "label2": "Years since"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -5,
+        "dy": -5
+      },
+      "encoding": {
+        "text": {
+          "field": "label1",
+          "type": "nominal"
+        },
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "value": 300
+        }
+      }
+    }
+  ]
+}

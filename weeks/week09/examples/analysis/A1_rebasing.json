@@ -1,0 +1,139 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Rebasing: divide every value by its value in a base year (x 100), so series with different units or levels start at 100. New: a calculate keeps the 2019 price, a joinaggregate copies it to every row of that dish, a second calculate divides.",
+  "title": {
+    "text": "Which dishes rose most?",
+    "subtitle": [
+      "Median menu price, 2019 = 100. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "width": 500,
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "number",
+        "p10": "number",
+        "p25": "number",
+        "median": "number",
+        "p75": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": {
+        "field": "item",
+        "oneOf": [
+          "latte",
+          "fish & chips",
+          "margherita",
+          "guinness"
+        ]
+      }
+    },
+    {
+      "calculate": "datum.year == 2019 ? datum.median : null",
+      "as": "base_price"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "base_price",
+          "as": "base"
+        }
+      ],
+      "groupby": [
+        "item"
+      ]
+    },
+    {
+      "calculate": "datum.median / datum.base * 100",
+      "as": "index"
+    },
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          3
+        ],
+        "color": "#999"
+      },
+      "encoding": {
+        "y": {
+          "datum": 100
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "point": true
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%Y"
+          }
+        },
+        "y": {
+          "field": "index",
+          "type": "quantitative",
+          "title": "Index, 2019 = 100",
+          "scale": {
+            "zero": false
+          }
+        },
+        "color": {
+          "field": "item",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "scheme": "tableau10"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "item",
+            "type": "nominal",
+            "title": "Dish"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Median (£)"
+          },
+          {
+            "field": "index",
+            "type": "quantitative",
+            "format": ".0f",
+            "title": "Index (2019 = 100)"
+          }
+        ]
+      }
+    }
+  ]
+}

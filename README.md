@@ -28,8 +28,8 @@ To get a copy of the example files, open a week's folder and download the files 
 | 5 | Programming: loops and conditionals | [week05](weeks/week05/README.md) |
 | 6 | *Reading week* | — |
 | 7 | Maps | [week07](weeks/week07/README.md) · [maps page](https://jhellingsdata.github.io/LSE-PP434/weeks/week07/maps/) |
-| 8 | Advanced data: storage, reshaping | *coming soon* |
-| 9 | Advanced analysis | *coming soon* |
+| 8 | Big data: storage, reshaping | [week08](weeks/week08/README.md) |
+| 9 | Advanced analysis · Interactivity | [week09](weeks/week09/README.md) |
 | 10 | Machine learning I | *coming soon* |
 | 11 | Machine learning II · Interactivity | *coming soon* |
 

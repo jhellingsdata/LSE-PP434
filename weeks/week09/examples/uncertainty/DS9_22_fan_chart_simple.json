@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A fan chart: forecast lines with bands for the 10th-90th percentile ranges. OBR, November 2025.",
+  "width": 600,
+  "height": 400,
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/obr_growth_uncertainty_ranges.csv"
+      },
+      "mark": {
+        "type": "area"
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal",
+          "title": "Year"
+        },
+        "y": {
+          "field": "lower",
+          "type": "quantitative",
+          "title": "GDP Forecast"
+        },
+        "y2": {
+          "field": "upper"
+        },
+        "color": {
+          "field": "band",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "10-90",
+              "20-80",
+              "30-70"
+            ],
+            "range": [
+              "rgba(54, 183, 181, 0.1)",
+              "rgba(54, 183, 181, 0.2)",
+              "rgba(54, 183, 181, 0.6)"
+            ]
+          },
+          "legend": null
+        },
+        "order": {
+          "field": "band",
+          "type": "ordinal",
+          "sort": "descending"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/obr_growth_forecasts.csv"
+      },
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "forecast",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#f4c245",
+              "#179fdb"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "title": {
+    "text": "GDP Forecast with Percentile Ranges",
+    "fontSize": 16,
+    "anchor": "start",
+    "color": "#000000"
+  },
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  }
+}

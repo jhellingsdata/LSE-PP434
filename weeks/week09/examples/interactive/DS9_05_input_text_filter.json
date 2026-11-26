@@ -1,0 +1,66 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Two text boxes set the first and last year; a filter transform uses them. The data is a saved copy; the live ONS series is at https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/cdsi/mm23/data (format: property 'years').",
+  "title": {
+    "text": "Inflation - since 1800",
+    "subtitle": "RPI: long series: annual percentage change ",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "color": "black"
+  },
+  "width": 300,
+  "height": 300,
+  "data": {
+    "name": "staticData",
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/ons_rpi_inflation_long_run.json",
+    "format": {
+      "type": "json",
+      "property": "years"
+    }
+  },
+  "params": [
+    {
+      "name": "minYear",
+      "value": 1800,
+      "bind": {
+        "input": "text",
+        "name": "Start year:"
+      }
+    },
+    {
+      "name": "maxYear",
+      "value": 2021,
+      "bind": {
+        "input": "text",
+        "name": "End year:"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.year>minYear"
+    },
+    {
+      "filter": "datum.year<maxYear"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "color": "#00BFFF",
+    "strokeWidth": 2,
+    "opacity": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": null
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "3. Range slider: a number param bound to a 'range' input, with min, max and step. Here it sets the first year shown: filter datum.year >= startYear.",
+  "width": 500,
+  "height": 280,
+  "title": {
+    "text": {
+      "expr": "'The price of a ' + dish + ', from ' + startYear"
+    },
+    "subtitle": [
+      "Median price on UK menus. Pick a dish and a start year. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "number",
+        "p10": "number",
+        "p25": "number",
+        "median": "number",
+        "p75": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "dish",
+      "value": "latte",
+      "bind": {
+        "input": "select",
+        "options": [
+          "latte",
+          "flat white",
+          "cappuccino",
+          "croissant",
+          "sausage roll",
+          "fish & chips",
+          "margherita",
+          "cheeseburger",
+          "chicken tikka masala",
+          "english breakfast",
+          "pad thai",
+          "guinness"
+        ],
+        "name": "Dish "
+      }
+    },
+    {
+      "name": "startYear",
+      "value": 2017,
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2024,
+        "step": 1,
+        "name": "From "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.item == dish"
+    },
+    {
+      "filter": "datum.year >= startYear"
+    },
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "color": "#8c5a2b",
+    "point": {
+      "color": "#8c5a2b"
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%Y",
+        "tickCount": "year"
+      }
+    },
+    "y": {
+      "field": "median",
+      "type": "quantitative",
+      "title": "£",
+      "scale": {
+        "zero": false
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "median",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Median (£)"
+      }
+    ]
+  }
+}

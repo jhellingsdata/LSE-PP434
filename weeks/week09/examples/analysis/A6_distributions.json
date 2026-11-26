@@ -1,0 +1,222 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Three ways to show a distribution of the same 145 countries. Histogram: bin the values and count. Density: transform_density smooths the histogram (one curve per group with groupby). Box plot: median, quartiles and range in one mark.",
+  "title": {
+    "text": "Life expectancy around the world",
+    "subtitle": [
+      "145 countries. Oceania (two countries) is left out of the group charts. Source: World Bank, World Happiness Report"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/gdp_life_expectancy.csv",
+    "format": {
+      "parse": {
+        "Life Expectancy": "number"
+      }
+    }
+  },
+  "vconcat": [
+    {
+      "title": {
+        "text": "1. Histogram",
+        "anchor": "start",
+        "fontSize": 13,
+        "subtitleColor": "#555"
+      },
+      "width": 520,
+      "height": 130,
+      "mark": {
+        "type": "bar",
+        "color": "#888"
+      },
+      "encoding": {
+        "x": {
+          "field": "Life Expectancy",
+          "type": "quantitative",
+          "title": "Life expectancy (years)",
+          "scale": {
+            "domain": [
+              50,
+              90
+            ]
+          },
+          "bin": {
+            "step": 2,
+            "extent": [
+              50,
+              90
+            ]
+          }
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Countries"
+        }
+      }
+    },
+    {
+      "title": {
+        "text": "2. Density, by continent",
+        "anchor": "start",
+        "fontSize": 13,
+        "subtitleColor": "#555"
+      },
+      "width": 520,
+      "height": 130,
+      "transform": [
+        {
+          "filter": {
+            "field": "Continent",
+            "oneOf": [
+              "Africa",
+              "Asia",
+              "America",
+              "Europe"
+            ]
+          }
+        },
+        {
+          "density": "Life Expectancy",
+          "groupby": [
+            "Continent"
+          ],
+          "extent": [
+            50,
+            90
+          ],
+          "as": [
+            "value",
+            "density"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "opacity": 0.45,
+        "line": true
+      },
+      "encoding": {
+        "x": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Life expectancy (years)",
+          "scale": {
+            "domain": [
+              50,
+              90
+            ]
+          }
+        },
+        "y": {
+          "field": "density",
+          "type": "quantitative",
+          "title": "Density",
+          "stack": null,
+          "axis": {
+            "labels": false,
+            "ticks": false
+          }
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Africa",
+              "Asia",
+              "America",
+              "Europe"
+            ],
+            "range": [
+              "#e45756",
+              "#f58518",
+              "#54a24b",
+              "#4c78a8"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "title": {
+        "text": "3. Box plot, by continent",
+        "anchor": "start",
+        "fontSize": 13,
+        "subtitleColor": "#555"
+      },
+      "width": 520,
+      "height": 130,
+      "transform": [
+        {
+          "filter": {
+            "field": "Continent",
+            "oneOf": [
+              "Africa",
+              "Asia",
+              "America",
+              "Europe"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "boxplot",
+        "extent": "min-max",
+        "size": 18
+      },
+      "encoding": {
+        "x": {
+          "field": "Life Expectancy",
+          "type": "quantitative",
+          "title": "Life expectancy (years)",
+          "scale": {
+            "domain": [
+              50,
+              90
+            ]
+          }
+        },
+        "y": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Africa",
+            "Asia",
+            "America",
+            "Europe"
+          ]
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Africa",
+              "Asia",
+              "America",
+              "Europe"
+            ],
+            "range": [
+              "#e45756",
+              "#f58518",
+              "#54a24b",
+              "#4c78a8"
+            ]
+          },
+          "legend": null
+        }
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "shared"
+    }
+  }
+}

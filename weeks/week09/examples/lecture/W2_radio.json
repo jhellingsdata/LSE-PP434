@@ -1,0 +1,129 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "2. Radio buttons: a second param picks which column to plot. 'calculate': 'datum[measure]' copies the chosen column into 'value', and the chart plots 'value'. 'labels' shows readable names for the options.",
+  "width": 500,
+  "height": 280,
+  "title": {
+    "text": {
+      "expr": "'The price of a ' + dish"
+    },
+    "subtitle": [
+      "Pick a dish and a measure. Source: LSE Growth Lab, AutoCPI (menu photos)"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week08/data/menu_percentiles_by_year.csv",
+    "format": {
+      "parse": {
+        "year": "number",
+        "p10": "number",
+        "p25": "number",
+        "median": "number",
+        "p75": "number",
+        "p90": "number",
+        "prices": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "dish",
+      "value": "latte",
+      "bind": {
+        "input": "select",
+        "options": [
+          "latte",
+          "flat white",
+          "cappuccino",
+          "croissant",
+          "sausage roll",
+          "fish & chips",
+          "margherita",
+          "cheeseburger",
+          "chicken tikka masala",
+          "english breakfast",
+          "pad thai",
+          "guinness"
+        ],
+        "name": "Dish "
+      }
+    },
+    {
+      "name": "measure",
+      "value": "median",
+      "bind": {
+        "input": "radio",
+        "options": [
+          "p10",
+          "p25",
+          "median",
+          "p75",
+          "p90"
+        ],
+        "labels": [
+          "10th percentile",
+          "25th percentile",
+          "median",
+          "75th percentile",
+          "90th percentile"
+        ],
+        "name": "Measure "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.item == dish"
+    },
+    {
+      "calculate": "datetime(datum.year, 0, 1)",
+      "as": "date"
+    },
+    {
+      "calculate": "datum[measure]",
+      "as": "value"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "color": "#8c5a2b",
+    "point": {
+      "color": "#8c5a2b"
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%Y",
+        "tickCount": "year"
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "£",
+      "scale": {
+        "zero": false
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "value",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Price (£)"
+      }
+    ]
+  }
+}

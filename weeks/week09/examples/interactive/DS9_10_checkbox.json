@@ -1,0 +1,71 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A checkbox: starts the y-axis at zero, using a condition in the scale's domainMin.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/us_real_gdp_per_capita.csv"
+  },
+  "width": 300,
+  "height": 250,
+  "title": {
+    "text": "Real GDP Per Capita",
+    "subtitle": [
+      "2011 USD. Source: FRED"
+    ],
+    "align": "left",
+    "anchor": "start",
+    "fontSize": 14,
+    "offset": 10,
+    "subtitleFontSize": 11,
+    "subtitleFontStyle": "italic"
+  },
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    }
+  },
+  "mark": {
+    "type": "line",
+    "color": "rgb(128,0,0)"
+  },
+  "encoding": {
+    "x": {
+      "field": "Date",
+      "type": "temporal",
+      "axis": {
+        "grid": false,
+        "tickOpacity": 0,
+        "labelPadding": 5
+      }
+    },
+    "y": {
+      "field": "Value",
+      "type": "quantitative",
+      "scale": {
+        "domainMin": {
+          "expr": "toggleZero ? 0 : 42000"
+        }
+      },
+      "axis": {
+        "title": null,
+        "tickOpacity": 0,
+        "grid": false,
+        "format": "$,.0d"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "toggleZero",
+      "value": false,
+      "bind": {
+        "input": "checkbox",
+        "name": "Start y-axis at 0"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "year(datum.Date) >= 2000"
+    }
+  ]
+}

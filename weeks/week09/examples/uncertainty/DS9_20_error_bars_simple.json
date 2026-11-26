@@ -1,0 +1,85 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Error bars from a table of results: a point for the estimate (Beta), a rule from the lower to the upper 95% confidence interval (y and y2). Economics Observatory, youth club closures.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/youth_clubs_crime_effects.csv"
+  },
+  "title": {
+    "text": "Youth offending rates before and after closures",
+    "subtitle": "Source: Difference-in-differences models: two-way fixed effects (TWFE), stacked ",
+    "color": "#676a86",
+    "subtitleColor": "#676a86d1",
+    "dx": 0,
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "frame": "group",
+    "offset": 7
+  },
+  "width": 450,
+  "height": 300,
+  "transform": [
+    {
+      "filter": "datum.Estimates == 'Stacked'"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "quantitative",
+      "title": "Years since closure",
+      "axis": {
+        "gridOpacity": 0.3,
+        "labelExpr": "datum.value == 0 ? 'closure' : datum.value > 0 ? '+' + datum.label : datum.label"
+      },
+      "scale": {
+        "padding": 15,
+        "nice": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "errorbar",
+        "size": 5,
+        "ticks": true
+      },
+      "encoding": {
+        "y": {
+          "field": "CI95_lower",
+          "title": "",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "CI95_upper",
+          "title": ""
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "size": 40
+      },
+      "encoding": {
+        "y": {
+          "axis": {
+            "title": "Crime participation coefficient, age 10-18",
+            "gridOpacity": {
+              "expr": "datum.value == 0 ? 1 : 0.6"
+            },
+            "gridWidth": {
+              "expr": "datum.value == 0 ? 2 : 1"
+            },
+            "gridDash": {
+              "expr": "datum.value == 0 ? [4,2] : [1, 5]"
+            }
+          },
+          "field": "Beta",
+          "type": "quantitative"
+        }
+      }
+    }
+  ]
+}
