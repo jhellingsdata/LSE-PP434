@@ -2,7 +2,7 @@
 
 **Lecture practical:** making charts interactive: widgets (dropdowns, radio buttons, sliders, checkboxes) and selections (hover, legend, brush)
 
-Copy any example into the [Vega Editor](https://vega.github.io/editor/) to try it. All data is in [`data/`](data/); maps come from [map-data](https://github.com/jhellingsdata/map-data).
+**All the charts on one page:** [charts page](https://jhellingsdata.github.io/LSE-PP434/weeks/week09/charts/), with each chart's code. Copy any example into the [Vega Editor](https://vega.github.io/editor/) to try it. All data is in [`data/`](data/); maps come from [map-data](https://github.com/jhellingsdata/map-data).
 
 ## Notebooks
 
@@ -26,6 +26,22 @@ New Vega-Lite examples, one technique each, in [`examples/analysis/`](examples/a
 | [`A5_scatter_fit`](examples/analysis/A5_scatter_fit.json) | A scatter with a straight-line fit (`regression`) and a smooth one (`loess`) |
 | [`A6_distributions`](examples/analysis/A6_distributions.json) | Histogram (`bin`), density (`density` with `groupby`) and box plot (`boxplot`) of the same data |
 | [`A7_event_study`](examples/analysis/A7_event_study.json) | An event study: UK productivity against its pre-2008 trend, fitted on 1997-2007 only and extended. The gap is shaded |
+
+## Class: selections, step by step
+
+The class examples in [`examples/class/`](examples/class/), all on one chart: GDP per person and life expectancy for 141 countries, coloured by continent. Each step makes one change to the one before. The recipe for every selection: (1) make a select param, (2) use it in a condition, (3) choose the trigger.
+
+| Chart | The idea |
+|---|---|
+| [`C0_scatter`](examples/class/C0_scatter.json) | Start: a scatter of 141 countries, coloured by continent. A tooltip, but no other interactivity. Every step below adds a selection: (1) a select param, (2) a condition that uses it, (3) a trigger. |
+| [`C1_hover`](examples/class/C1_hover.json) | 1. Hover: a 'point' selection. 'on': 'pointerover' selects the point under the pointer, 'clear': 'pointerout' lets go when you move away. The opacity condition uses it: 1 when selected, 0.15 otherwise. Until you hover, nothing is selected, and an empty selection counts as everything ('empty': true is the default), so all points start at full strength. |
+| [`C2_click`](examples/class/C2_click.json) | 2. Click: the same selection without 'on' and 'clear'. A point selection's default trigger is a click. Shift-click adds more points; double-click empty space to reset. |
+| [`C3_select_group`](examples/class/C3_select_group.json) | 3. Select a group: 'fields': ['Continent']. The selection now stores the continent of the point you click, so every country with the same continent is selected. |
+| [`C4_legend`](examples/class/C4_legend.json) | 4. Clickable legend: add 'bind': 'legend'. It works because the colour encoding makes a legend for the same field, Continent. No colour (or shape, or size) encoding, no legend, and nothing to bind to. |
+| [`C5_brush`](examples/class/C5_brush.json) | 5. Brush: change the selection type to 'interval', and drag a box on the chart. Points inside the box are selected. Drag the box to move it; double-click to reset. 'encodings': ['x'] would select a range of x only. |
+| [`C6_linked_bars`](examples/class/C6_linked_bars.json) | 6. Linked views (stretch): the same brush, used in a second chart. The bar chart keeps only the rows inside the brush ('filter': {'param': 'brush'}) and counts them by continent. One selection, two views: the scatter sets it, the bars use it. The x domain is fixed so the bars shrink as you brush. |
+| [`C7_fit_lines`](examples/class/C7_fit_lines.json) | 7. Fit lines: each fit is a layer with its own transform. 'regression' fits a line; method 'log' fits y = a + b * log(x), which is a straight line on this log x-axis. 'loess' fits a smooth curve that follows the data: here it flattens above about $50,000. The two fits sit in their own layer, and the colour scales are resolved independently, so the points keep the continent colours and the lines get one legend of their own. The regression layer first drops the four countries with no GDP figure: one missing value and the fit fails. |
+| [`C8_brush_fit`](examples/class/C8_brush_fit.json) | 8. Stretch: a selection feeding an analysis. The regression layer keeps only the brushed countries before it fits, so the line refits to whatever you select. Try brushing only the poorer countries, then only the richer ones. |
 
 ## Lecture practical: making charts interactive
 
