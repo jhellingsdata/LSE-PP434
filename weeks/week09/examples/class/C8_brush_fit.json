@@ -1,0 +1,163 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "8. Stretch: a selection feeding an analysis. The regression layer keeps only the brushed countries before it fits, so the line refits to whatever you select. Try brushing only the poorer countries, then only the richer ones.",
+  "title": {
+    "text": "Does the relationship hold for every group?",
+    "subtitle": [
+      "Drag a box: the line refits to the countries inside it",
+      "Source: World Bank, UN"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "width": 480,
+  "height": 320,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/gdp_life_expectancy.csv",
+    "format": {
+      "parse": {
+        "GDP per capita (PPP)": "number",
+        "Life Expectancy": "number"
+      }
+    }
+  },
+  "layer": [
+    {
+      "width": 480,
+      "height": 320,
+      "mark": {
+        "type": "circle",
+        "size": 70,
+        "opacity": 0.75
+      },
+      "encoding": {
+        "x": {
+          "field": "GDP per capita (PPP)",
+          "type": "quantitative",
+          "title": "GDP per person (PPP $, log scale)",
+          "scale": {
+            "type": "log",
+            "domain": [
+              1000,
+              140000
+            ]
+          },
+          "axis": {
+            "values": [
+              1000,
+              2000,
+              5000,
+              10000,
+              20000,
+              50000,
+              100000
+            ],
+            "format": "$,"
+          }
+        },
+        "y": {
+          "field": "Life Expectancy",
+          "type": "quantitative",
+          "title": "Life expectancy (years)",
+          "scale": {
+            "domain": [
+              50,
+              87
+            ]
+          }
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Africa",
+              "America",
+              "Asia",
+              "Europe",
+              "Oceania"
+            ],
+            "scheme": "tableau10"
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "Continent",
+            "type": "nominal",
+            "title": "Continent"
+          },
+          {
+            "field": "GDP per capita (PPP)",
+            "type": "quantitative",
+            "format": "$,.0f",
+            "title": "GDP per person"
+          },
+          {
+            "field": "Life Expectancy",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Life expectancy"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "param": "brush",
+            "value": 1
+          },
+          "value": 0.15
+        }
+      },
+      "params": [
+        {
+          "name": "brush",
+          "select": {
+            "type": "interval"
+          }
+        }
+      ]
+    },
+    {
+      "transform": [
+        {
+          "filter": "isValid(datum['GDP per capita (PPP)'])"
+        },
+        {
+          "filter": {
+            "param": "brush"
+          }
+        },
+        {
+          "regression": "Life Expectancy",
+          "on": "GDP per capita (PPP)",
+          "method": "log"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "color": "#222222"
+      },
+      "encoding": {
+        "x": {
+          "field": "GDP per capita (PPP)",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "Life Expectancy",
+          "type": "quantitative"
+        }
+      }
+    }
+  ]
+}

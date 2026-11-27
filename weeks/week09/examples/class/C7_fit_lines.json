@@ -1,0 +1,226 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "7. Fit lines: each fit is a layer with its own transform. 'regression' fits a line; method 'log' fits y = a + b * log(x), which is a straight line on this log x-axis. 'loess' fits a smooth curve that follows the data: here it flattens above about $50,000. The two fits sit in their own layer, and the colour scales are resolved independently, so the points keep the continent colours and the lines get one legend of their own. The regression layer first drops the four countries with no GDP figure: one missing value and the fit fails.",
+  "title": {
+    "text": "Richer countries live longer, up to a point",
+    "subtitle": [
+      "Dashed: regression on log GDP. Gold: loess",
+      "Source: World Bank, UN"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "width": 480,
+  "height": 320,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/gdp_life_expectancy.csv",
+    "format": {
+      "parse": {
+        "GDP per capita (PPP)": "number",
+        "Life Expectancy": "number"
+      }
+    }
+  },
+  "layer": [
+    {
+      "width": 480,
+      "height": 320,
+      "mark": {
+        "type": "circle",
+        "size": 70,
+        "opacity": 0.75
+      },
+      "encoding": {
+        "x": {
+          "field": "GDP per capita (PPP)",
+          "type": "quantitative",
+          "title": "GDP per person (PPP $, log scale)",
+          "scale": {
+            "type": "log",
+            "domain": [
+              1000,
+              140000
+            ]
+          },
+          "axis": {
+            "values": [
+              1000,
+              2000,
+              5000,
+              10000,
+              20000,
+              50000,
+              100000
+            ],
+            "format": "$,"
+          }
+        },
+        "y": {
+          "field": "Life Expectancy",
+          "type": "quantitative",
+          "title": "Life expectancy (years)",
+          "scale": {
+            "domain": [
+              50,
+              87
+            ]
+          }
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Africa",
+              "America",
+              "Asia",
+              "Europe",
+              "Oceania"
+            ],
+            "scheme": "tableau10"
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "Continent",
+            "type": "nominal",
+            "title": "Continent"
+          },
+          {
+            "field": "GDP per capita (PPP)",
+            "type": "quantitative",
+            "format": "$,.0f",
+            "title": "GDP per person"
+          },
+          {
+            "field": "Life Expectancy",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Life expectancy"
+          }
+        ]
+      }
+    },
+    {
+      "layer": [
+        {
+          "transform": [
+            {
+              "filter": "isValid(datum['GDP per capita (PPP)'])"
+            },
+            {
+              "regression": "Life Expectancy",
+              "on": "GDP per capita (PPP)",
+              "method": "log"
+            },
+            {
+              "calculate": "'Regression (log)'",
+              "as": "Fit"
+            }
+          ],
+          "mark": {
+            "type": "line",
+            "strokeWidth": 3,
+            "strokeDash": [
+              6,
+              3
+            ]
+          },
+          "encoding": {
+            "x": {
+              "field": "GDP per capita (PPP)",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "Life Expectancy",
+              "type": "quantitative"
+            },
+            "color": {
+              "field": "Fit",
+              "type": "nominal",
+              "title": null,
+              "scale": {
+                "domain": [
+                  "Regression (log)",
+                  "Loess"
+                ],
+                "range": [
+                  "#222222",
+                  "#e8a400"
+                ]
+              },
+              "legend": {
+                "orient": "bottom-right"
+              }
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "loess": "Life Expectancy",
+              "on": "GDP per capita (PPP)",
+              "bandwidth": 0.5
+            },
+            {
+              "calculate": "'Loess'",
+              "as": "Fit"
+            }
+          ],
+          "mark": {
+            "type": "line",
+            "strokeWidth": 3,
+            "strokeDash": [
+              1,
+              0
+            ]
+          },
+          "encoding": {
+            "x": {
+              "field": "GDP per capita (PPP)",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "Life Expectancy",
+              "type": "quantitative"
+            },
+            "color": {
+              "field": "Fit",
+              "type": "nominal",
+              "title": null,
+              "scale": {
+                "domain": [
+                  "Regression (log)",
+                  "Loess"
+                ],
+                "range": [
+                  "#222222",
+                  "#e8a400"
+                ]
+              },
+              "legend": {
+                "orient": "bottom-right"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  }
+}

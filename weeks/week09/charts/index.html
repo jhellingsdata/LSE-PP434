@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9: Interactive and analytical charts · PP434</title>
+<script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+<style>
+  :root { --ink: #222; --muted: #666; --line: #e5e5e5; --accent: #0f5499; --bg: #fafafa; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; color: var(--ink); background: #fff;
+         max-width: 980px; margin: 0 auto; padding: 24px 16px 80px; line-height: 1.55; }
+  h1 { margin-bottom: 4px; }
+  .lede { color: var(--muted); margin-top: 0; }
+  h2 { margin-top: 56px; padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  nav { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+  nav ol { margin: 4px 0; padding-left: 20px; }
+  a { color: var(--accent); }
+  code { background: #f2f2f2; padding: 1px 4px; border-radius: 3px; font-size: 0.92em; }
+  .example { border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin: 20px 0; }
+  .example h3 { margin: 0 0 4px; font-size: 1.05em; }
+  .example h3 .tag { color: var(--muted); font-weight: normal; margin-right: 6px; }
+  .example .desc { color: var(--muted); margin: 0 0 12px; font-size: 0.95em; }
+  .chart { overflow-x: auto; }
+  .chart .vega-bindings { margin-top: 8px; font-size: 0.95em; }
+  .chart .vega-bind { margin: 4px 0; }
+  details { margin-top: 10px; }
+  summary { cursor: pointer; color: var(--accent); font-size: 0.95em; }
+  pre { background: #f6f8fa; border: 1px solid var(--line); border-radius: 6px; padding: 12px; overflow-x: auto;
+        font-size: 12.5px; line-height: 1.45; max-height: 480px; }
+  .files { font-size: 0.9em; color: var(--muted); }
+  .note { background: #fff8e5; border-left: 4px solid #f0b400; padding: 10px 14px; border-radius: 4px; margin: 16px 0; }
+  table { border-collapse: collapse; font-size: 0.95em; }
+  td, th { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+</style>
+</head>
+<body>
+
+<h1>Week 9: Interactive and analytical charts</h1>
+<p class="lede">PP434 Automated Data Visualisation for Policymaking · Vega-Lite 6 examples, building up one idea at a time.</p>
+
+<nav>
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#idea">The one idea</a>: every interaction is a param plus a place that uses it</li>
+    <li><a href="#widgets">Widgets</a>: dropdowns, radio buttons, sliders and checkboxes (the lecture practical)</li>
+    <li><a href="#selections">Selections</a>: hover, click, legend and brush, on one chart (the class)</li>
+    <li><a href="#more">More interactive charts</a>: the lecture's examples, from colour pickers to linked views</li>
+    <li><a href="#maps">Interactive maps</a>: pick the series, pick the year, explore a region</li>
+    <li><a href="#analysis">Analytical charts</a>: rebasing, small multiples, smoothing, trends, fit lines, distributions, event studies</li>
+    <li><a href="#uncertainty">Uncertainty</a>: error bars and fan charts</li>
+    <li><a href="#recipe">Where a param can go</a>, and <a href="#problems">when an interaction doesn't work</a></li>
+  </ol>
+  <p class="files">Each chart's code is a JSON file in <a href="https://github.com/jhellingsdata/LSE-PP434/tree/main/weeks/week09/examples">weeks/week09/examples</a>.
+  Open any chart in the Vega Editor from its <strong>…</strong> menu. Data files are in
+  <a href="https://github.com/jhellingsdata/LSE-PP434/tree/main/weeks/week09/data">weeks/week09/data</a>; maps come from
+  <a href="https://github.com/jhellingsdata/map-data">jhellingsdata/map-data</a>.
+  The same charts in Python:
+  <a href="https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week09/notebooks/DS9_1_Interactive_Charts.ipynb">DS9_1_Interactive_Charts</a> and
+  <a href="https://colab.research.google.com/github/jhellingsdata/LSE-PP434/blob/main/weeks/week09/notebooks/DS9_2_Analytical_Charts.ipynb">DS9_2_Analytical_Charts</a> (Colab).</p>
+</nav>
+
+<h2 id="idea">The one idea</h2>
+<p>So far, our charts have had one interaction: the tooltip. There are two more kinds:</p>
+<ul>
+  <li><strong>Widgets:</strong> the reader sets a value with a control under the chart (a dropdown, radio buttons, a slider, a checkbox).</li>
+  <li><strong>Selections:</strong> the reader acts on the chart itself (hovering, clicking, clicking the legend, dragging a box).</li>
+</ul>
+<p>Both work the same way. <strong>Every interaction is a param plus a place that uses it.</strong> A param is a named value
+that can change while someone is looking at the chart. You use it in a filter, a calculation, a mark property, a condition
+or a title, and the chart updates when it changes.</p>
+
+<h2 id="widgets">1. Widgets</h2>
+<p>The recipe: start with a hard-coded value, give it a name as a param (the chart doesn't change), then add <code>bind</code>
+to get a control. These five steps use the Week 8 menu prices.</p>
+<div data-example="lecture/W0_start" data-title="Start: one dish, hard-coded"></div>
+<div data-example="lecture/W1_dropdown" data-title="A dropdown: pick the dish"></div>
+<div class="note"><strong>Don't call a param <code>item</code>.</strong> Vega uses that name itself, and the chart fails with
+"item is not defined". That's why ours is called <code>dish</code>.</div>
+<div data-example="lecture/W2_radio" data-title="Radio buttons: pick the percentile"></div>
+<div data-example="lecture/W3_range_slider" data-title="A range slider: pick the first year"></div>
+<div data-example="lecture/W4_checkbox" data-title="A checkbox: show the range"></div>
+
+<h2 id="selections">2. Selections</h2>
+<p>The recipe: (1) make a selection, (2) use it in a condition, (3) choose the trigger. Every step below makes one change to
+the one before, on the same chart: GDP per person and life expectancy, coloured by continent.</p>
+<div data-example="class/C0_scatter" data-title="The starting chart"></div>
+<div data-example="class/C1_hover" data-title="Hover"></div>
+<div data-example="class/C2_click" data-title="Click"></div>
+<div data-example="class/C3_select_group" data-title="Click to select a group"></div>
+<div data-example="class/C4_legend" data-title="A clickable legend"></div>
+<div class="note"><strong>No encoding, no legend.</strong> A legend only exists when an encoding (colour, size, shape) makes one.
+Bind the selection to the field the legend shows. In a layered chart, put the selection on the <em>first</em> layer, or legend
+clicks do nothing (see the lecture's <a href="#ex-lecture/S2_legend_click">S2</a>).</div>
+<div data-example="class/C5_brush" data-title="A brush"></div>
+<div data-example="class/C6_linked_bars" data-title="Linked views: the brush filters a bar chart"></div>
+
+<h2 id="more">3. More interactive charts</h2>
+<p>The lecture's examples (section 9.4) and practical selections. Each uses the same idea in a new place.</p>
+<h3>Tooltips</h3>
+<div data-example="interactive/DS9_01_tooltip_single" data-title="A tooltip"></div>
+<div data-example="interactive/DS9_02_tooltip_multi" data-title="A tooltip with several fields"></div>
+<h3>Widgets in more places</h3>
+<div data-example="interactive/DS9_03_input_colour" data-title="A colour picker"></div>
+<div data-example="interactive/DS9_05_input_text_filter" data-title="Text boxes that filter the years"></div>
+<div data-example="interactive/DS9_06_range_filter" data-title="Two sliders: a window of years"></div>
+<div data-example="interactive/DS9_07_range_reindex" data-title="Re-index with a slider"></div>
+<div data-example="interactive/DS9_10b_checkbox_layers" data-title="A checkbox: start the axis at zero"></div>
+<div data-example="interactive/DS9_10c_checkbox_slider" data-title="A checkbox and a slider together"></div>
+<h3>Selections, and both together</h3>
+<div data-example="interactive/DS9_09_hover_select" data-title="Hover highlight: many lines"></div>
+<div data-example="lecture/S1_hover_highlight" data-title="Hover highlight (lecture practical)"></div>
+<div data-example="lecture/S2_legend_click" data-title="Clickable legend (lecture practical)"></div>
+<div data-example="interactive/DS9_06b_range_filter_select" data-title="A slider and a clickable legend"></div>
+<div data-example="lecture/S3_brush_zoom" data-title="Brush to zoom: two views"></div>
+<div data-example="interactive/DS9_11_hover_select_concat" data-title="Linked views: a map and a scatter"></div>
+<div data-example="lecture/L4_rebase_slider" data-title="Stretch: a slider that rebases prices to any year"></div>
+
+<h2 id="maps">4. Interactive maps</h2>
+<p>The same params, on a map. A dropdown can pick which column to colour by (<code>datum[param]</code>), and a slider can pick
+the year. When the data has a row for every year, start from the data and look up each area's shape (Week 7's DS7_09 pattern).</p>
+<div data-example="interactive/DS9_08_selection_dropdown_map" data-title="A dropdown map: pick the indicator"></div>
+<div data-example="interactive/DS9_12_dropdown_map" data-title="Menu prices by region: pick the dish"></div>
+<div data-example="interactive/DS9_13_year_slider_map" data-title="The price of a latte by region: pick the year"></div>
+<div data-example="interactive/DS9_14_dropdown_slider_map" data-title="Dearer or cheaper than the UK: pick the dish and year"></div>
+<div data-example="interactive/DS9_15_wales_explorer" data-title="Wales explorer: pick an indicator and a year, hover a council"></div>
+<div data-example="interactive/DS9_16_strategic_authorities_explorer" data-title="England's strategic authorities: map and ranking, linked"></div>
+
+<h2 id="analysis">5. Analytical charts</h2>
+<p>The lecture's section 9.2. Vega-Lite transforms do the analysis inside the chart; DS9_2 does the same steps in pandas.</p>
+<div data-example="analysis/A1_rebasing" data-title="Rebasing: 2019 = 100"></div>
+<div data-example="analysis/A2_trellis_independent" data-title="Small multiples with independent axes"></div>
+<div data-example="analysis/A3_moving_average" data-title="A moving average"></div>
+<div data-example="analysis/A4_trend_deviations" data-title="A trend, and the gaps from it"></div>
+<div data-example="analysis/A5_scatter_fit" data-title="A scatter with fit lines"></div>
+<div data-example="class/C7_fit_lines" data-title="Fit lines on a log axis: regression and loess"></div>
+<div data-example="class/C8_brush_fit" data-title="A brush that refits the line"></div>
+<div data-example="analysis/A6_distributions" data-title="Three ways to show a distribution"></div>
+<div data-example="analysis/A7_event_study" data-title="An event study"></div>
+
+<h2 id="uncertainty">6. Uncertainty</h2>
+<p>Show uncertainty, don't hide it: error bars for a set of estimates, and fan charts for forecasts.</p>
+<div data-example="uncertainty/DS9_20_error_bars_simple" data-title="Error bars"></div>
+<div data-example="uncertainty/DS9_21_error_bars_two_methods" data-title="Error bars: two methods side by side"></div>
+<div data-example="uncertainty/DS9_22_fan_chart_simple" data-title="A fan chart"></div>
+<div data-example="uncertainty/DS9_23_fan_chart_styled" data-title="A fan chart, styled"></div>
+
+<h2 id="recipe">Where a param can go</h2>
+<table>
+  <tr><th>Place</th><th>Example</th><th>See</th></tr>
+  <tr><td>A filter</td><td><code>{"filter": "datum.item == dish"}</code></td><td>W1, W3, DS9_13</td></tr>
+  <tr><td>A calculation</td><td><code>{"calculate": "datum[measure]", "as": "value"}</code></td><td>W2, DS9_08</td></tr>
+  <tr><td>A mark property</td><td><code>"opacity": {"expr": "showRange ? 1 : 0"}</code></td><td>W4, DS9_03</td></tr>
+  <tr><td>A scale</td><td><code>"domainMin": {"expr": "toggleZero ? 0 : 42000"}</code></td><td>DS9_10b, DS9_10c</td></tr>
+  <tr><td>A condition</td><td><code>"opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.15}</code></td><td>C1 to C5</td></tr>
+  <tr><td>A filter on a selection</td><td><code>{"filter": {"param": "brush"}}</code></td><td>C6, C8, S3</td></tr>
+  <tr><td>A title</td><td><code>"text": {"expr": "'The price of a ' + dish"}</code></td><td>W1, DS9_13</td></tr>
+</table>
+
+<h2 id="problems">When an interaction doesn't work</h2>
+<table>
+  <tr><th>Symptom</th><th>Likely cause and fix</th></tr>
+  <tr><td>"item is not defined"</td><td>A param called <code>item</code>: rename it.</td></tr>
+  <tr><td>The dropdown appears, but nothing changes</td><td>The filter still uses the hard-coded value. Use the param's name, without quotes: <code>datum.item == dish</code>.</td></tr>
+  <tr><td>Clicking the legend does nothing</td><td>No colour (or size, or shape) encoding, so no legend to bind to; or, in a layered chart, the selection isn't on the first layer.</td></tr>
+  <tr><td>Hover does nothing</td><td>The selection is on a layer with no points to pick (a line), or the <code>on</code> trigger is missing.</td></tr>
+  <tr><td>The colour picker starts black</td><td>A colour input needs a hex code: <code>"#ff0000"</code>, not <code>"red"</code>.</td></tr>
+  <tr><td>A fit line or total silently fails</td><td>Numbers read as text. JSON isn't type-guessed, and one word (like <code>null</code>) in a CSV column makes it text: add <code>"format": {"parse": {"value": "number"}}</code>.</td></tr>
+  <tr><td>A year slider map hardly changes</td><td>The colour scale refits every year. Fix its domain: <code>"scale": {"domain": [2.25, 4.25]}</code>.</td></tr>
+</table>
+
+<script>
+function tag(name) {
+  const stem = name.split("/").pop();
+  const parts = stem.split("_");
+  return stem.startsWith("DS9") ? parts[0] + "_" + parts[1] : parts[0];
+}
+async function showExample(el) {
+  const name = el.dataset.example;
+  const url = `../examples/${name}.json`;
+  el.id = "ex-" + name;
+  try {
+    const text = await (await fetch(url)).text();
+    const spec = JSON.parse(text);
+    const t = spec.title;
+    let title = el.dataset.title || (t && typeof t === "object" ? t.text : (t || name));
+    if (title && typeof title === "object") title = name.split("/").pop().replace(/_/g, " ");   // a title set by an expression
+    if (Array.isArray(title)) title = title.join(" ");
+    el.className = "example";
+    el.innerHTML = `
+      <h3><span class="tag">${tag(name)}</span><span class="t"></span></h3>
+      <p class="desc"></p>
+      <div class="chart"></div>
+      <details><summary>Show the code</summary><pre></pre></details>
+      <p class="files"><a href="${url}">${name.split("/").pop()}.json</a></p>`;
+    el.querySelector(".t").textContent = title;
+    el.querySelector(".desc").textContent = spec.description || "";
+    el.querySelector("pre").textContent = text;
+    await vegaEmbed(el.querySelector(".chart"), spec, {actions: {export: true, source: false, compiled: false, editor: true}});
+  } catch (err) {
+    el.className = "example";
+    el.textContent = `${name}: chart failed to load (${err})`;
+  }
+}
+document.querySelectorAll("[data-example]").forEach(showExample);
+</script>
+</body>
+</html>

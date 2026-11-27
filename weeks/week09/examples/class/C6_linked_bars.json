@@ -1,0 +1,197 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "6. Linked views (stretch): the same brush, used in a second chart. The bar chart keeps only the rows inside the brush ('filter': {'param': 'brush'}) and counts them by continent. One selection, two views: the scatter sets it, the bars use it. The x domain is fixed so the bars shrink as you brush.",
+  "title": {
+    "text": "Richer countries live longer",
+    "subtitle": [
+      "Drag a box on the scatter: the bars count the countries inside it",
+      "Source: World Bank, UN"
+    ],
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleColor": "#555"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/jhellingsdata/LSE-PP434/main/weeks/week09/data/gdp_life_expectancy.csv",
+    "format": {
+      "parse": {
+        "GDP per capita (PPP)": "number",
+        "Life Expectancy": "number"
+      }
+    }
+  },
+  "hconcat": [
+    {
+      "width": 380,
+      "height": 300,
+      "mark": {
+        "type": "circle",
+        "size": 80
+      },
+      "encoding": {
+        "x": {
+          "field": "GDP per capita (PPP)",
+          "type": "quantitative",
+          "title": "GDP per person (PPP $, log scale)",
+          "scale": {
+            "type": "log",
+            "domain": [
+              1000,
+              140000
+            ]
+          },
+          "axis": {
+            "values": [
+              1000,
+              2000,
+              5000,
+              10000,
+              20000,
+              50000,
+              100000
+            ],
+            "format": "$,"
+          }
+        },
+        "y": {
+          "field": "Life Expectancy",
+          "type": "quantitative",
+          "title": "Life expectancy (years)",
+          "scale": {
+            "domain": [
+              50,
+              87
+            ]
+          }
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Africa",
+              "America",
+              "Asia",
+              "Europe",
+              "Oceania"
+            ],
+            "scheme": "tableau10"
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "Continent",
+            "type": "nominal",
+            "title": "Continent"
+          },
+          {
+            "field": "GDP per capita (PPP)",
+            "type": "quantitative",
+            "format": "$,.0f",
+            "title": "GDP per person"
+          },
+          {
+            "field": "Life Expectancy",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Life expectancy"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "param": "brush",
+            "value": 1
+          },
+          "value": 0.15
+        }
+      },
+      "params": [
+        {
+          "name": "brush",
+          "select": {
+            "type": "interval"
+          }
+        }
+      ]
+    },
+    {
+      "width": 200,
+      "height": 300,
+      "transform": [
+        {
+          "filter": {
+            "param": "brush"
+          }
+        }
+      ],
+      "mark": {
+        "type": "bar"
+      },
+      "encoding": {
+        "y": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Africa",
+            "America",
+            "Asia",
+            "Europe",
+            "Oceania"
+          ]
+        },
+        "x": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Countries",
+          "scale": {
+            "domain": [
+              0,
+              45
+            ]
+          }
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Africa",
+              "America",
+              "Asia",
+              "Europe",
+              "Oceania"
+            ],
+            "scheme": "tableau10"
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Continent",
+            "type": "nominal"
+          },
+          {
+            "aggregate": "count",
+            "type": "quantitative",
+            "title": "Countries"
+          }
+        ]
+      }
+    }
+  ]
+}
